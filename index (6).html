@@ -1,0 +1,1535 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Administração em Jogo</title>
+<meta name="description" content="Administração em Jogo: Decisões, Estratégias e Desafios do Administrador Contemporâneo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* =========================================================
+   CONFIGURAÇÃO RÁPIDA: veja o objeto CONFIG no <script>
+   ========================================================= */
+:root{
+  /* Paleta do XV EGAD: azul-marinho, dourado, verde e azul-claro */
+  --navy:#14254a; --gold:#e3a51e; --green:#3f8f3c;
+  --bg:#eef4fb; --surface:#ffffff; --surface2:#e3ecf7; --ink:#14254a; --muted:#5b6b86;
+  --line:#d3dfee; --brand:#14254a; --brand-ink:#ffffff; --accent:#b97f0b; --warn:#c0392b; --ok:#2f7d32;
+  --c-caixa:#2f7d32; --c-clientes:#c98a0c; --c-pessoas:#6a5bb0; --c-res:#2a6fb5;
+  --radius:14px; --shadow:0 1px 2px rgba(20,37,74,.06),0 6px 18px rgba(20,37,74,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1830; --surface:#15244a; --surface2:#1c2e58; --ink:#eaf1fb; --muted:#a3b2cc; --line:#283c68;
+  --brand:#e3a51e; --brand-ink:#14254a; --accent:#f0b93d; --warn:#ff8a7a; --ok:#7fcf7c;
+  --c-caixa:#7fcf7c; --c-clientes:#f0b93d; --c-pessoas:#b3a6ef; --c-res:#7fb6ef; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1830; --surface:#15244a; --surface2:#1c2e58; --ink:#eaf1fb; --muted:#a3b2cc; --line:#283c68;
+  --brand:#e3a51e; --brand-ink:#14254a; --accent:#f0b93d; --warn:#ff8a7a; --ok:#7fcf7c;
+  --c-caixa:#7fcf7c; --c-clientes:#f0b93d; --c-pessoas:#b3a6ef; --c-res:#7fb6ef; --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:Montserrat,Inter,sans-serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0 0 .4em}
+button{font:inherit;cursor:pointer}
+.hidden{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 96px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;background:var(--surface2);color:var(--accent)}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--brand);color:var(--brand-ink);font-weight:600}
+.btn.sec{background:var(--surface2);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.block{width:100%}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---------- participante ---------- */
+.topbar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar .wrap{padding:10px 16px}
+.who{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.85rem}
+.meters{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.meter{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px}
+.meter b{font-size:1.25rem;font-variant-numeric:tabular-nums}
+.meter span{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.meter .bar{height:4px;border-radius:2px;background:var(--surface2);margin-top:4px;overflow:hidden}
+.meter .bar i{display:block;height:100%}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 13px;font-size:.88rem;font-weight:500}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab .lock{opacity:.6;margin-left:4px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.role{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:12px;text-align:left;color:var(--ink)}
+.role[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 25%,transparent)}
+.role strong{display:block}
+select,input[type=text]{width:100%;font:inherit;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:12px;margin:8px 0;background:var(--surface);cursor:pointer}
+.opt input{margin-top:4px;accent-color:var(--brand);width:18px;height:18px;flex:0 0 auto}
+.opt.on{border-color:var(--brand)}
+.opt .desc{font-size:.88rem;color:var(--muted)}
+.opt.done{cursor:default}
+.notice{border-left:4px solid var(--accent);background:var(--surface2);padding:10px 12px;border-radius:0 10px 10px 0;margin:10px 0}
+.alert{background:var(--warn);color:#fff;border-radius:var(--radius);padding:18px;text-align:center}
+.alert .big{font-family:Montserrat,sans-serif;font-size:3rem;font-weight:800;line-height:1}
+.effect{display:inline-flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:.75rem;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--surface2)}
+.chip.p{color:var(--ok)} .chip.m{color:var(--warn)}
+.goal{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.goal .st{font-weight:700}
+.score{font-family:Montserrat,sans-serif;font-size:3.2rem;font-weight:800;line-height:1}
+.secret{background:repeating-linear-gradient(135deg,var(--surface2) 0 10px,var(--surface) 10px 20px);border:1.5px dashed var(--accent)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:2px 12px;font-size:.92rem}
+.kv div:nth-child(even){text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.dice{font-size:3rem;text-align:center;margin:8px 0}
+.concept{border:1px solid var(--line);border-left:4px solid var(--c-res);background:var(--surface);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;margin:14px 0}
+.concept .tag{background:transparent;padding:0;color:var(--c-res)}
+.concept p{margin:.4em 0}
+.concept .ref{font-size:.78rem;color:var(--muted)}
+.result{border-radius:var(--radius);padding:14px 16px;margin:14px 0;border:1.5px solid var(--line);background:var(--surface)}
+.result.ok{border-color:var(--ok)} .result.bad{border-color:var(--warn)}
+.step{font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.05em;text-transform:uppercase}
+textarea{width:100%;font:inherit;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical;min-height:80px}
+.slideconcept{border-left:5px solid var(--c-res);padding:10px 0 10px 18px;margin-top:3vh}
+.slideconcept .tag{background:transparent;padding:0;color:var(--c-res);font-size:.9rem}
+.frases{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.frases div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:clamp(1rem,1.4vw,1.3rem);cursor:pointer}
+.frases div:hover{border-color:var(--warn)}
+.brandbar{height:4px;background:linear-gradient(90deg,var(--navy) 0 50%,var(--gold) 50% 80%,var(--green) 80%)}
+.hexdeco{position:fixed;pointer-events:none;opacity:.5;z-index:0;width:min(46vw,340px);color:var(--c-res)}
+.hexdeco.tl{top:-40px;left:-50px}.hexdeco.br{bottom:-50px;right:-40px;transform:rotate(180deg)}
+html.prof .hexdeco{opacity:.22;width:min(26vw,360px);z-index:2}
+html.prof .hexdeco.br{bottom:70px;right:-30px}
+html.prof .hexdeco.tl{top:60px}
+.slide .small{font-size:clamp(.9rem,1.1vw,1.05rem)!important}
+.eyebrow{flex-wrap:wrap}
+#join{position:relative;z-index:1}
+.eyebrow{display:flex;align-items:center;gap:10px;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--accent)}
+/* capa (mesma linguagem da arte do minicurso) */
+.hexnum{flex:none;display:flex;align-items:center;justify-content:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--navy);color:#fff;font-family:Montserrat,sans-serif;font-weight:800}
+.hexnum.gold{background:var(--gold);color:var(--navy)}
+.cv-title{font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:.98;color:var(--navy);margin:0}
+.cv-title span{color:#a8760b}
+.cv-sub{font-family:Montserrat,sans-serif;font-weight:700;color:var(--navy);line-height:1.2;margin:0}
+.cv-tag{color:#3c4d6b;line-height:1.4;margin:0}
+.cv-line{display:inline-flex;align-items:center;gap:12px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+.cv-line i{display:inline-block;width:34px;height:4px;background:var(--gold)}
+.cv-line i.g{background:var(--green)}
+.cv-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cv-steps div{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-family:Montserrat,sans-serif;font-weight:700;color:var(--navy);line-height:1.15}
+.cv-hero{margin:0 -16px;padding:34px 20px 26px;text-align:center;background:#edf3fb;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.cv-hero .cv-title{font-size:2.5rem}
+.cv-hero .cv-sub{font-size:1.05rem;margin-top:14px}
+.cv-hero .cv-tag{font-size:.92rem;margin-top:8px}
+.cv-hero .cv-steps{margin-top:22px}
+.cv-hero .cv-steps div{font-size:.72rem}
+.cv-hero .hexnum{width:40px;height:44px;font-size:1.05rem}
+.cv-hero .cv-line{font-size:.72rem}
+.cv-hero svg{position:absolute;width:150px;opacity:.3;pointer-events:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cv-hero{background:#15244a}
+ :root:not([data-theme="light"]) .cv-title,:root:not([data-theme="light"]) .cv-sub,:root:not([data-theme="light"]) .cv-line,:root:not([data-theme="light"]) .cv-steps div{color:#eaf1fb}
+ :root:not([data-theme="light"]) .cv-title span{color:#f0b93d} :root:not([data-theme="light"]) .cv-hero .hexnum:not(.gold){background:#2f5ca8} :root:not([data-theme="light"]) .cv-tag{color:#a3b2cc}}
+/* capa na projeção: tela clara como a arte */
+html.prof.cover .stage{background:#edf3fb;color:var(--navy)}
+html.prof.cover .stage header,html.prof.cover .foot{border-color:#d3dfee}
+html.prof.cover .stage header .ttl,html.prof.cover .timer{color:var(--navy)}
+html.prof.cover .ctrls .btn.sec,html.prof.cover #prev{background:#fff;color:var(--navy);border-color:#d3dfee}
+html.prof.cover .foot,html.prof.cover #stepLbl{color:#5b6b86}
+html.prof.cover .hexdeco{opacity:.3}
+.cover-slide{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:5vw;align-items:center;min-height:100%}
+.cover-slide .cv-title{font-size:clamp(2.8rem,6vw,7rem)}
+.cover-slide .cv-sub{font-size:clamp(1.3rem,2.1vw,2.3rem);margin-top:3vh;max-width:22em}
+.cover-slide .cv-tag{font-size:clamp(1.05rem,1.5vw,1.6rem)!important;margin-top:1.5vh;max-width:30em}
+.cover-slide .cv-line{font-size:clamp(.85rem,1.1vw,1.2rem)}
+.cover-slide .cv-steps{margin-top:3.5vh;max-width:820px}
+.cover-slide .cv-steps div{font-size:clamp(.85rem,1.1vw,1.15rem)}
+.cover-slide .hexnum{width:clamp(48px,4.4vw,80px);height:clamp(54px,4.9vw,90px);font-size:clamp(1.2rem,2vw,2.1rem)}
+.cover-slide .qrcard{position:relative;z-index:3;background:#fff;border:1px solid #d3dfee;border-radius:18px;padding:26px;text-align:center;color:var(--navy)}
+.cover-slide .qrcard p{color:#3c4d6b}
+/* login e sorteio */
+.reveal{text-align:center}
+.reveal .lbl{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 2px}
+.reveal .num{font-family:Montserrat,sans-serif;font-weight:800;font-size:5.6rem;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.reveal .cargo{font-family:Montserrat,sans-serif;font-weight:700;font-size:1.35rem;color:var(--accent);min-height:1.7em}
+.reveal.spin .num,.reveal.spin .cargo{opacity:.55}
+.divider{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.82rem;margin:18px 0 10px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--line)}
+.qrhint{display:flex;gap:14px;align-items:center}
+.qrhint svg{flex:none;width:56px;height:56px;color:var(--accent)}
+.roster{list-style:none;padding:0;margin:8px 0 0}
+.roster li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.roster li:last-child{border-bottom:0}
+.roster .me{font-weight:700}
+.teamgrid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;margin-top:2.5vh}
+.tcell{border:1px solid var(--line);border-radius:10px;padding:6px 4px;text-align:center;background:var(--surface)}
+.tcell b{font-family:Montserrat,sans-serif;font-size:1.05rem}
+.tcell.full{border-color:var(--ok)}
+.pips{display:flex;justify-content:center;gap:3px;margin-top:4px}
+.pips i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.pips i.on{background:var(--gold)}
+.bigcount{font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(2.6rem,5vw,5rem);line-height:1;color:var(--accent)}
+/* capa em tela cheia e espera */
+.cv-hero.full{min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:44px 22px 36px;border-bottom:0}
+.cv-hero.full .cv-title{font-size:clamp(2.6rem,12vw,3.4rem)}
+.cv-hero.full .cv-sub{font-size:1.12rem}
+.cv-hero .cv-by{font-family:Montserrat,sans-serif;font-weight:700;color:var(--navy);margin:26px 0 0;font-size:.95rem}
+.cv-hero .cv-start{margin-top:22px;min-height:52px;font-size:1.05rem}
+.cv-hero .cv-event{margin:14px 0 0;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cv-hero:not(.full) .onlyfull{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cv-hero .cv-by{color:#eaf1fb}}
+.loader{width:48px;height:48px;margin:4px auto 14px;border:4px solid var(--line);border-top-color:var(--gold);border-radius:50%;animation:girar 1s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.loader{animation-duration:3s}}
+.badge{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:6px 10px;align-items:center;background:var(--surface2);border-radius:99px;padding:7px 14px;font-weight:600;font-size:.9rem}
+.badge b{color:var(--accent)}
+#tFase{background:var(--gold);color:var(--navy);font-weight:700}
+#tFase.confirm{background:#b3261e;color:#fff}
+#tFase:disabled{opacity:.6}
+/* encontro das empresas e teoria dos jogos */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.vs>div{background:var(--surface2);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.vs>div.me{box-shadow:inset 0 0 0 2px var(--brand)}
+.vs small{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.vs b{font-family:Montserrat,sans-serif;font-size:1rem}
+.vs span{font-size:.8rem;color:var(--muted);line-height:1.3}
+.vs>.x{background:none;align-self:center;font-family:Montserrat,sans-serif;font-weight:800;color:var(--accent);padding:0}
+.enc h4,.mtx-h{margin:18px 0 6px;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.enc-list{margin:0;padding-left:18px}
+table.br td{padding:6px 4px}
+table.br tr.sel td{font-weight:700}
+.star{color:var(--gold)}
+.mtx-wrap{overflow-x:auto}
+table.mtx{border-collapse:separate;border-spacing:4px;width:100%;font-size:.86rem}
+.mtx th{font-size:.72rem;text-align:center;color:var(--muted);font-weight:700;text-transform:none;letter-spacing:0;border:0;padding:4px}
+.mtx th.corner{font-size:.64rem;text-align:left;line-height:1.3}
+.mtx td{text-align:center;background:var(--surface2);border-radius:8px;padding:9px 4px;font-variant-numeric:tabular-nums;border:2px solid transparent}
+.mtx td.hit{background:var(--brand);color:var(--brand-ink);font-weight:700}
+.mtx td.nash{border-color:var(--gold)}
+.mtx.big{font-size:clamp(.9rem,1.15vw,1.2rem)}
+.mtx.big th{font-size:clamp(.85rem,1.1vw,1.15rem)}
+.mtx.big th.corner{font-size:clamp(.75rem,.9vw,.95rem)}
+.mtx.big td{padding:1.2vh .8vw;background:color-mix(in srgb,var(--gold) calc(var(--alpha,0) * 85%),var(--surface2))}
+.mtx.big .cnt{display:block;font-family:Montserrat,sans-serif;font-size:clamp(1.5rem,2.8vw,2.8rem);line-height:1.05}
+.mtx.big .pp{font-size:.85em;opacity:.8}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:2.5vh}
+.mcell{border:1px solid var(--line);border-radius:10px;padding:6px;background:var(--surface)}
+.mcell>small{display:block;text-align:center;color:var(--muted);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+.mteams{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px}
+.mteams>div{text-align:center;border-radius:8px;padding:4px 2px;border:1px solid transparent}
+.mteams>div.full{border-color:var(--ok)}
+.mteams b{font-family:Montserrat,sans-serif;font-size:1rem;display:block;line-height:1.1}
+.mteams small{font-size:.65rem;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:20;max-width:90vw}
+
+/* ---------- professor (projeção) ---------- */
+html.prof,html.prof body{background:#0d1830;color:#eaf1fb;overflow:hidden}
+html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--muted:#a3b2cc;--ink:#eaf1fb;--brand:#e3a51e;--brand-ink:#14254a;--accent:#f0b93d;--warn:#ff7a6a;--ok:#7fcf7c;
+  --c-caixa:#7fcf7c;--c-clientes:#f0b93d;--c-pessoas:#b3a6ef;--c-res:#7fb6ef}
+.stage{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
+.stage header{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:14px 28px;border-bottom:1px solid var(--line);gap:12px}
+.stage header .ttl{font-family:Montserrat,sans-serif;font-weight:800;font-size:1.2rem}
+.timer{font-family:Montserrat,sans-serif;font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;min-width:110px;text-align:right}
+.timer.low{color:var(--warn)}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap}
+.ctrls .btn{padding:8px 12px;font-size:.9rem}
+.slide{flex:1;overflow:auto;padding:3vh 5vw;position:relative;z-index:1}
+.slide h1{font-size:clamp(2.2rem,5vw,4.6rem)}
+.slide h2{font-size:clamp(1.6rem,3vw,2.6rem)}
+.slide p,.slide li{font-size:clamp(1.05rem,1.7vw,1.55rem)}
+.lead{font-size:clamp(1.2rem,2.2vw,2rem)!important;color:var(--muted)}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:4vw;align-items:center}
+.qr{background:#fff;padding:14px;border-radius:14px;display:inline-block}
+.code{font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:.08em;font-size:clamp(2rem,5vw,4.5rem);color:var(--accent)}
+.ind4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:2vh 0}
+.ind4 div{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface)}
+.ind4 b{display:block;font-family:Montserrat,sans-serif;font-size:1.6rem}
+.bars .row{display:grid;grid-template-columns:minmax(160px,42%) 1fr 50px;gap:12px;align-items:center;margin:4px 0;font-size:.95rem;line-height:1.25}
+.bars .track{height:22px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.bars .track i{display:block;height:100%;background:var(--brand);transition:width .6s}
+.rank{width:100%;font-size:1.15rem}
+.rank td{padding:8px 10px}
+.rank tr:first-child td{color:var(--accent);font-weight:700}
+.panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:3vw}
+.foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:10px 28px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.dots{display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--brand)}
+@media (max-width:900px){.cols,.panelgrid{grid-template-columns:1fr}.ind4{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="brandbar" style="position:fixed;top:0;left:0;right:0;z-index:30"></div>
+<div class="hexdeco tl" id="hexTL"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M40 20l26 15v30l-26 15-26-15V35z"/><path d="M92 50l26 15v30l-26 15-26-15V65z"/><path d="M40 80l26 15v30l-26 15-26-15V95z"/><path d="M144 20l26 15v30l-26 15-26-15V35z"/><path d="M92 110l26 15v30l-26 15-26-15v-30z"/><circle cx="66" cy="35" r="3" fill="currentColor"/><circle cx="118" cy="95" r="3" fill="currentColor"/><circle cx="66" cy="125" r="3" fill="currentColor"/></svg></div><div class="hexdeco br" id="hexBR"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M40 20l26 15v30l-26 15-26-15V35z"/><path d="M92 50l26 15v30l-26 15-26-15V65z"/><path d="M40 80l26 15v30l-26 15-26-15V95z"/><path d="M144 20l26 15v30l-26 15-26-15V35z"/><path d="M92 110l26 15v30l-26 15-26-15v-30z"/><circle cx="66" cy="35" r="3" fill="currentColor"/><circle cx="118" cy="95" r="3" fill="currentColor"/><circle cx="66" cy="125" r="3" fill="currentColor"/></svg></div>
+
+<!-- ===================== PARTICIPANTE ===================== -->
+<div id="appPart">
+  <!-- Entrada -->
+  <section id="join" class="wrap">
+    <header class="cv-hero full">
+      <svg style="top:-30px;left:-40px" aria-hidden="true" viewBox="0 0 300 300" fill="none" stroke="#2a5aa8" stroke-width="3"><path d="M60 30l39 22.5v45L60 120l-39-22.5v-45z"/><path d="M138 75l39 22.5v45L138 165l-39-22.5v-45z"/><path d="M60 120l39 22.5v45L60 210l-39-22.5v-45z"/><circle cx="99" cy="52.5" r="6" fill="#2a5aa8"/></svg>
+      <svg style="bottom:-40px;right:-40px;transform:rotate(180deg)" aria-hidden="true" viewBox="0 0 300 300" fill="none" stroke="#2a5aa8" stroke-width="3"><path d="M60 30l39 22.5v45L60 120l-39-22.5v-45z"/><path d="M138 75l39 22.5v45L138 165l-39-22.5v-45z"/><path d="M60 120l39 22.5v45L60 210l-39-22.5v-45z"/><circle cx="99" cy="52.5" r="6" fill="#2a5aa8"/></svg>
+      <p class="cv-line"><i></i>Minicurso · XV EGAD<i class="g"></i></p>
+      <h1 class="cv-title" style="margin-top:14px">Administração<br><span>em Jogo</span></h1>
+      <p class="cv-sub">Decisões, Estratégias e Desafios do Administrador Contemporâneo</p>
+      <p class="cv-tag">Uma experiência prática de gestão, consultoria e tomada de decisão em cenários de incerteza</p>
+      <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Reagir à crise</div><div><span class="hexnum">3</span>Negociar com o mundo</div><div><span class="hexnum gold">4</span>Projetar o futuro</div></div>
+      <p class="cv-by onlyfull">Prof. Me. Wildson Brandão</p>
+      <button class="btn block cv-start onlyfull" id="btnCapa">Começar</button>
+      <p class="cv-event onlyfull">XV EGAD · 20 anos do curso de Administração · UFCAT</p>
+    </header>
+    <div id="joinBox" class="hidden"></div>
+  </section>
+
+  <!-- Jogo -->
+  <section id="game" class="hidden">
+    <div class="topbar"><div class="wrap">
+      <div class="who"><span id="whoLbl"></span><button class="btn sec" id="btnSair" style="padding:5px 10px;font-size:.8rem">Trocar</button></div>
+      <div class="meters" id="meters"></div>
+      <nav class="tabs" id="tabs" role="tablist"></nav>
+    </div></div>
+    <main class="wrap" id="view"></main>
+  </section>
+</div>
+
+<!-- ===================== PROFESSOR ===================== -->
+<div id="appProf" class="hidden">
+  <div class="stage">
+    <header>
+      <div class="ttl">Administração em Jogo <span class="muted" style="font-family:Inter;font-weight:500;font-size:.95rem" id="stepLbl"></span></div>
+      <div class="ctrls">
+        <button class="btn" id="tFase">Liberar o jogo</button>
+        <button class="btn sec hidden" id="tConc">Conceito</button>
+        <button class="btn sec" id="tStart">Iniciar</button>
+        <button class="btn sec" id="tPlus">+1 min</button>
+        <button class="btn sec" id="tReset">Zerar</button>
+      </div>
+      <div class="timer" id="timer">--:--</div>
+    </header>
+    <div class="slide" id="slide"></div>
+    <div class="foot">
+      <button class="btn sec" id="prev">← Anterior</button>
+      <div class="dots" id="dots"></div>
+      <span id="feedStatus" class="small"></span>
+      <button class="btn" id="next">Próximo →</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+/* =========================================================
+   CONFIG: ajuste antes do evento
+   ENDPOINT: URL do App Script publicado como Web App (deixe '' para jogar sem painel ao vivo)
+   SESSAO: código da turma, embutido no QR Code (use outro, ex. ENSAIO, para testar)
+   PARTICIPANTES: público esperado; define o número de equipes de 5 para o sorteio
+   CODIGOS: palavras que o professor projeta para liberar as rodadas
+   ========================================================= */
+const CONFIG = {
+  ENDPOINT: 'https://script.google.com/a/macros/discente.ufcat.edu.br/s/AKfycby6G0QpkmxzTgEvJYr2yfngLIiEP8FrQ_5YYVlPij_-RgvjPW9NkQanoJp2tjisRaXV/exec'
+  SESSAO: 'EGAD2026',
+  PARTICIPANTES: 150,
+  CHAVE: 'EGAD2026',   // chave do professor (igual a CHAVE_LIMPEZA no Codigo.gs)
+  // Códigos reserva: só são necessários se a liberação pelo professor não chegar ao celular
+  CODIGOS: { jogo: 'COMECAR', r2: 'EMBALAGEM', r3: 'EXPORTAR', r4: '2030' },
+  POLL_MS: 6000
+};
+CONFIG.MAX_EQUIPES = Math.max(2, Math.ceil(CONFIG.PARTICIPANTES/5));
+if(CONFIG.MAX_EQUIPES % 2) CONFIG.MAX_EQUIPES++;   // cada mercado tem duas empresas
+
+/* ===================== REGRAS DO JOGO ===================== */
+const IND = [
+  {k:'caixa',    n:'Caixa',       c:'var(--c-caixa)'},
+  {k:'clientes', n:'Clientes',    c:'var(--c-clientes)'},
+  {k:'pessoas',  n:'Pessoas',     c:'var(--c-pessoas)'},
+  {k:'res',      n:'Resiliência', c:'var(--c-res)'}
+];
+const INICIO = {caixa:10, clientes:10, pessoas:10, res:10};
+
+const CARGOS = [
+  {id:'ceo', n:'Porta-voz (CEO)', s:'Registra as decisões oficiais',
+   meta:'A soma dos quatro indicadores deve terminar em 48 ou mais.',
+   ok:(v)=> v.caixa+v.clientes+v.pessoas+v.res >= 48,
+   dica:'Você não ganha puxando para um lado. Seu papel é fazer a equipe chegar a um acordo que não destrua nenhum indicador, e prever o que a empresa concorrente vai fazer.'},
+  {id:'fin', n:'Diretor(a) Financeiro(a)', s:'Guardião do caixa',
+   meta:'Caixa deve terminar em 8 ou mais.',
+   ok:(v)=> v.caixa >= 8,
+   dica:'Cada relatório comprado e cada investimento grande saem do seu indicador. Questione o retorno de tudo. Uma guerra de preços com a concorrente também sai do seu caixa.'},
+  {id:'rh', n:'Diretor(a) de Pessoas', s:'Clima e capacitação',
+   meta:'Pessoas deve terminar em 11 ou mais, e a equipe não pode aprovar demissões.',
+   ok:(v,d)=> v.pessoas >= 11 && d.r3 && d.r3.esg !== 'X2',
+   dica:'A rotatividade já é alta. Toda mudança tecnológica sem treinamento vira resistência na fábrica.'},
+  {id:'com', n:'Diretor(a) Comercial', s:'Clientes e mercado',
+   meta:'Clientes deve terminar em 14 ou mais.',
+   ok:(v)=> v.clientes >= 14,
+   dica:'Três redes concentram mais da metade da receita, e a empresa concorrente disputa o mesmo espaço nelas. Um cliente no exterior seria a sua saída.'},
+  {id:'sup', n:'Diretor(a) de Suprimentos e Comex', s:'Cadeia global',
+   meta:'Resiliência deve terminar em 14 ou mais.',
+   ok:(v)=> v.res >= 14,
+   dica:'O estoque de embalagens cobre 20 dias e o fornecedor atrasou. Um único fornecedor é um único ponto de falha, e a concorrente depende do mesmo.'}
+];
+
+/* ---------- Empresas e mercados ----------
+   Equipes ímpares: Cerrado Alimentos. Equipes pares: Veredas Laticínios.
+   Cada mercado reúne uma de cada (1-2, 3-4, 5-6...). */
+const EMPRESAS = {
+  cerrado:{nome:'Cerrado Alimentos', curto:'Cerrado', seg:'biscoitos, massas e snacks', cidade:'Catalão (GO)'},
+  veredas:{nome:'Veredas Laticínios', curto:'Veredas', seg:'queijos, iogurtes e manteiga', cidade:'Morrinhos (GO)'}
+};
+const empresaKey = (t)=> t%2===1 ? 'cerrado' : 'veredas';
+const empresaDe = (t)=> EMPRESAS[empresaKey(t)];
+const mercadoDe = (t)=> Math.ceil(t/2);
+const rivalDe = (t)=>{ const r = t%2===1 ? t+1 : t-1; return (r>=1 && r<=CONFIG.MAX_EQUIPES) ? r : null; };
+// Reação padrão do mercado quando a concorrente não registra a tempo (ou joga sem planilha)
+const ROBO = {r2:'D', r3:{est:'D', esg:'X3'}};
+
+const R1_PROB = [
+  {id:'P1', t:'Dependência de um único fornecedor de embalagens importadas', e:{res:+1}},
+  {id:'P2', t:'Concentração de receita em poucos clientes', e:{clientes:+1}},
+  {id:'P3', t:'Queda contínua da margem líquida', e:{caixa:+1}},
+  {id:'P4', t:'Pedidos e faturamento manuais, com alto índice de erro', e:{caixa:+1}},
+  {id:'P5', t:'Rotatividade elevada na produção e pouco treinamento', e:{pessoas:+1}},
+  {id:'P6', t:'Identidade visual da marca desatualizada', e:{caixa:-1}},
+  {id:'P7', t:'Poucos seguidores nas redes sociais', e:{caixa:-1}},
+  {id:'P8', t:'Sede administrativa pequena', e:{caixa:-1}}
+];
+const R1_KPI = [
+  {id:'K1', t:'Dias de cobertura do estoque de insumos críticos', e:{res:+1}},
+  {id:'K2', t:'Margem de contribuição por linha de produto', e:{caixa:+1}},
+  {id:'K3', t:'Participação dos 3 maiores clientes na receita', e:{clientes:+1}},
+  {id:'K4', t:'Taxa de rotatividade e horas de treinamento', e:{pessoas:+1}},
+  {id:'K5', t:'Número de seguidores e curtidas', e:{}}
+];
+
+/* ---------- Rodada 2: a crise das embalagens (jogo entre as duas empresas do mercado) ---------- */
+const R2_INFO = [
+  {id:'I1', t:'Cotação do fornecedor nacional',
+   r:(t)=>`A fabricante de Anápolis (GO) entrega em 12 dias, com preço 15% acima do que vocês pagavam antes da crise: mais barato que o importado com o aumento de 25%. Mas ela só tem capacidade para UMA empresa, e a ${rivalDe(t)?empresaDe(rivalDe(t)).nome:'concorrente'} também pediu cotação ontem.`},
+  {id:'I2', t:'Histórico do fornecedor estrangeiro alternativo',
+   r:()=>'Nas últimas 6 entregas a clientes brasileiros, 2 atrasaram mais de 30 dias por problemas portuários e regulatórios. Risco de falha: cerca de 1 em 3.'},
+  {id:'I3', t:'Sondagem com as 3 grandes redes',
+   r:()=>'As redes aceitam reajuste se ele vier das duas empresas ao mesmo tempo. Se só uma reajustar, as redes vão priorizar a outra na gôndola e na verba promocional.'}
+];
+const R2_OPC = [
+  {id:'A', t:'Contratar o fornecedor nacional', d:'Abastecimento garantido em Goiás. Atenção: a fabricante só atende UMA empresa. Se a concorrente também for, a capacidade é dividida e o preço sobe.', e:{caixa:-1, res:+2}},
+  {id:'B', t:'Contratar novo fornecedor internacional', d:'Preço atrativo, mas origem com instabilidade logística. O resultado depende da sorte.', e:null},
+  {id:'C', t:'Reduzir a produção temporariamente', d:'Preserva o estoque, mas deixa pedidos sem atendimento e reduz turnos. O espaço de vocês nas redes fica para a concorrente.', e:{caixa:+1, clientes:-3, pessoas:-2}},
+  {id:'D', t:'Repassar o aumento ao preço', d:'Protege a margem. Se a concorrente não reajustar também, parte dos seus clientes migra para ela.', e:{caixa:+2, clientes:-3}},
+  {id:'E', t:'Investir em alternativa produtiva própria', d:'Nova linha de embalagem com insumo nacional. Investimento alto, ganho estrutural, não depende da concorrente.', e:{caixa:-4, pessoas:+1, res:+3}}
+];
+const R2_B_OK = {caixa:-1, res:+1};
+const R2_B_FAIL = {caixa:-2, clientes:-2, res:-3};
+const nomeR2 = (id)=>{ const o=R2_OPC.find(x=>x.id===id); return o?`${o.id}. ${o.t}`:'?'; };
+
+function somar(a,b){ const r={...a}; for(const k in (b||{})) r[k]=(r[k]||0)+b[k]; for(const k in r) if(!r[k]) delete r[k]; return r; }
+const pontos = (e)=> Object.values(e||{}).reduce((a,b)=>a+b,0);
+
+/* Efeito da decisão de uma equipe na Rodada 2, dado o que a concorrente decidiu */
+function efeitoR2(opc, team, rivOpc){
+  const proprio = opc==='B' ? (hashTeam(team)===0 ? R2_B_FAIL : R2_B_OK) : R2_OPC.find(o=>o.id===opc).e;
+  let cruzado = {}; const msgs = [];
+  if(rivOpc){
+    if(opc==='A' && rivOpc==='A'){ cruzado = somar(cruzado,{caixa:-1,res:-2}); msgs.push('As duas empresas foram à fabricante de Anápolis. Ela dividiu a capacidade e subiu o preço.'); }
+    if(opc==='D' && rivOpc==='D'){ cruzado = somar(cruzado,{clientes:+2}); msgs.push('As duas reajustaram juntas: as redes aceitaram e vocês perderam menos clientes.'); }
+    if(opc==='D' && rivOpc!=='D') msgs.push('Vocês reajustaram sozinhos: parte dos seus clientes migrou para a concorrente.');
+    if(opc!=='D' && rivOpc==='D'){ cruzado = somar(cruzado,{clientes:+1}); msgs.push('A concorrente subiu o preço e parte dos clientes dela veio para vocês.'); }
+    if(rivOpc==='C'){ cruzado = somar(cruzado,{clientes:+1}); msgs.push('A concorrente reduziu a produção e vocês ocuparam o espaço dela nas redes.'); }
+    if(opc==='A' && rivOpc!=='A') msgs.push('Vocês ficaram com a vaga da fabricante de Anápolis sem disputa.');
+  }
+  return {proprio, cruzado, msgs};
+}
+
+/* ---------- Rodada 3: a proposta de Hamburgo ---------- */
+const R3_EST = [
+  {id:'C', t:'Preço cheio', d:'Proposta com margem normal. Se a concorrente também mantiver o preço, a Nordkost divide o pedido entre as duas.'},
+  {id:'D', t:'Desconto agressivo', d:'Corta a margem para ganhar a vaga. Se só vocês derem desconto, levam o pedido inteiro.'},
+  {id:'K', t:'Consórcio de exportação com a concorrente', d:'Proposta conjunta: o kit "café da manhã brasileiro" com biscoitos e laticínios, custos de certificação divididos. Só existe se a concorrente também escolher o consórcio.'}
+];
+const nomeEst = (id)=> (R3_EST.find(x=>x.id===id)||{t:'?'}).t;
+const curtoEst = {C:'Preço cheio', D:'Desconto', K:'Consórcio'};
+// Efeito no placar de cada combinação (linha = sua empresa, coluna = concorrente)
+const MATRIZ3 = {
+  'C|C':{clientes:+2, caixa:+1},          // 3: pedido dividido com margem
+  'C|D':{},                                // 0: perdeu a vaga
+  'C|K':{clientes:+2, caixa:+1},          // 3: foi sozinha e ficou com o pedido
+  'D|C':{clientes:+4, caixa:+1},          // 5: levou o pedido inteiro
+  'D|D':{clientes:+2, caixa:-1},          // 1: guerra de preços
+  'D|K':{clientes:+4, caixa:+1},          // 5
+  'K|C':{caixa:-1},                        // -1: apostou no consórcio sozinha
+  'K|D':{caixa:-1},                        // -1
+  'K|K':{clientes:+3, caixa:+1, res:+2}    // 6: consórcio
+};
+const NASH3 = ['D|D','K|K'];
+const R3_INC = [
+  {id:'EXW', t:'EXW (na fábrica)', d:'O comprador retira na fábrica em Goiás e assume todo o resto.', e:{clientes:-1}},
+  {id:'FOB', t:'FOB (a bordo no porto de Santos)', d:'O exportador entrega a carga embarcada; daí em diante o risco é do comprador.', e:{}},
+  {id:'CIF', t:'CIF (custo, seguro e frete até Hamburgo)', d:'O exportador paga frete e seguro até o porto de destino.', e:{caixa:-1, clientes:+1}},
+  {id:'DDP', t:'DDP (entregue com tributos pagos)', d:'O exportador entrega no armazém do comprador e paga os tributos europeus.', e:{caixa:-2, clientes:+1, res:-2}}
+];
+const R3_ESG = [
+  {id:'X1', t:'Aceitar tudo: ERP com rastreabilidade por lote e capacitação das equipes', d:'Investimento alto, prazo curto, equipe preparada.', e:{caixa:-3, clientes:+2, pessoas:+2, res:+1}},
+  {id:'X2', t:'Aceitar tudo: automação e corte de 15 vagas para pagar o investimento', d:'Resolve o caixa da adequação.', e:{clientes:+1, pessoas:-4}},
+  {id:'X3', t:'Propor um pedido-piloto e 12 meses para a certificação completa', d:'Fecha um contrato menor agora e constrói a adequação com tempo.', e:{caixa:-1, clientes:+1, res:+1}},
+  {id:'X4', t:'Recusar as exigências e manter o foco no mercado interno', d:'Nenhum investimento novo. A proposta de vocês fica fora da disputa.', e:{caixa:+1, clientes:-1, res:-1}}
+];
+/* Estratégia "efetiva" de uma empresa: quem recusou o ESG fica fora e conta como se não disputasse com desconto */
+const estEfetiva = (r3)=> r3.esg==='X4' ? 'C' : r3.est;
+function efeitoR3(meu, riv){
+  if(meu.esg==='X4') return {};
+  if(!riv) return null;
+  return MATRIZ3[meu.est+'|'+estEfetiva(riv)];
+}
+function desfechoR3(d, rv){
+  if(!d) return null;
+  if(d.esg==='X4') return {ok:false, t:'Sem contrato. Vocês recusaram as exigências e a Nordkost nem avaliou o preço. Ela fechou com um fornecedor chileno que já tinha rastreabilidade.'};
+  if(!rv || !rv.r3) return {pend:true, t:'Proposta enviada. A Nordkost aguarda a proposta da concorrente para decidir.'};
+  const r = rv.r3, fora = r.esg==='X4', cel = d.est+'|'+estEfetiva(r);
+  const pre = fora ? 'A concorrente recusou as exigências ESG e ficou fora da disputa. ' : '';
+  const T = {
+    'K|K':[true,'Consórcio aprovado! O kit "café da manhã brasileiro" convenceu a Nordkost, e as duas empresas dividem um contrato maior e os custos de certificação.'],
+    'K|C':[false,'Vocês apostaram no consórcio, mas a concorrente foi sozinha com preço cheio. A proposta conjunta não existia e a Nordkost fechou com ela.'],
+    'K|D':[false,'Vocês apostaram no consórcio, mas a concorrente foi sozinha com desconto e levou a vaga.'],
+    'D|C':[true,'Vocês levaram o pedido inteiro com o desconto. A concorrente manteve o preço e ficou de fora.'],
+    'D|K':[true,'Vocês levaram o pedido inteiro com o desconto. A concorrente esperava um consórcio e ficou sem nada.'],
+    'D|D':[true,'Guerra de preços: as duas deram desconto, a Nordkost dividiu o pedido e as margens encolheram.'],
+    'C|C':[true,'As duas mantiveram o preço. A Nordkost dividiu o pedido entre vocês, com boa margem.'],
+    'C|D':[false,'A concorrente deu desconto e levou a vaga. O preço cheio de vocês ficou de fora.'],
+    'C|K':[true,'A concorrente propôs um consórcio, mas vocês foram sozinhos e ficaram com o pedido a preço cheio.']
+  }[cel];
+  let t = pre + T[1];
+  if(T[0] && d.esg==='X2') t += ' Ressalva: a due diligence social da Nordkost vai auditar as 15 demissões. Na Europa, o "S" do ESG pesa.';
+  if(T[0] && d.esg==='X3') t += ' O contrato começa como pedido-piloto, e o comprador quer ver o cronograma de certificação.';
+  if(T[0] && d.inc==='EXW') t += ' O comprador cobrou desconto extra por ter de retirar a carga em Goiás (EXW).';
+  return {ok:T[0], t, cel};
+}
+
+/* ---------- Análise de melhor resposta e equilíbrio de Nash ---------- */
+function analiseR2(meu, team, riv, rteam){
+  const tab = R2_OPC.map(o=>{ const e=efeitoR2(o.id, team, riv); return {id:o.id, t:o.t, pts:pontos(somar(e.proprio,e.cruzado))}; });
+  const max = Math.max(...tab.map(x=>x.pts));
+  const tabR = R2_OPC.map(o=>{ const e=efeitoR2(o.id, rteam, meu); return pontos(somar(e.proprio,e.cruzado)); });
+  const meuBR = tab.find(x=>x.id===meu).pts===max;
+  const rivBR = pontos(somar(efeitoR2(riv, rteam, meu).proprio, efeitoR2(riv, rteam, meu).cruzado))===Math.max(...tabR);
+  return {tab, max, meuBR, rivBR, nash: meuBR && rivBR};
+}
+function analiseR3(meu, riv){
+  const r = estEfetiva(riv);
+  const tab = R3_EST.map(o=>({id:o.id, t:o.t, pts:pontos(MATRIZ3[o.id+'|'+r])}));
+  const max = Math.max(...tab.map(x=>x.pts));
+  const meuBR = tab.find(x=>x.id===meu.est).pts===max;
+  const rivBR = riv.esg==='X4' ? true : R3_EST.every(o=>pontos(MATRIZ3[o.id+'|'+meu.est]) <= pontos(MATRIZ3[riv.est+'|'+meu.est]));
+  return {tab, max, meuBR, rivBR, nash: meuBR && rivBR};
+}
+
+/* ---------- Rodada 4: competências 2030 ---------- */
+const R4_HARD = [
+  'Análise de dados e indicadores',
+  'IA aplicada à gestão e ao comércio exterior',
+  'Compliance e regulação internacional',
+  'Logística e cadeias globais de suprimento',
+  'Finanças e gestão de risco cambial',
+  'Gestão de processos digitais e projetos'
+];
+const R4_SOFT = [
+  'Inteligência cultural',
+  'Negociação e mediação de conflitos',
+  'Comunicação com equipes distribuídas',
+  'Adaptabilidade e aprendizagem contínua',
+  'Pensamento crítico e ética',
+  'Liderança colaborativa'
+];
+
+/* ---------- Conceitos-chave de cada rodada ---------- */
+const CONCEITOS = {
+  r1:{t:'Diagnóstico organizacional e indicadores',
+      p:['Diagnosticar é separar sintoma de causa. A logomarca antiga incomoda, mas não explica a queda da margem.',
+         'Priorizar também é decidir o que fica de fora. Ferramentas como SWOT e 5W2H ajudam a organizar, mas quem decide é o administrador.',
+         'Um bom indicador (KPI) mede algo que muda uma decisão. Curtidas são indicador de vaidade quando não se ligam a resultado.'],
+      ref:'Funções administrativas: planejar, organizar, dirigir e controlar (Fayol).'},
+  r2:{t:'Decisões interdependentes e equilíbrio de Nash',
+      p:['Quando duas empresas disputam o mesmo recurso escasso, o resultado de cada uma depende da escolha da outra. Isso é um jogo estratégico, e a teoria dos jogos estuda essas situações.',
+         'Melhor resposta é a melhor decisão possível dado o que o outro fez. Quando as duas empresas estão, ao mesmo tempo, jogando a melhor resposta uma à outra, há um equilíbrio de Nash: nenhuma ganha mudando sozinha.',
+         'Na disputa pelo fornecedor de Anápolis há dois equilíbrios: uma empresa vai ao nacional e a outra não. O difícil é saber qual. Por isso informação sobre o concorrente tem valor e tem custo.'],
+      ref:'John Nash (1950); racionalidade limitada (Herbert Simon).'},
+  r3:{t:'Dilema do prisioneiro, cooperação e internacionalização',
+      p:['Na proposta de Hamburgo, o desconto mútuo é um equilíbrio de Nash: nenhuma empresa ganha mudando sozinha, mas as duas ficam pior do que se cooperassem. É o dilema do prisioneiro.',
+         'O consórcio também é um equilíbrio, e é o melhor para as duas, mas exige confiança: quem entra sozinho perde. Consórcios de exportação são uma forma real de PMEs entrarem em mercados exigentes.',
+         'Incoterms dividem custos e riscos entre exportador e importador, e em mercados exigentes o ESG deixou de ser diferencial: virou condição de acesso.'],
+      ref:'Nash (1950); Axelrod, A evolução da cooperação (1984); Peng, Estratégia global.'},
+  r4:{t:'Competências do administrador do futuro',
+      p:['Hard skills são técnicas e se aprendem com método. Soft skills definem como você usa a técnica com outras pessoas.',
+         'A IA amplia a análise, mas não assume a responsabilidade pela decisão nem negocia interesses por você.'],
+      ref:'Carta do Administrador Global: construída ao vivo com as respostas desta sala.'}
+};
+function conceitoHTML(r){ const c=CONCEITOS[r]; return `<div class="concept"><span class="tag">Conceito-chave</span><h3 style="margin-top:4px">${esc(c.t)}</h3>${c.p.map(x=>`<p>${esc(x)}</p>`).join('')}<div class="ref">${esc(c.ref)}</div></div>`; }
+
+function hashTeam(n){ let h = (n*2654435761)>>>0; h ^= h>>>13; return h % 3; } // 0 = falha (1 em 3)
+
+/* Decisões da concorrente que valem para o cálculo.
+   rivDec: decisões oficiais da concorrente (já liberadas pelo servidor), faseAtual: fase do jogo */
+function rivalEfetivo(team, rivDec, faseAtual, offline){
+  if(offline===undefined) offline = !CONFIG.ENDPOINT;   // sem planilha, o celular joga contra a reação padrão
+  const r = rivalDe(team);
+  if(!r || offline) return {r2:ROBO.r2, r3:ROBO.r3, robo2:true, robo3:true, semPar:true};
+  const d = rivDec||{}, out = {r2:null, r3:null, robo2:false, robo3:false};
+  if(d.r2) out.r2 = d.r2.opc; else if(faseAtual>=3){ out.r2 = ROBO.r2; out.robo2 = true; }
+  if(d.r3) out.r3 = {est:d.r3.est, esg:d.r3.esg}; else if(faseAtual>=4){ out.r3 = ROBO.r3; out.robo3 = true; }
+  return out;
+}
+
+function calcular(d, team, rv){
+  rv = rv || {};
+  const v = {...INICIO};
+  const add = (e)=>{ if(!e) return; for(const k in e) v[k]+=e[k]; };
+  if(d.r1){ d.r1.prob.forEach(id=>add(R1_PROB.find(p=>p.id===id).e)); add(R1_KPI.find(k=>k.id===d.r1.kpi).e); }
+  if(d.r2){
+    v.caixa -= d.r2.info.length;
+    const e = efeitoR2(d.r2.opc, team, rv.r2); add(e.proprio); add(e.cruzado);
+  }
+  if(d.r3){
+    add(R3_INC.find(o=>o.id===d.r3.inc).e); add(R3_ESG.find(o=>o.id===d.r3.esg).e);
+    add(efeitoR3(d.r3, rv.r3));
+  }
+  return v;
+}
+const resultadoFinal = (d, rv)=> !!(d.r3 && (d.r3.esg==='X4' || (rv && rv.r3)));
+function pontuar(v,d,final){
+  const soma = v.caixa+v.clientes+v.pessoas+v.res;
+  const metas = CARGOS.map(c=>({id:c.id, ok: !!(final && c.ok(v,d))}));
+  const nm = metas.filter(m=>m.ok).length;
+  return {soma, metas, nm, total: soma + 2*nm};
+}
+
+/* ---------- Dossiê de cada empresa ---------- */
+const DOSSIE = {
+  cerrado:{
+    rec:['41,2','45,0','48,6'], mar:['9,1%','5,8%','3,2%'], err:['3,9%','5,1%','6,0%'], caixa:'3,1',
+    custo:[['Matéria-prima (trigo, açúcar, óleo)','46%'],['Embalagens (100% importadas, 1 fornecedor)','22%'],['Mão de obra','18%'],['Energia e logística','14%']],
+    cli:[['3 redes de supermercados','62% da receita'],['Cerca de 180 pequenos varejos','38% da receita'],['Pedidos recebidos por WhatsApp e planilha','70%'],['Seguidores no Instagram','1.900']],
+    pes:[['Funcionários','120'],['Rotatividade anual na produção','28%'],['Horas de treinamento por funcionário/ano','4 h'],['Área da sede administrativa','240 m²']]
+  },
+  veredas:{
+    rec:['36,8','39,5','41,9'], mar:['8,4%','5,2%','2,7%'], err:['4,4%','5,6%','6,3%'], caixa:'2,7',
+    custo:[['Matéria-prima (leite captado de 140 produtores)','52%'],['Embalagens cartonadas e potes (100% importados, 1 fornecedor)','19%'],['Mão de obra','16%'],['Energia e logística refrigerada','13%']],
+    cli:[['3 redes de supermercados','58% da receita'],['Cerca de 210 pequenos varejos','42% da receita'],['Pedidos recebidos por WhatsApp e planilha','65%'],['Seguidores no Instagram','2.400']],
+    pes:[['Funcionários','110'],['Rotatividade anual na produção','31%'],['Horas de treinamento por funcionário/ano','5 h'],['Área da sede administrativa','210 m²']]
+  }
+};
+/* ===================== UTIL ===================== */
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = (s)=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function store(k,v){ try{ if(v===undefined) return JSON.parse(localStorage.getItem('aej_'+k)||'null'); localStorage.setItem('aej_'+k, JSON.stringify(v)); }catch(e){ return null; } }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.remove('hidden'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.add('hidden'),2600); }
+function chips(e){ if(!e) return '<span class="chip">resultado incerto</span>'; return Object.entries(e).map(([k,x])=>`<span class="chip ${x>0?'p':'m'}">${IND.find(i=>i.k===k).n} ${x>0?'+':''}${x}</span>`).join(''); }
+async function enviar(payload){
+  if(!CONFIG.ENDPOINT) return false;
+  try{ await fetch(CONFIG.ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({sessao:(typeof P!=='undefined'&&P.sessao)||CONFIG.SESSAO, ...payload})}); return true; }
+  catch(e){ return false; }
+}
+async function consultar(params, ms=12000){
+  const ctl = new AbortController(); const t = setTimeout(()=>ctl.abort(), ms);
+  try{
+    const q = new URLSearchParams({...params, t:Date.now()}).toString();
+    const r = await fetch(CONFIG.ENDPOINT+'?'+q, {signal:ctl.signal});
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+const normS = (v)=> String(v||'').trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'').slice(0,30);
+
+/* ===================== PARTICIPANTE ===================== */
+const P = { team:null, role:null, d:{}, unlock:{jogo:false,r2:false,r3:false,r4:false}, tab:'caso', fase:0, oficial:{}, rivDec:{}, rv:{} };
+function clientId(){ let id=store('cid'); if(!id){ id=Math.random().toString(36).slice(2,10); store('cid',id); } return id; }
+
+const ICON_QR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M17 21h4v-4M14 18v3"/></svg>';
+
+function initPart(){
+  document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
+  const arg = new URLSearchParams(location.search).get('s');
+  const sArg = arg ? normS(arg) : null;
+  const st = store('state');
+  if(st && st.team && st.role && !(sArg && st.sessao && st.sessao!==sArg)){
+    Object.assign(P, st); P.unlock = {jogo:false,r2:false,r3:false,r4:false, ...(st.unlock||{})}; P.tab = P.tab||'caso';
+    if(P.unlock.jogo) startGame(); else telaEspera();
+    return;
+  }
+  if(st && sArg && st.sessao && st.sessao!==sArg) store('state',{});
+  // Tela inicial: a capa em tela cheia. "Começar" abre o login.
+  $('#btnCapa').onclick = ()=>{
+    abrirLogin();
+    if(sArg && sArg===normS(CONFIG.SESSAO)){ P.sessao = sArg; telaNome(); }
+    else telaQR(!!sArg);
+  };
+}
+function abrirLogin(){
+  $('.cv-hero').classList.remove('full');
+  $('#joinBox').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+function telaQR(outra){
+  $('#joinBox').innerHTML = `
+  <div class="card">
+    <div class="qrhint">${ICON_QR}<div><h3 style="margin:0">Entre pelo QR Code</h3><p class="muted small" style="margin:4px 0 0">Aponte a câmera do celular para o QR Code projetado no telão.</p></div></div>
+    ${outra?'<div class="notice small">Este QR Code é de outra sessão. Leia o QR Code que está no telão agora.</div>':''}
+    <div class="divider">sem câmera?</div>
+    <label for="salaIn" class="small muted">Digite o código da sala, que o professor informa</label>
+    <input type="text" id="salaIn" autocomplete="off" autocapitalize="characters" placeholder="Código da sala" style="margin-top:6px;text-align:center;letter-spacing:.08em">
+    <button class="btn block sec" id="salaOk" style="margin-top:10px">Entrar</button>
+  </div>`;
+  const go = ()=>{
+    const v = normS($('#salaIn').value);
+    if(v && v===normS(CONFIG.SESSAO)){ P.sessao=v; try{ history.replaceState(null,'','?s='+encodeURIComponent(v)); }catch(e){} telaNome(); }
+    else toast('Código não encontrado. Confira com o professor.');
+  };
+  $('#salaOk').onclick = go; $('#salaIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
+}
+function telaNome(){
+  if(!CONFIG.ENDPOINT) return telaManual('O sorteio automático está desligado porque a planilha não foi configurada. Escolham equipe e cargo com o grupo.');
+  $('#joinBox').innerHTML = `
+  <div class="card">
+    <h3>Como você se chama?</h3>
+    <input type="text" id="nomeIn" maxlength="30" autocomplete="given-name" placeholder="Seu primeiro nome">
+    <p class="small muted" style="margin:10px 0 0">Ao confirmar, o sistema sorteia a sua <b>equipe</b> e o seu <b>cargo</b>. Seu nome aparece só para os colegas da sua equipe.</p>
+    <button class="btn block" id="btnSort" style="margin-top:14px">Sortear minha equipe</button>
+  </div>`;
+  const go = ()=>{ const n = $('#nomeIn').value.trim(); if(n.length<2) return toast('Digite seu primeiro nome.'); sortear(n); };
+  $('#btnSort').onclick = go; $('#nomeIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
+  setTimeout(()=>{ const i=$('#nomeIn'); if(i) i.focus(); }, 50);
+}
+async function sortear(nome){
+  const T = CONFIG.MAX_EQUIPES;
+  $('#joinBox').innerHTML = `
+  <div class="card reveal spin" aria-live="polite">
+    <p class="lbl">Sorteando sua equipe</p><div class="num" id="rvNum">--</div>
+    <p class="lbl">Cargo</p><div class="cargo" id="rvCargo">...</div>
+  </div>`;
+  let k = 0;
+  const anim = setInterval(()=>{ $('#rvNum').textContent = 1+Math.floor(Math.random()*T); $('#rvCargo').textContent = CARGOS[k++%CARGOS.length].n; }, 90);
+  const espera = new Promise(r=>setTimeout(r,1800));
+  try{
+    const [j] = await Promise.all([consultar({acao:'sortear', s:P.sessao, id:clientId(), nome, equipes:T}), espera]);
+    clearInterval(anim);
+    if(!j || !j.ok || !CARGOS.find(c=>c.id===j.cargo)) throw new Error('resposta inválida');
+    P.team = +j.equipe; P.role = j.cargo; P.nome = nome; P.sorteado = true;
+    save(); telaRevelar();
+  }catch(e){
+    clearInterval(anim);
+    $('#joinBox').innerHTML = `
+    <div class="card">
+      <h3>Não foi possível sortear agora</h3>
+      <p class="muted">A conexão falhou. Tente de novo em alguns segundos.</p>
+      <button class="btn block" id="retry">Tentar de novo</button>
+      <button class="btn block sec" id="manual" style="margin-top:8px">Escolher equipe e cargo manualmente</button>
+    </div>`;
+    $('#retry').onclick = ()=>sortear(nome);
+    $('#manual').onclick = ()=>telaManual('Combinem com o professor qual equipe completar.');
+  }
+}
+function telaRevelar(){
+  const c = CARGOS.find(x=>x.id===P.role);
+  $('#joinBox').innerHTML = `
+  <div class="card reveal">
+    <p class="lbl">Olá, ${esc(P.nome)}! Sua equipe é a</p>
+    <div class="num">${P.team}</div>
+    <p class="small" style="margin:6px 0 0"><b>${esc(empresaDe(P.team).nome)}</b> · Mercado ${mercadoDe(P.team)}</p>
+    <p class="lbl">Seu cargo</p>
+    <div class="cargo">${esc(c.n)}</div>
+    <p class="small muted" style="margin:14px 0 0">Procure os colegas da <b>Equipe ${P.team}</b>. A equipe concorrente do seu mercado é a <b>${rivalDe(P.team)||'-'}</b>. Na próxima tela você vê quem são seus colegas enquanto o jogo não começa.</p>
+    <button class="btn block" id="go" style="margin-top:16px">Continuar</button>
+  </div>`;
+  $('#go').onclick = telaEspera;
+}
+function telaManual(msg){
+  $('#joinBox').innerHTML = `
+  <div class="card">
+    ${msg?`<div class="notice small" style="margin-top:0">${esc(msg)}</div>`:''}
+    <h3>1. Número da sua equipe</h3>
+    <select id="selTeam"></select>
+    <h3 style="margin-top:18px">2. Seu cargo</h3>
+    <p class="small muted">Cada integrante da equipe fica com um cargo diferente. O Porta-voz é quem registra as decisões oficiais.</p>
+    <div class="grid2" id="roleGrid"></div>
+    <button class="btn block" id="btnJoin" style="margin-top:18px" disabled>Entrar no jogo</button>
+  </div>`;
+  const sel = $('#selTeam');
+  sel.innerHTML = '<option value="">Escolha...</option>' + Array.from({length:CONFIG.MAX_EQUIPES},(_,i)=>`<option value="${i+1}">Equipe ${i+1}</option>`).join('');
+  $('#roleGrid').innerHTML = CARGOS.map(c=>`<button class="role" data-r="${c.id}" aria-pressed="false"><strong>${c.n}</strong><span class="small muted">${c.s}</span></button>`).join('');
+  const check = ()=>{ $('#btnJoin').disabled = !(sel.value && P.role); };
+  sel.onchange = ()=>{ P.team = +sel.value||null; check(); };
+  $('#roleGrid').onclick = (ev)=>{ const b=ev.target.closest('.role'); if(!b) return; P.role=b.dataset.r; document.querySelectorAll('.role').forEach(x=>x.setAttribute('aria-pressed', x===b)); check(); };
+  $('#btnJoin').onclick = ()=>{ P.sorteado=false; P.sessao = P.sessao || normS(CONFIG.SESSAO); save(); telaEspera(); };
+}
+function telaEspera(){
+  abrirLogin();
+  const c = CARGOS.find(x=>x.id===P.role);
+  const remoto = !!CONFIG.ENDPOINT;
+  $('#joinBox').innerHTML = `
+  <div class="card reveal" aria-live="polite">
+    <div class="loader" role="img" aria-label="Carregando"></div>
+    <h3 style="margin:0">Aguardando o professor</h3>
+    <p class="muted" style="margin:6px 0 14px">${remoto?'O jogo abre sozinho quando o professor liberar. Não feche esta página.':'Quando o professor autorizar, digite o código de início projetado no telão.'}</p>
+    <span class="badge">Equipe <b>${P.team}</b> · ${esc(empresaDe(P.team).curto)} · Mercado ${mercadoDe(P.team)} · ${esc(c.n)}</span>
+  </div>
+  ${P.sorteado && remoto ? `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3 style="margin:0">Encontre sua equipe</h3><button class="btn sec" id="teamRef" style="padding:6px 10px;font-size:.82rem">Atualizar</button></div><ul class="roster" id="roster"><li class="muted">Carregando...</li></ul></div>`:''}
+  <div class="card">
+    ${remoto?'<div class="divider" style="margin-top:0">o jogo não abriu?</div>':''}
+    <label for="iniIn" class="small muted">Código de início ${remoto?'(projetado pelo professor)':''}</label>
+    <input type="text" id="iniIn" autocomplete="off" autocapitalize="characters" placeholder="Código" style="margin-top:6px;text-align:center;letter-spacing:.08em">
+    <button class="btn block sec" id="iniOk" style="margin-top:10px">Entrar no jogo</button>
+  </div>`;
+  if($('#teamRef')){ $('#teamRef').onclick = carregarEquipe; carregarEquipe(); }
+  const go = ()=>{ if(norm($('#iniIn').value)===norm(CONFIG.CODIGOS.jogo)){ P.unlock.jogo=true; save(); startGame(); } else toast('Código incorreto. Aguarde o professor.'); };
+  $('#iniOk').onclick = go; $('#iniIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
+  syncFase();
+}
+let faseRodando = false;
+const atualizaRv = ()=>{ P.rv = rivalEfetivo(P.team, P.rivDec, P.fase||0); return P.rv; };
+function pendente(){
+  const of = P.oficial||{};
+  if(!of.r1 || !of.r2 || !of.r3) return true;
+  atualizaRv();
+  return !P.rv.r2 || (P.d.r3 && P.d.r3.esg!=='X4' && !P.rv.r3);
+}
+function syncFase(){
+  if(!CONFIG.ENDPOINT || faseRodando) return;
+  faseRodando = true;
+  const tick = async ()=>{
+    try{
+      const q = {acao:'estado', s:P.sessao||normS(CONFIG.SESSAO)}; if(P.team) q.n = P.team;
+      const j = await consultar(q, 8000);
+      if(j && j.ok) aplicarEstado(j);
+    }catch(e){}
+    const pend = pendente();
+    if(P.unlock.r4 && !pend){ faseRodando = false; return; }
+    const espera = !P.unlock.jogo ? 5000 : (pend ? 7000 : 12000);
+    setTimeout(tick, espera + Math.random()*3000);   // espalha as consultas dos celulares
+  };
+  tick();
+}
+function aplicarEstado(j){
+  let mudou = false;
+  const antes = {...atualizaRv()};
+  const f = Number(j.fase)||0;
+  if(f !== P.fase){ P.fase = f; mudou = true; }
+  if(j.eu){
+    P.oficial = P.oficial||{};
+    ['r1','r2','r3'].forEach(r=>{
+      if(!j.eu[r]) return;
+      if(JSON.stringify(P.d[r]) !== JSON.stringify(j.eu[r])){ P.d[r] = j.eu[r]; mudou = true; }
+      if(!P.oficial[r]){ P.oficial[r] = true; mudou = true; }
+    });
+  }
+  if(j.rival && JSON.stringify(j.rival) !== JSON.stringify(P.rivDec||{})){ P.rivDec = j.rival; mudou = true; }
+  const depois = atualizaRv();
+  const emJogo = !$('#game').classList.contains('hidden');
+  if(emJogo && ((!antes.r2 && depois.r2 && P.d.r2) || (!antes.r3 && depois.r3 && P.d.r3)))
+    toast('A concorrente decidiu! Vejam como as decisões se encontraram.');
+  aplicarFase(f);
+  if(mudou){ save(); if(!$('#game').classList.contains('hidden')) render(); }
+}
+function aplicarFase(f){
+  const ordem = ['jogo','r2','r3','r4'];
+  let nova = null;
+  ordem.forEach((k,i)=>{ if(f>=i+1 && !P.unlock[k]){ P.unlock[k]=true; nova=k; } });
+  if(!nova) return;
+  save();
+  if($('#game').classList.contains('hidden')){
+    if(P.unlock.jogo){ startGame(); toast('Jogo liberado! Boa sorte.'); }
+    return;
+  }
+  if(nova==='jogo') return;
+  toast(`Rodada ${nova.slice(1)} liberada!`);
+  if(P.tab===nova) render(); else desenharAbas();
+}
+function save(){ store('state',{team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec}); }
+function startGame(){
+  document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
+  $('#join').classList.add('hidden'); $('#game').classList.remove('hidden');
+  const c = CARGOS.find(x=>x.id===P.role);
+  $('#whoLbl').innerHTML = `<b>Equipe ${P.team} · ${esc(empresaDe(P.team).curto)}</b> · ${esc(c.n)}${P.nome?` · ${esc(P.nome)}`:''}`;
+  $('#btnSair').classList.toggle('hidden', !!P.sorteado);
+  syncFase();
+  $('#btnSair').onclick = ()=>{ if(confirm('Trocar de equipe ou cargo apaga as decisões registradas neste aparelho. Continuar?')){ store('state',{}); location.reload(); } };
+  render();
+}
+const TABS = [
+  {id:'caso', n:'O caso'}, {id:'dossie', n:'Dossiê'}, {id:'cargo', n:'Meu cargo'},
+  {id:'r1', n:'Rodada 1'}, {id:'r2', n:'Rodada 2', lock:'r2'}, {id:'r3', n:'Rodada 3', lock:'r3'}, {id:'r4', n:'Rodada 4', lock:'r4'}, {id:'placar', n:'Placar'}
+];
+function desenharAbas(){
+  $('#tabs').innerHTML = TABS.map(t=>`<button class="tab" role="tab" data-t="${t.id}" aria-selected="${P.tab===t.id}">${t.n}${t.lock && !P.unlock[t.lock] ? '<span class="lock">🔒</span>':''}</button>`).join('');
+}
+function render(){
+  atualizaRv();
+  const v = calcular(P.d, P.team, P.rv);
+  $('#meters').innerHTML = IND.map(i=>`<div class="meter"><span>${i.n}</span><b>${v[i.k]}</b><div class="bar"><i style="width:${Math.max(0,Math.min(100,v[i.k]/16*100))}%;background:${i.c}"></i></div></div>`).join('');
+  desenharAbas();
+  $('#tabs').onclick = (e)=>{ const b=e.target.closest('.tab'); if(!b) return; P.tab=b.dataset.t; save(); render(); window.scrollTo(0,0); };
+  const sel = $('#tabs [aria-selected="true"]'); if(sel) sel.scrollIntoView({inline:'center',block:'nearest'});
+  $('#view').innerHTML = VIEWS[P.tab](v);
+  (BIND[P.tab]||(()=>{}))();
+}
+const isCEO = ()=> P.role==='ceo';
+
+const VIEWS = {
+caso: ()=>{ const E = empresaDe(P.team), rt = rivalDe(P.team), R = rt?empresaDe(rt):null; return `
+  ${P.sorteado && CONFIG.ENDPOINT ? `<div class="card" id="teamBox"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3 style="margin:0">Sua equipe: ${P.team}</h3><button class="btn sec" id="teamRef" style="padding:6px 10px;font-size:.82rem">Atualizar</button></div><ul class="roster" id="roster"><li class="muted">Carregando...</li></ul></div>`:''}
+  <div class="card">
+    <span class="tag">Caso fictício · Mercado ${mercadoDe(P.team)}</span>
+    <div class="vs" style="margin-top:12px">
+      <div class="me"><small>Sua empresa · Equipe ${P.team}</small><b>${esc(E.nome)}</b><span>${esc(E.seg)} · ${esc(E.cidade)}</span></div>
+      <div class="x">×</div>
+      <div><small>Concorrente · ${rt?'Equipe '+rt:'reação padrão do mercado'}</small><b>${esc(R?R.nome:'Empresa concorrente')}</b><span>${esc(R?R.seg:'')}</span></div>
+    </div>
+    <p style="margin-top:14px">A diretoria da ${esc(E.nome)} contratou a sua equipe como consultoria para reorganizar a empresa e prepará-la para crescer. O problema é que a empresa não está sozinha: cada decisão de vocês encontra a decisão da ${esc(R?R.nome:'concorrente')}.</p>
+  </div>
+  <div class="card">
+    <h3>Onde as duas empresas se cruzam</h3>
+    <ol class="small" style="padding-left:20px;margin:6px 0 0">
+      <li><b>Mesmo fornecedor:</b> as duas dependem de embalagens importadas e do único fornecedor nacional da região.</li>
+      <li><b>Mesmos clientes:</b> as três grandes redes de Goiás dividem espaço e verba promocional entre as duas.</li>
+      <li><b>Mesma oportunidade:</b> uma rede alemã procura uma linha brasileira de café da manhã, e biscoito com laticínio formam um kit.</li>
+    </ol>
+    <p class="small muted" style="margin:10px 0 0">Vocês decidem sem ver a escolha da concorrente. O jogo revela como as duas decisões se encontraram assim que as duas equipes registrarem.</p>
+  </div>
+  <div class="card">
+    <h3>Como o jogo funciona</h3>
+    <p>A empresa começa com <b>10 pontos</b> em quatro indicadores: <b>Caixa, Clientes, Pessoas e Resiliência</b>. As decisões de vocês e as da concorrente alteram esse placar.</p>
+    <p>Cada integrante tem uma <b>meta secreta</b> ligada ao próprio cargo. As metas competem entre si.</p>
+    <p><b>Pontuação final</b> = soma dos indicadores + 2 pontos por meta de cargo cumprida.</p>
+    <div class="notice small">Só o Porta-voz registra as decisões oficiais. Os demais podem simular no próprio celular; quando o Porta-voz registra, a decisão oficial aparece para todos.</div>
+  </div>
+  <div class="card">
+    <h3>Rodadas</h3>
+    <table><tr><th>Rodada</th><th>Desafio</th></tr>
+    <tr><td>1</td><td>Diagnóstico com dados: 3 problemas prioritários e 1 indicador</td></tr>
+    <tr><td>2</td><td>Crise: vocês e a concorrente disputam o mesmo fornecedor e os mesmos clientes</td></tr>
+    <tr><td>3</td><td>Hamburgo: competir com a concorrente ou formar um consórcio com ela</td></tr>
+    <tr><td>4</td><td>Individual: as competências do administrador de 2030</td></tr></table>
+    <p class="small muted" style="margin-top:8px">As rodadas abrem quando o professor liberar. Ao final de cada uma aparece um <b>conceito-chave</b> da Administração.</p>
+  </div>`; },
+
+dossie: ()=>{ const D = DOSSIE[empresaKey(P.team)], E = empresaDe(P.team), rt = rivalDe(P.team); return `
+  <div class="card">
+    <span class="tag">${esc(E.nome)} · dados de gestão 2023 a 2025</span>
+    <h3 style="margin-top:8px">Desempenho financeiro</h3>
+    <table><tr><th></th><th class="n">2023</th><th class="n">2024</th><th class="n">2025</th></tr>
+    <tr><td>Receita líquida (R$ mi)</td>${D.rec.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
+    <tr><td>Margem líquida</td>${D.mar.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
+    <tr><td>Erros de faturamento (% pedidos)</td>${D.err.map(x=>`<td class="n">${x}</td>`).join('')}</tr></table>
+    <p class="small muted" style="margin-top:8px">Caixa disponível hoje: R$ ${D.caixa} milhões.</p>
+  </div>
+  <div class="card">
+    <h3>Composição do custo do produto vendido</h3>
+    <div class="kv">${D.custo.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
+    <p class="small muted" style="margin-top:8px">Prazo de entrega do fornecedor de embalagens: 45 dias. Estoque atual de embalagens: 20 dias de produção.</p>
+  </div>
+  <div class="card">
+    <h3>Clientes e mercado</h3>
+    <div class="kv">${D.cli.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
+  </div>
+  <div class="card">
+    <h3>Pessoas e estrutura</h3>
+    <div class="kv">${D.pes.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
+    <p class="small muted" style="margin-top:8px">A diretoria reclama da logomarca antiga e da sede apertada.</p>
+  </div>
+  <div class="card">
+    <h3>Mercado compartilhado</h3>
+    <p class="small" style="margin:0">A ${esc(rt?empresaDe(rt).nome:'concorrente')} ${rt?`(Equipe ${rt})`:''} compra do mesmo fornecedor de embalagens, vende para as mesmas três redes e também recebeu a sondagem da rede alemã Nordkost.</p>
+  </div>`; },
+
+cargo: ()=>{ const c = CARGOS.find(x=>x.id===P.role); return `
+  <div class="card secret">
+    <span class="tag">Confidencial · não mostre seu celular</span>
+    <h2 style="margin-top:8px">${esc(c.n)}</h2>
+    <h3>Sua meta</h3><p style="font-size:1.1rem"><b>${esc(c.meta)}</b></p>
+    <h3>O que você sabe</h3><p>${esc(c.dica)}</p>
+  </div>
+  <div class="card small muted">Cada meta cumprida vale 2 pontos para a equipe. As metas dos cargos entram em conflito. Defenda a sua, mas lembre que o placar é coletivo.</div>`; },
+
+r1: ()=>{ const d=P.d.r1; const done=!!d; const sel = d? d.prob : (P.tmp1||[]); const kpi = d? d.kpi : P.tmpK; return `
+  <div class="card">
+    <span class="tag">Rodada 1 · Diagnóstico</span>
+    <h2 style="margin-top:8px">O que está errado nesta empresa?</h2>
+    <p>Usem o <b>Dossiê</b>. Escolham <b>exatamente 3</b> problemas prioritários e <b>1</b> indicador para a diretoria monitorar.</p>
+  </div>
+  <div class="card"><h3>Problemas prioritários <span class="muted small" id="cnt1">(${sel.length}/3)</span></h3>
+  ${R1_PROB.map(p=>`<label class="opt ${sel.includes(p.id)?'on':''} ${done?'done':''}"><input type="checkbox" name="p" value="${p.id}" ${sel.includes(p.id)?'checked':''} ${done?'disabled':''}><div>${esc(p.t)}${done && sel.includes(p.id)?`<div class="effect">${chips(p.e)}</div>`:''}</div></label>`).join('')}
+  </div>
+  <div class="card"><h3>Indicador a monitorar</h3>
+  ${R1_KPI.map(k=>`<label class="opt ${kpi===k.id?'on':''} ${done?'done':''}"><input type="radio" name="k" value="${k.id}" ${kpi===k.id?'checked':''} ${done?'disabled':''}><div>${esc(k.t)}${done && kpi===k.id?`<div class="effect">${Object.keys(k.e).length?chips(k.e):'<span class="chip">sem efeito: indicador de vaidade</span>'}</div>`:''}</div></label>`).join('')}
+  </div>
+  ${done ? `<div class="notice">Decisão registrada. Os efeitos já estão no placar.</div>${conceitoHTML('r1')}` : `<button class="btn block" id="ok1">${isCEO()?'Registrar decisão oficial da equipe':'Simular no meu placar'}</button>`}`; },
+
+r2: ()=>{ if(!P.unlock.r2) return lockView('r2','Aguardem o comunicado da diretoria.');
+  const d=P.d.r2; const done=!!d; const info = d? d.info : (P.tmpI||[]); const opc = d? d.opc : P.tmpO; const ia = d? d.ia : !!P.tmpIA;
+  const falha = hashTeam(P.team)===0;
+  const rt = rivalDe(P.team), Rn = rt? empresaDe(rt).nome : 'concorrente';
+  const oficial = isCEO() || (P.oficial && P.oficial.r2);
+  let pos = '';
+  if(done){
+    pos = !oficial ? simuladoHTML() : (P.rv.r2 ? encontroR2HTML() : aguardandoHTML('Vocês já decidiram.'));
+    pos += conceitoHTML('r2');
+  }
+  return `
+  <div class="alert"><div class="small" style="letter-spacing:.1em;font-weight:700">COMUNICADO URGENTE</div><div class="big">+25%</div><div>no custo das embalagens importadas. O fornecedor atrasou e o estoque cobre 20 dias. A ${esc(Rn)} foi atingida pela mesma crise.</div></div>
+  <div class="card small"><b>Atenção:</b> a única fabricante nacional, em Anápolis, só tem capacidade para atender <b>uma</b> das duas empresas do seu mercado. Vocês e a ${esc(Rn)} decidem ao mesmo tempo, sem ver a escolha da outra.</div>
+  <div class="card">
+    <h3>Comprar informação antes de decidir</h3>
+    <p class="small muted">Cada relatório custa <b>1 ponto de Caixa</b>. Dado custa dinheiro. Decidam se vale a pena.</p>
+    ${R2_INFO.map(i=>{ const comprado = info.includes(i.id); return `<div class="opt ${comprado?'on':''} done" style="flex-direction:column"><div style="display:flex;justify-content:space-between;width:100%;gap:10px;align-items:center"><b>${esc(i.t)}</b>${comprado?'<span class="chip">comprado</span>':(done?'':`<button class="btn sec" data-buy="${i.id}" style="padding:6px 10px;font-size:.85rem">Comprar (−1 Caixa)</button>`)}</div>${comprado?`<div class="desc" style="color:var(--ink)">${esc(i.r(P.team))}</div>`:''}</div>`; }).join('')}
+  </div>
+  <div class="card"><h3>Decisão da equipe</h3>
+  ${R2_OPC.map(o=>`<label class="opt ${opc===o.id?'on':''} ${done?'done':''}"><input type="radio" name="o2" value="${o.id}" ${opc===o.id?'checked':''} ${done?'disabled':''}><div><b>${o.id}. ${esc(o.t)}</b><div class="desc">${esc(o.d)}</div></div></label>`).join('')}
+  <label class="opt ${ia?'on':''} ${done?'done':''}" style="margin-top:14px"><input type="checkbox" id="ia" ${ia?'checked':''} ${done?'disabled':''}><div><b>Usamos IA nesta rodada</b><div class="desc">A equipe pode fazer uma consulta de até 2 minutos a uma IA no celular. Marquem se usaram. Isso não altera o placar, mas entra na discussão final.</div></div></label>
+  </div>
+  ${done ? (opc==='B' ? `<div class="card" style="text-align:center"><div class="dice">${falha?'⚠️':'✅'}</div><b>${falha?'O fornecedor estrangeiro falhou: o navio ficou retido no porto de origem.':'O fornecedor estrangeiro entregou no prazo. Desta vez.'}</b></div>`:'')+`<div class="notice">Decisão registrada.</div>${pos}` : `<button class="btn block" id="ok2">${isCEO()?'Registrar decisão oficial da equipe':'Simular no meu placar'}</button>`}`; },
+
+r3: ()=>{ if(!P.unlock.r3) return lockView('r3','A diretoria ainda está reunida.');
+  const d=P.d.r3; const done=!!d; const t = d || P.tmp3 || {};
+  const rt = rivalDe(P.team), Rn = rt? empresaDe(rt).nome : 'concorrente';
+  const grupo = (titulo, passo, arr, key, comEfeito)=>`
+    <div class="card"><div class="step">${passo}</div><h3>${titulo}</h3>
+    ${arr.map(o=>`<label class="opt ${t[key]===o.id?'on':''} ${done?'done':''}"><input type="radio" name="${key}" value="${o.id}" ${t[key]===o.id?'checked':''} ${done?'disabled':''}><div><b>${esc(o.t)}</b><div class="desc">${esc(o.d)}</div>${done && comEfeito && t[key]===o.id?`<div class="effect">${Object.keys(o.e).length?chips(o.e):'<span class="chip">neutro</span>'}</div>`:''}</div></label>`).join('')}</div>`;
+  const oficial = isCEO() || (P.oficial && P.oficial.r3);
+  let pos = '';
+  if(done){
+    pos = !oficial ? simuladoHTML() : ((d.esg==='X4' || P.rv.r3) ? encontroR3HTML() : aguardandoHTML('A proposta de vocês já foi enviada à Nordkost.'));
+    pos += conceitoHTML('r3') + '<div class="notice">Vejam o resultado completo na aba Placar.</div>';
+  }
+  return `
+  <div class="card">
+    <span class="tag">Rodada 3 · Oportunidade internacional</span>
+    <h2 style="margin-top:8px">A proposta de Hamburgo</h2>
+    <p>A <b>Nordkost</b>, rede varejista alemã (fictícia), procura uma <b>linha brasileira de café da manhã</b> e tem espaço para uma proposta. Ela sondou as duas empresas do seu mercado. O contrato vale cerca de 15% da receita. Exigências do comprador:</p>
+    <ol class="small">
+      <li>Rastreabilidade digital de cada lote, da origem dos insumos até a entrega.</li>
+      <li>Certificação socioambiental da cadeia de fornecedores.</li>
+      <li>Contrato em inglês, com arbitragem internacional em caso de disputa.</li>
+    </ol>
+  </div>
+  ${grupo(`Estratégia frente à ${esc(Rn)}`, 'Passo 1 · a decisão que depende da concorrente', R3_EST, 'est', false).replace(/<\/div>$/, `<h4 class="mtx-h">Matriz de resultados</h4>${matrizHTML(null,false)}</div>`)}
+  ${grupo('Incoterm proposto ao comprador','Passo 2', R3_INC,'inc',true)}
+  ${grupo('Resposta às exigências ESG','Passo 3 · só há dinheiro para uma grande mudança', R3_ESG,'esg',true)}
+  ${done ? pos : `<button class="btn block" id="ok3">${isCEO()?'Registrar proposta final da equipe':'Simular no meu placar'}</button>`}`; },
+
+r4: ()=>{ if(!P.unlock.r4) return lockView('r4','O futuro ainda não chegou.');
+  const d=P.d.r4; const done=!!d; const t = d || P.tmp4 || {hard:[],soft:[],frase:''};
+  const lista = (arr,key)=> arr.map(x=>`<label class="opt ${t[key].includes(x)?'on':''} ${done?'done':''}"><input type="checkbox" name="${key}" value="${esc(x)}" ${t[key].includes(x)?'checked':''} ${done?'disabled':''}><div>${esc(x)}</div></label>`).join('');
+  return `
+  <div class="card">
+    <span class="tag">Rodada 4 · Individual</span>
+    <h2 style="margin-top:8px">O administrador de 2030</h2>
+    <p>Esta rodada é <b>individual</b>: todos respondem, não só o Porta-voz. As respostas da sala formam, ao vivo, a <b>Carta do Administrador Global</b>.</p>
+  </div>
+  ${conceitoHTML('r4')}
+  <div class="card"><div class="step">Escolha 2</div><h3>Hard skills mais necessárias</h3>${lista(R4_HARD,'hard')}</div>
+  <div class="card"><div class="step">Escolha 2</div><h3>Soft skills mais necessárias</h3>${lista(R4_SOFT,'soft')}</div>
+  <div class="card"><div class="step">Opcional</div><h3>Complete a frase</h3>
+    <p class="small muted">"Em 2030, o administrador precisará..." (até 120 caracteres; pode aparecer no telão)</p>
+    <textarea id="frase" maxlength="120" ${done?'disabled':''} placeholder="...">${esc(t.frase||'')}</textarea></div>
+  ${done ? `<div class="notice">Resposta enviada. Obrigado!</div>` : `<button class="btn block" id="ok4">Enviar minha resposta</button>`}`; },
+
+placar: (v)=>{ const fin = resultadoFinal(P.d, P.rv); const s = pontuar(v,P.d,fin); const df = P.d.r3 ? desfechoR3(P.d.r3, P.rv) : null; return `
+  <div class="card" style="text-align:center">
+    <span class="tag">${fin?'Resultado final':'Parcial'}</span>
+    <div class="score" style="margin-top:10px">${s.total}</div>
+    <div class="muted">pontos da equipe ${P.team} · ${esc(empresaDe(P.team).nome)}</div>
+    <p class="small muted">${s.soma} dos indicadores + ${s.nm} meta(s) × 2</p>
+    ${df ? (df.pend ? `<p class="small muted"><b>Aguardando a proposta da concorrente para fechar o resultado.</b></p>` : `<p class="small" style="color:${df.ok?'var(--ok)':'var(--warn)'}"><b>${df.ok?'Contrato internacional fechado':'Sem contrato internacional'}</b></p>`) : ''}
+  </div>
+  <div class="card"><h3>Metas dos cargos</h3>
+  ${fin ? CARGOS.map(c=>{ const m=s.metas.find(x=>x.id===c.id); return `<div class="goal"><div><b>${esc(c.n)}</b><div class="small muted">${esc(c.meta)}</div></div><div class="st" style="color:${m.ok?'var(--ok)':'var(--warn)'}">${m.ok?'Cumprida':'Não cumprida'}</div></div>`; }).join('')
+        : `<p class="muted">${P.d.r3?'As metas aparecem quando a Nordkost decidir, depois que a concorrente registrar a proposta.':'As metas de todos os cargos são reveladas quando a Rodada 3 terminar.'}</p>`}
+  </div>
+  ${fin ? `<div class="card"><h3>Para a discussão final</h3><p>Em quais decisões vocês tentaram prever o que a concorrente faria? Se as duas empresas pudessem combinar antes, o resultado teria mudado? Que função administrativa (planejar, organizar, dirigir, controlar) mais faltou às empresas no início do jogo?</p></div>`:''}`; }
+
+};
+
+
+/* ---------- Encontro das decisões (celular) ---------- */
+function vsHTML(meuTxt, rivTxt, robo){
+  const E = empresaDe(P.team), rt = rivalDe(P.team), R = rt? empresaDe(rt) : null;
+  return `<div class="vs">
+    <div class="me"><small>Vocês · Equipe ${P.team}</small><b>${esc(E.curto)}</b><span>${esc(meuTxt)}</span></div>
+    <div class="x">×</div>
+    <div><small>${rt?'Concorrente · Equipe '+rt:'Mercado'}</small><b>${esc(R?R.curto:'Concorrente')}</b><span>${esc(rivTxt)}</span></div>
+  </div>${robo?`<div class="notice small">${rt && CONFIG.ENDPOINT ? `A Equipe ${rt} não registrou a tempo. O jogo usou a reação mais comum do mercado.` : 'Sem concorrente conectada: o jogo usou a reação mais comum do mercado.'}</div>`:''}`;
+}
+function aguardandoHTML(oQue){
+  const rt = rivalDe(P.team);
+  return `<div class="card" style="text-align:center"><div class="loader" role="img" aria-label="Aguardando"></div><h3 style="margin:0">Aguardando a ${esc(rt?empresaDe(rt).nome:'concorrente')}</h3><p class="muted small" style="margin:6px 0 0">${oQue} O encontro das decisões aparece aqui assim que a Equipe ${rt} registrar.</p></div>`;
+}
+function simuladoHTML(){
+  return `<div class="notice small">Esta é a sua simulação. O encontro com a concorrente aparece quando o Porta-voz registrar a decisão oficial da equipe.</div>`;
+}
+function brHTML(an, escolhido){
+  return `<table class="br">${an.tab.map(x=>`<tr class="${x.id===escolhido?'sel':''}"><td>${esc(x.t)}${x.id===escolhido?' <span class="chip">vocês</span>':''}</td><td class="n">${x.pts>0?'+':''}${x.pts}${x.pts===an.max?' <b class="star" title="melhor resposta">★</b>':''}</td></tr>`).join('')}</table>
+  <p class="small muted" style="margin:4px 0 0">★ = melhor resposta ao que a concorrente fez.</p>`;
+}
+function nashHTML(an){
+  const txt = an.nash ? 'As duas empresas jogaram a melhor resposta uma à outra. Nenhuma ganharia mudando sozinha de decisão.'
+    : an.meuBR ? 'Vocês jogaram a melhor resposta, mas a concorrente ganharia mudando de decisão. Por isso esse resultado não é estável.'
+    : 'Sabendo o que a concorrente fez, vocês ganhariam mais com outra decisão. Por isso esse resultado não é estável.';
+  return `<div class="result ${an.nash?'ok':''}"><b>${an.nash?'Vocês caíram num equilíbrio de Nash':'Não é um equilíbrio de Nash'}</b><p style="margin:.4em 0 0">${txt}</p></div>`;
+}
+function encontroR2HTML(){
+  const d = P.d.r2, rv = P.rv, rt = rivalDe(P.team) || P.team+1;
+  const e = efeitoR2(d.opc, P.team, rv.r2);
+  const an = analiseR2(d.opc, P.team, rv.r2, rt);
+  return `<div class="card enc"><span class="tag">Como as decisões se encontraram</span>
+    ${vsHTML(nomeR2(d.opc), nomeR2(rv.r2), rv.robo2)}
+    <h4>Efeito da decisão de vocês</h4><div class="effect">${chips(e.proprio)||'<span class="chip">neutro</span>'}</div>
+    <h4>Efeito do encontro com a concorrente</h4>
+    ${e.msgs.length?`<ul class="small enc-list">${e.msgs.map(m=>`<li>${esc(m)}</li>`).join('')}</ul>`:'<p class="small muted" style="margin:0">As decisões não se cruzaram.</p>'}
+    ${Object.keys(e.cruzado).length?`<div class="effect">${chips(e.cruzado)}</div>`:''}
+    <h4>Melhor resposta</h4>
+    <p class="small muted" style="margin:0 0 6px">Pontos que cada decisão daria a vocês, sabendo o que a concorrente escolheu:</p>
+    ${brHTML(an, d.opc)}
+    ${nashHTML(an)}
+  </div>`;
+}
+function matrizHTML(destaque, comNash){
+  const E = empresaDe(P.team), rt = rivalDe(P.team), R = rt? empresaDe(rt) : null;
+  return `<div class="mtx-wrap"><table class="mtx">
+    <tr><th class="corner">${esc(E.curto)} ↓<br>${esc(R?R.curto:'Concorrente')} →</th>${R3_EST.map(c=>`<th>${curtoEst[c.id]}</th>`).join('')}</tr>
+    ${R3_EST.map(l=>`<tr><th>${curtoEst[l.id]}</th>${R3_EST.map(c=>{ const k=l.id+'|'+c.id, nash=comNash&&NASH3.includes(k);
+      return `<td class="${k===destaque?'hit':''} ${nash?'nash':''}">${pontos(MATRIZ3[k])} / ${pontos(MATRIZ3[c.id+'|'+l.id])}${nash?' ★':''}</td>`; }).join('')}</tr>`).join('')}
+  </table></div>
+  <p class="small muted" style="margin:6px 0 0">Em cada célula: pontos de vocês / pontos da concorrente. A concorrente vê a mesma tabela.${comNash?' ★ = equilíbrio de Nash.':''}</p>`;
+}
+function encontroR3HTML(){
+  const d = P.d.r3, rv = P.rv, fim = desfechoR3(d, rv);
+  if(d.esg==='X4') return `<div class="result bad"><b>Negociação encerrada</b><p style="margin:.4em 0 0">${esc(fim.t)}</p></div>`;
+  const an = analiseR3(d, rv.r3);
+  const rivTxt = rv.r3.esg==='X4' ? 'Recusou o ESG e ficou fora' : nomeEst(rv.r3.est);
+  return `<div class="card enc"><span class="tag">Como as decisões se encontraram</span>
+    ${vsHTML(nomeEst(d.est), rivTxt, rv.robo3)}
+    <div class="result ${fim.ok?'ok':'bad'}"><b>${fim.ok?'Resposta da Nordkost':'Sem contrato'}</b><p style="margin:.4em 0 0">${esc(fim.t)}</p></div>
+    <h4>Onde vocês caíram na matriz</h4>
+    ${matrizHTML(fim.cel, true)}
+    <h4>Melhor resposta</h4>
+    ${brHTML(an, d.est)}
+    ${nashHTML(an)}
+    <h4>Efeito no placar</h4><div class="effect">${chips(efeitoR3(d, rv.r3))||'<span class="chip">neutro</span>'}</div>
+  </div>`;
+}
+
+function lockView(r,msg){ return `
+  <div class="card" style="text-align:center">
+    <div class="loader" role="img" aria-label="Aguardando"></div>
+    <h3>${msg}</h3>
+    <p class="muted">${CONFIG.ENDPOINT?'Esta rodada abre sozinha quando o professor liberar.':'Digite o código projetado pelo professor para liberar esta rodada.'}</p>
+    ${CONFIG.ENDPOINT?'<div class="divider">não abriu?</div>':''}
+    <input type="text" id="codeIn" autocomplete="off" autocapitalize="characters" placeholder="Código" style="text-align:center;font-size:1.2rem;letter-spacing:.1em">
+    <button class="btn block ${CONFIG.ENDPOINT?'sec':''}" id="codeOk" style="margin-top:10px" data-r="${r}">Liberar</button>
+  </div>`; }
+
+function norm(s){ return (s||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function bindLock(){
+  const b = $('#codeOk'); if(!b) return;
+  const go = ()=>{ const r=b.dataset.r; if(norm($('#codeIn').value)===norm(CONFIG.CODIGOS[r])){ P.unlock[r]=true; save(); render(); } else toast('Código incorreto.'); };
+  b.onclick = go; $('#codeIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
+}
+async function registrar(rodada){
+  atualizaRv(); const v = calcular(P.d, P.team, P.rv); const s = pontuar(v,P.d,resultadoFinal(P.d,P.rv));
+  if(isCEO()){
+    P.oficial = P.oficial||{}; P.oficial['r'+rodada] = true; save();
+    const ok = await enviar({equipe:P.team, rodada, decisoes:{r1:P.d.r1||null, r2:P.d.r2||null, r3:P.d.r3||null}, indicadores:v, total:s.total, metas:s.nm});
+    toast(ok ? 'Decisão enviada à diretoria.' : (CONFIG.ENDPOINT ? 'Sem conexão. A decisão ficou salva neste aparelho.' : 'Decisão registrada.'));
+  } else toast('Simulação registrada no seu placar.');
+}
+async function carregarEquipe(){
+  const ul = $('#roster'); if(!ul) return;
+  try{
+    const j = await consultar({acao:'equipe', s:P.sessao, n:P.team}, 10000);
+    const ms = (j && j.membros) || [];
+    const ord = (x)=> CARGOS.findIndex(c=>c.id===x.cargo);
+    ms.sort((a,b)=>ord(a)-ord(b));
+    if(!$('#roster')) return;
+    $('#roster').innerHTML = ms.length ? ms.map(m=>{ const c=CARGOS.find(x=>x.id===m.cargo); const eu = m.nome===P.nome && m.cargo===P.role; return `<li class="${eu?'me':''}"><span>${esc(m.nome)}${eu?' (você)':''}</span><span class="small muted">${esc(c?c.n:m.cargo)}</span></li>`; }).join('') + (ms.length<5?`<li class="small muted">Aguardando ${5-ms.length} colega(s)...</li>`:'')
+      : '<li class="muted">Ninguém ainda.</li>';
+  }catch(e){ if($('#roster')) $('#roster').innerHTML = '<li class="muted">Sem conexão. Toque em Atualizar.</li>'; }
+}
+const BIND = {
+  caso: ()=>{ if(!$('#teamBox')) return; $('#teamRef').onclick = carregarEquipe; carregarEquipe(); },
+  r1: ()=>{
+    if(P.d.r1) return;
+    P.tmp1 = P.tmp1||[];
+    document.querySelectorAll('input[name=p]').forEach(i=>i.onchange=()=>{
+      const ch=[...document.querySelectorAll('input[name=p]:checked')].map(x=>x.value);
+      if(ch.length>3){ i.checked=false; toast('Escolham apenas 3. Priorizar é decidir o que fica de fora.'); return; }
+      P.tmp1=ch; $('#cnt1').textContent=`(${ch.length}/3)`; i.closest('.opt').classList.toggle('on',i.checked);
+    });
+    document.querySelectorAll('input[name=k]').forEach(i=>i.onchange=()=>{ P.tmpK=i.value; document.querySelectorAll('input[name=k]').forEach(x=>x.closest('.opt').classList.toggle('on',x.checked)); });
+    $('#ok1').onclick=()=>{
+      if((P.tmp1||[]).length!==3) return toast('Escolham exatamente 3 problemas.');
+      if(!P.tmpK) return toast('Escolham 1 indicador.');
+      if(!confirm('Confirmar o diagnóstico? Não será possível alterar.')) return;
+      P.d.r1={prob:P.tmp1, kpi:P.tmpK}; save(); registrar(1); render();
+    };
+  },
+  r2: ()=>{
+    if(!P.unlock.r2) return bindLock();
+    if(P.d.r2) return;
+    P.tmpI = P.tmpI||[];
+    document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{ P.tmpI.push(b.dataset.buy); render(); });
+    document.querySelectorAll('input[name=o2]').forEach(i=>i.onchange=()=>{ P.tmpO=i.value; document.querySelectorAll('input[name=o2]').forEach(x=>x.closest('.opt').classList.toggle('on',x.checked)); });
+    $('#ia').onchange=(e)=>{ P.tmpIA=e.target.checked; e.target.closest('.opt').classList.toggle('on',e.target.checked); };
+    $('#ok2').onclick=()=>{
+      if(!P.tmpO) return toast('Escolham uma decisão.');
+      if(!confirm('Confirmar a resposta à crise? Não será possível alterar.')) return;
+      P.d.r2={info:P.tmpI, opc:P.tmpO, ia:!!P.tmpIA}; save(); registrar(2); render();
+    };
+  },
+  r3: ()=>{
+    if(!P.unlock.r3) return bindLock();
+    if(P.d.r3) return;
+    P.tmp3 = P.tmp3||{};
+    ['est','inc','esg'].forEach(k=>document.querySelectorAll(`input[name=${k}]`).forEach(i=>i.onchange=()=>{ P.tmp3[k]=i.value; document.querySelectorAll(`input[name=${k}]`).forEach(x=>x.closest('.opt').classList.toggle('on',x.checked)); }));
+    $('#ok3').onclick=()=>{
+      const t=P.tmp3; if(!t.est||!t.inc||!t.esg) return toast('Completem os 3 passos.');
+      if(!P.d.r1 || !P.d.r2) return toast('Registrem antes as rodadas 1 e 2.');
+      if(!confirm('Confirmar a proposta ao comprador? Não será possível alterar.')) return;
+      P.d.r3={est:t.est, inc:t.inc, esg:t.esg}; save(); registrar(3); render();
+    };
+  },
+  r4: ()=>{
+    if(!P.unlock.r4) return bindLock();
+    if(P.d.r4) return;
+    P.tmp4 = P.tmp4||{hard:[],soft:[],frase:''};
+    ['hard','soft'].forEach(k=>document.querySelectorAll(`input[name=${k}]`).forEach(i=>i.onchange=()=>{
+      const ch=[...document.querySelectorAll(`input[name=${k}]:checked`)].map(x=>x.value);
+      if(ch.length>2){ i.checked=false; toast('Escolha só 2. Competência também se prioriza.'); return; }
+      P.tmp4[k]=ch; i.closest('.opt').classList.toggle('on',i.checked);
+    }));
+    $('#frase').oninput=(e)=>{ P.tmp4.frase=e.target.value; };
+    $('#ok4').onclick=async ()=>{
+      const t=P.tmp4; if(t.hard.length!==2||t.soft.length!==2) return toast('Escolha 2 hard skills e 2 soft skills.');
+      P.d.r4={hard:t.hard, soft:t.soft, frase:(t.frase||'').trim().slice(0,120)}; save(); render();
+      const ok = await enviar({tipo:'competencias', id:clientId(), equipe:P.team, cargo:P.role, ...P.d.r4});
+      toast(ok?'Resposta enviada para a Carta.':(CONFIG.ENDPOINT?'Sem conexão. Tente de novo em instantes.':'Resposta registrada.'));
+    };
+  }
+};
+
+/* ===================== PROFESSOR ===================== */
+const baseURL = location.href.split('?')[0].split('#')[0];
+const partURL = baseURL + '?s=' + encodeURIComponent(normS(CONFIG.SESSAO));
+let dados = {}; // {equipe: {decisoes, indicadores, total, metas}}
+let demo = false;
+
+const codigoBox = (r,n)=>`<div style="text-align:center"><p class="muted">${CONFIG.ENDPOINT?'Se a Rodada '+n+' não abrir no celular, código:':'Código para liberar a Rodada '+n}</p><div class="code" style="${CONFIG.ENDPOINT?'font-size:clamp(1.6rem,3vw,2.8rem)':''}">${esc(CONFIG.CODIGOS[r])}</div></div>`;
+const conceitoSlide = (r)=>{ const c=CONCEITOS[r];
+  return mostraConceito ? `<div class="slideconcept"><span class="tag">Conceito-chave</span><h2 style="margin-top:6px">${esc(c.t)}</h2>${c.p.map(x=>`<p>${esc(x)}</p>`).join('')}<p class="small muted">${esc(c.ref)}</p></div>`
+  : `<p class="small muted" style="margin-top:4vh">Tecla C ou botão "Conceito" revela o conceito-chave desta rodada para o debriefing.</p>`; };
+
+const SLIDES = [
+  {n:'Capa', min:0, h:()=>`
+    <div class="cover-slide">
+      <div>
+        <p class="cv-line"><i></i>Minicurso · XV EGAD · 20 anos do curso de Administração<i class="g"></i></p>
+        <h1 class="cv-title" style="margin-top:3vh">Administração<br><span>em Jogo</span></h1>
+        <p class="cv-sub">Decisões, Estratégias e Desafios do Administrador Contemporâneo</p>
+        <p class="cv-tag">Uma experiência prática de gestão, consultoria e tomada de decisão em cenários de incerteza</p>
+        <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Reagir à crise</div><div><span class="hexnum">3</span>Negociar com o mundo</div><div><span class="hexnum gold">4</span>Projetar o futuro</div></div>
+        <p class="cv-sub" style="margin-top:3.5vh;font-size:clamp(1rem,1.4vw,1.5rem)">Prof. Me. Wildson Brandão</p>
+      </div>
+      <div class="qrcard">
+        <div class="qr" id="qrBox" style="padding:0"></div>
+        <p style="margin:16px 0 4px;font-weight:600;font-size:clamp(1rem,1.3vw,1.35rem)">Aponte a câmera e entre no jogo</p>
+        <p class="small" style="word-break:break-all;margin:0">${esc(partURL)}</p>
+      </div>
+    </div>`},
+  {n:'Abertura', min:4, h:()=>`
+    <h2>Se você fosse responsável por uma empresa hoje, conseguiria decidir sem tempo, sem dinheiro e sem todas as informações?</h2>
+    <p class="lead" style="margin-top:3vh">Cada equipe é uma empresa goiana: <b>Cerrado Alimentos</b> (equipes ímpares) ou <b>Veredas Laticínios</b> (equipes pares). Cada <b>mercado</b> reúne uma de cada: elas dividem o fornecedor, os clientes e a mesma oportunidade de exportação. Cada empresa começa com 10 pontos em cada indicador:</p>
+    <div class="ind4">${IND.map(i=>`<div><span class="small muted">INDICADOR</span><b style="color:${i.c}">${i.n}</b></div>`).join('')}</div>
+    <p><b>Pontuação final:</b> soma dos indicadores + 2 pontos por meta de cargo cumprida. Cada pessoa tem uma meta secreta, e as metas competem entre si.</p>
+    <p class="muted">Vocês decidem sem ver a concorrente. O celular revela como as decisões se encontraram. Quatro rodadas: <b>diagnosticar</b>, <b>reagir</b>, <b>negociar com o mundo</b>, <b>projetar o futuro</b>.</p>`},
+  {n:'Equipes', min:6, live:true, h:()=>equipesHTML()},
+  {n:'Rodada 1', min:11, conceito:'r1', h:()=>`
+    <p class="tag">Rodada 1 · Passado e presente · Diagnóstico com dados</p>
+    <h1 style="margin-top:10px">O que está errado nesta empresa?</h1>
+    <p class="lead">Abram o <b>Dossiê</b>. Escolham exatamente <b>3 problemas</b> e <b>1 indicador</b> para monitorar.</p>
+    <p>Atenção: nem todo incômodo da diretoria é um problema estratégico. Os números mostram o que pesa de verdade.</p>
+    <p class="small muted">${CONFIG.ENDPOINT?'Se o jogo não abrir no celular, código de início:':'Código de início do jogo:'} <b style="color:var(--accent);letter-spacing:.08em;font-size:1.4em">${esc(CONFIG.CODIGOS.jogo)}</b></p>
+    ${conceitoSlide('r1')}`},
+  {n:'Rodada 2', min:12, conceito:'r2', h:()=>`
+    <div class="cols">
+      <div><p class="tag" style="background:var(--warn);color:#fff">Comunicado urgente</p>
+      <h1 style="font-size:clamp(4rem,12vw,10rem);color:var(--warn);margin:2vh 0 0">+25%</h1>
+      <p class="lead">no custo das embalagens importadas. O fornecedor vai atrasar. O estoque cobre <b>20 dias</b>.</p>
+      <p>A fabricante nacional de Anápolis só atende <b>uma empresa por mercado</b>. Cerrado e Veredas decidem ao mesmo tempo, sem ver a escolha da outra.</p>
+      <p class="small muted">Vocês podem comprar relatórios de informação (custam Caixa) e fazer uma consulta de 2 minutos a uma IA.</p></div>
+      ${codigoBox('r2',2)}
+    </div>${conceitoSlide('r2')}`},
+  {n:'Rodada 3', min:16, conceito:'r3', h:()=>`
+    <div class="cols">
+      <div><p class="tag">Rodada 3 · Negociação internacional</p>
+      <h1 style="margin-top:10px;font-size:clamp(2.2rem,4.4vw,4rem)">A proposta de Hamburgo</h1>
+      <p class="lead">A Nordkost quer uma linha brasileira de café da manhã e tem espaço para <b>uma proposta por mercado</b>.</p>
+      <p>Cada empresa escolhe: <b>preço cheio</b>, <b>desconto agressivo</b> ou <b>consórcio</b> com a concorrente. Depois, Incoterm e resposta às exigências ESG.</p>
+      <div style="margin-top:3vh">${codigoBox('r3',3)}</div></div>
+      <div>${matrizSalaHTML({}, 0, {count:false, nash:mostraConceito})}<p class="small muted" style="margin-top:1vh">Pontos da Cerrado / pontos da Veredas.${mostraConceito?' ★ = equilíbrio de Nash.':''}</p></div>
+    </div>${conceitoSlide('r3')}`},
+  {n:'Rodada 4', min:6, h:()=>`
+    <div class="cols">
+      <div><p class="tag">Rodada 4 · O futuro · Individual</p>
+      <h1 style="margin-top:10px">O administrador de 2030</h1>
+      <p class="lead">Todos respondem: 2 hard skills, 2 soft skills e, se quiser, uma frase para a Carta do Administrador Global.</p></div>
+      ${codigoBox('r4',4)}
+    </div>`},
+  {n:'Painel', min:10, live:true, h:()=>painelHTML()},
+  {n:'Carta', min:5, live:true, h:()=>cartaHTML()},
+  {n:'Fechamento', min:8, live:true, h:()=>fechamentoHTML()}
+];
+let cur = 0, tEnd = null, tLeft = null, tRun = false, mostraConceito = false;
+let comp = []; let sorteio = []; const ocultas = new Set(); let fraseIni = 0;
+
+function initProf(){
+  document.documentElement.classList.add('prof');
+  $('#appPart').classList.add('hidden'); $('#appProf').classList.remove('hidden');
+  $('#dots').innerHTML = SLIDES.map(()=>'<i></i>').join('');
+  $('#prev').onclick = ()=>go(cur-1); $('#next').onclick = ()=>go(cur+1);
+  $('#tConc').onclick = ()=>{ mostraConceito=!mostraConceito; drawSlide(); revelar(); };
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown') go(cur+1);
+    if(e.key==='ArrowLeft'||e.key==='PageUp') go(cur-1);
+    if(e.key===' '){ e.preventDefault(); toggleTimer(); }
+    if((e.key==='c'||e.key==='C') && SLIDES[cur].conceito){ mostraConceito=!mostraConceito; drawSlide(); revelar(); }
+  });
+  $('#tStart').onclick = toggleTimer;
+  $('#tFase').onclick = cliqueFase;
+  desenharFase();
+  $('#tPlus').onclick = ()=>{ if(tRun) tEnd += 60000; else tLeft = (tLeft??0) + 60000; drawTimer(); };
+  $('#tReset').onclick = ()=>{ tRun=false; tLeft = SLIDES[cur].min*60000; $('#tStart').textContent='Iniciar'; drawTimer(); };
+  setInterval(drawTimer, 250);
+  go(0);
+  poll(); setInterval(poll, CONFIG.POLL_MS);
+}
+function go(i){
+  if(i<0||i>=SLIDES.length) return;
+  cur = i; const s = SLIDES[i]; mostraConceito = false;
+  document.querySelectorAll('.hexdeco').forEach(h=>h.classList.toggle('hidden', !(i===0 || i===SLIDES.length-1)));
+  document.documentElement.classList.toggle('cover', i===0);
+  $('#stepLbl').textContent = `· ${i+1}/${SLIDES.length} · ${s.n}`;
+  document.querySelectorAll('#dots i').forEach((d,k)=>d.classList.toggle('on',k===i));
+  $('#tConc').classList.toggle('hidden', !s.conceito);
+  tRun=false; tLeft = s.min*60000; $('#tStart').textContent='Iniciar';
+  drawSlide();
+}
+function drawSlide(){
+  const y = $('#slide').scrollTop;
+  $('#slide').innerHTML = SLIDES[cur].h();
+  $('#slide').scrollTop = y;
+  const q = $('#qrBox');
+  if(q){ if(window.QRCode) new QRCode(q,{text:partURL,width:cur===0?300:200,height:cur===0?300:200,correctLevel:QRCode.CorrectLevel.M}); else q.textContent='QR indisponível'; }
+  document.querySelectorAll('#demoBtn').forEach(b=> b.onclick = ()=>{ demo=true; gerarDemo(); drawSlide(); poll(); });
+  document.querySelectorAll('[data-hide]').forEach(el=> el.onclick = ()=>{ ocultas.add(el.dataset.hide); drawSlide(); });
+  const nx = $('#maisFrases'); if(nx) nx.onclick = ()=>{ fraseIni += 6; drawSlide(); };
+  $('#tConc').textContent = mostraConceito ? 'Ocultar conceito' : 'Conceito';
+}
+function revelar(){ const c=$('.slideconcept'); if(c) c.scrollIntoView({behavior:'smooth',block:'start'}); else $('#slide').scrollTo({top:0,behavior:'smooth'}); }
+function toggleTimer(){
+  if(tRun){ tLeft = Math.max(0,tEnd-Date.now()); tRun=false; $('#tStart').textContent='Retomar'; }
+  else { if(tLeft==null||tLeft<=0) tLeft = SLIDES[cur].min*60000; tEnd = Date.now()+tLeft; tRun=true; $('#tStart').textContent='Pausar'; }
+  drawTimer();
+}
+function drawTimer(){
+  const ms = tRun ? Math.max(0,tEnd-Date.now()) : (tLeft??0);
+  const t = $('#timer'); if(!t) return;
+  if(!ms && !tRun && !SLIDES[cur].min){ t.textContent='--:--'; t.classList.remove('low'); return; }
+  const s = Math.ceil(ms/1000);
+  t.textContent = `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+  t.classList.toggle('low', tRun && s<=60);
+  if(tRun && ms<=0){ tRun=false; tLeft=0; $('#tStart').textContent='Iniciar'; }
+}
+async function poll(){
+  const st = $('#feedStatus');
+  if(demo){ st.textContent=`Dados de demonstração · ${sorteio.length} participantes · ${Object.keys(dados).length} equipes · ${comp.length} respostas individuais`; return; }
+  if(!CONFIG.ENDPOINT){ st.textContent='Painel ao vivo desligado'; return; }
+  try{
+    const r = await fetch(CONFIG.ENDPOINT+'?acao=ler&s='+encodeURIComponent(normS(CONFIG.SESSAO))+'&t='+Date.now());
+    const j = await r.json();
+    dados = j.equipes || {}; comp = j.competencias || []; sorteio = j.sorteio || [];
+    if(typeof j.fase==='number' && !faseConfirmando){ fase = j.fase; desenharFase(); }
+    st.textContent = `${FASE_NOME[fase]} · ${sorteio.length} participante(s) · ${Object.keys(dados).length} equipe(s) com decisões · ${comp.length} resposta(s) individuais · ${new Date().toLocaleTimeString('pt-BR')}`;
+    if(SLIDES[cur].live) drawSlide();
+  }catch(e){ st.textContent='Sem conexão com a planilha'; }
+}
+const FASE_BTN  = ['Liberar o jogo','Liberar Rodada 2','Liberar Rodada 3','Liberar Rodada 4','Tudo liberado'];
+const FASE_NOME = ['Celulares aguardando','Rodada 1 liberada','Rodada 2 liberada','Rodada 3 liberada','Rodada 4 liberada'];
+let fase = 0, faseConfirmando = false, faseTmr = null;
+function desenharFase(){
+  const b = $('#tFase'); if(!b) return;
+  b.classList.toggle('confirm', faseConfirmando);
+  if(!CONFIG.ENDPOINT){ b.textContent = 'Liberação por código'; b.disabled = true; b.title = 'Configure o ENDPOINT para liberar pelos celulares'; return; }
+  b.disabled = fase >= 4;
+  b.textContent = faseConfirmando ? `Confirmar: ${FASE_BTN[fase].toLowerCase()}?` : FASE_BTN[fase];
+}
+async function cliqueFase(){
+  if(!CONFIG.ENDPOINT || fase>=4) return;
+  if(!faseConfirmando){
+    faseConfirmando = true; desenharFase();
+    clearTimeout(faseTmr); faseTmr = setTimeout(()=>{ faseConfirmando=false; desenharFase(); }, 4000);
+    return;
+  }
+  clearTimeout(faseTmr); faseConfirmando = false;
+  const b = $('#tFase'); b.disabled = true; b.textContent = 'Liberando...';
+  try{
+    const j = await consultar({acao:'fase', s:normS(CONFIG.SESSAO), chave:CONFIG.CHAVE, f:fase+1}, 12000);
+    if(j && j.ok){ fase = j.fase; $('#feedStatus').textContent = FASE_NOME[fase] + ' · os celulares atualizam em até 15 segundos'; }
+    else $('#feedStatus').textContent = 'Chave do professor recusada. Confira CONFIG.CHAVE.';
+  }catch(e){ $('#feedStatus').textContent = 'Sem conexão: use o código reserva projetado.'; }
+  desenharFase();
+}
+/* Resultado de uma equipe calculado na projeção, cruzando com a decisão da concorrente */
+function calcEquipe(eq){
+  const x = dados[eq]; if(!x || !x.decisoes) return null;
+  const rt = rivalDe(eq), rd = rt && dados[rt] ? dados[rt].decisoes : null;
+  const rv = rivalEfetivo(eq, rd, fase, false);
+  const v = calcular(x.decisoes, eq, rv), fin = resultadoFinal(x.decisoes, rv), s = pontuar(v, x.decisoes, fin);
+  return {eq, d:x.decisoes, rv, v, s, fin};
+}
+function lista(){ return Object.keys(dados).map(k=>calcEquipe(+k)).filter(Boolean); }
+function mercadosCompletos(r){
+  const out = [];
+  for(let m=1; m<=CONFIG.MAX_EQUIPES/2; m++){
+    const a = calcEquipe(2*m-1), b = calcEquipe(2*m);
+    if(a && b && a.d[r] && b.d[r]) out.push({m, a, b});
+  }
+  return out;
+}
+function contar(arr, key, opts){ return opts.map(o=>({t:o.t, id:o.id, n:arr.filter(x=>key(x)===o.id).length})); }
+function barras(rows, semId){ const max = Math.max(1,...rows.map(r=>r.n)); return `<div class="bars">${rows.map(r=>`<div class="row"><span>${semId?'':esc(r.id)+'. '}${esc(r.t)}</span><div class="track"><i style="width:${r.n/max*100}%"></i></div><b>${r.n}</b></div>`).join('')}</div>`; }
+function semDados(msg){ return `<div class="card"><h3>${msg}</h3><p class="muted">${CONFIG.ENDPOINT?'As respostas aparecem aqui assim que forem registradas nos celulares.':'Configure o ENDPOINT da planilha para receber as respostas ao vivo.'}</p><button class="btn sec" id="demoBtn">Ver com dados de demonstração</button></div>`; }
+/* Matriz da Rodada 3 para o telão. cont = mercados por célula (linha Cerrado, coluna Veredas) */
+function matrizSalaHTML(cont, tot, opt){
+  opt = Object.assign({count:true, nash:true}, opt||{});
+  return `<table class="mtx big">
+    <tr><th class="corner">Cerrado ↓ · Veredas →</th>${R3_EST.map(c=>`<th>${curtoEst[c.id]}</th>`).join('')}</tr>
+    ${R3_EST.map(l=>`<tr><th>${curtoEst[l.id]}</th>${R3_EST.map(c=>{
+      const k = l.id+'|'+c.id, n = (cont||{})[k]||0, nash = opt.nash && NASH3.includes(k);
+      return `<td class="${nash?'nash':''}" style="--alpha:${opt.count&&tot?n/tot:0}">${opt.count?`<b class="cnt">${n}</b>`:''}<span class="pp">${pontos(MATRIZ3[k])} / ${pontos(MATRIZ3[c.id+'|'+l.id])}${nash?' ★':''}</span></td>`;
+    }).join('')}</tr>`).join('')}
+  </table>`;
+}
+const pips = (n)=> Array.from({length:5},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('');
+function equipesHTML(){
+  const T = CONFIG.MAX_EQUIPES;
+  const por = Array.from({length:T},()=>0);
+  sorteio.forEach(x=>{ if(x.equipe>=1 && x.equipe<=T) por[x.equipe-1]++; });
+  const completas = por.filter(n=>n>=5).length;
+  const ativo = CONFIG.ENDPOINT || demo;
+  const cel = (t)=>`<div class="${por[t-1]>=5?'full':''}"><b>${t}</b><small>${EMPRESAS[empresaKey(t)].curto}</small><div class="pips">${pips(por[t-1])}</div></div>`;
+  return `
+  <div class="cols" style="grid-template-columns:1.3fr 1fr;align-items:start">
+    <div>
+      <h2>Sorteio das equipes</h2>
+      <ol>
+        <li>Leia o QR Code com a câmera do celular.</li>
+        <li>Digite seu primeiro nome.</li>
+        <li>O sistema sorteia sua <b>equipe</b>, sua <b>empresa</b> e seu <b>cargo</b>.</li>
+        <li>Encontre seus colegas. A equipe concorrente do seu mercado senta ao lado.</li>
+        <li>Aguardem com a página aberta: o jogo começa quando o professor liberar.</li>
+      </ol>
+      ${ativo ? `<div style="display:flex;gap:5vw;margin-top:2vh"><div><div class="bigcount">${sorteio.length}</div><p class="small muted" style="margin:4px 0 0">participantes sorteados</p></div><div><div class="bigcount">${completas}<span style="font-size:.5em;color:var(--muted)">/${T}</span></div><p class="small muted" style="margin:4px 0 0">equipes completas</p></div></div>` : semDados('Sorteio desligado: configure o ENDPOINT da planilha')}
+    </div>
+    <div style="text-align:center"><div class="qr" id="qrBox"></div><p class="small muted" style="margin-top:8px">Código da sala: <b style="color:var(--accent);letter-spacing:.08em">${esc(normS(CONFIG.SESSAO))}</b></p></div>
+  </div>
+  ${ativo ? `<div class="mgrid">${Array.from({length:T/2},(_,i)=>`<div class="mcell"><small>Mercado ${i+1}</small><div class="mteams">${cel(2*i+1)}${cel(2*i+2)}</div></div>`).join('')}</div>` : ''}`;
+}
+function painelHTML(){
+  const L = lista();
+  if(!L.length) return `<h2>Painel da diretoria</h2>`+semDados('Nenhuma decisão recebida ainda');
+  const fin = L.filter(x=>x.fin).sort((a,b)=>b.s.total-a.s.total);
+  const M3 = mercadosCompletos('r3'), M2 = mercadosCompletos('r2');
+  const cont = {};
+  M3.forEach(p=>{ const k = estEfetiva(p.a.d.r3)+'|'+estEfetiva(p.b.d.r3); cont[k]=(cont[k]||0)+1; });
+  const nashN = M3.filter(p=>NASH3.includes(estEfetiva(p.a.d.r3)+'|'+estEfetiva(p.b.d.r3))).length;
+  const col = M2.filter(p=>p.a.d.r2.opc==='A' && p.b.d.r2.opc==='A').length;
+  const eq2 = M2.filter(p=>analiseR2(p.a.d.r2.opc, p.a.eq, p.b.d.r2.opc, p.b.eq).nash).length;
+  return `
+  <h2>Painel da diretoria <span class="muted" style="font-size:1rem;font-family:Inter">${fin.length} de ${L.length} equipes com resultado final</span></h2>
+  <div class="panelgrid">
+    <div><h3>Ranking</h3>
+      <table class="rank">${fin.slice(0,10).map((x,i)=>`<tr><td>${i+1}º</td><td>Equipe ${x.eq} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/5 metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
+    </div>
+    <div>
+      <h3>Rodada 3: onde os ${M3.length} mercados caíram</h3>
+      ${matrizSalaHTML(cont, M3.length)}
+      <p style="margin-top:1.2vh"><b style="color:var(--accent)">${nashN} de ${M3.length}</b> mercados terminaram num equilíbrio de Nash · <b>${cont['K|K']||0}</b> em consórcio · <b>${cont['D|D']||0}</b> em guerra de preços</p>
+      <h3 style="margin-top:1.5vh">Rodada 2: a disputa pelo fornecedor</h3>
+      <p><b>${col}</b> mercado(s) com as duas empresas no fornecedor nacional · <b>${eq2} de ${M2.length}</b> terminaram em equilíbrio de Nash</p>
+    </div>
+  </div>`;
+}
+function cartaHTML(){
+  if(!comp.length) return `<h2>Carta do Administrador Global</h2>`+semDados('Nenhuma resposta individual ainda');
+  const conta = (lst,key)=> lst.map(t=>({t, n:comp.filter(c=>(c[key]||[]).includes(t)).length})).sort((a,b)=>b.n-a.n);
+  const H = conta(R4_HARD,'hard').slice(0,4), Sx = conta(R4_SOFT,'soft').slice(0,4);
+  const fr = comp.map((c,i)=>({k:c.id||String(i), f:(c.frase||'').trim()})).filter(x=>x.f && !ocultas.has(x.k));
+  if(fraseIni >= fr.length) fraseIni = 0;
+  const vis = fr.slice(fraseIni, fraseIni+6);
+  return `
+  <h2>Carta do Administrador Global <span class="muted" style="font-size:1rem;font-family:Inter">${comp.length} respostas</span></h2>
+  <div class="panelgrid">
+    <div><h3>O administrador de 2030 domina...</h3>${barras(H.map(x=>({...x,id:''})),true)}</div>
+    <div><h3>...e sabe trabalhar com pessoas por meio de</h3>${barras(Sx.map(x=>({...x,id:''})),true)}</div>
+  </div>
+  <h3 style="margin-top:3vh">"Em 2030, o administrador precisará..."</h3>
+  ${vis.length ? `<div class="frases">${vis.map(x=>`<div data-hide="${esc(x.k)}" title="Clique para ocultar">${esc(x.f)}</div>`).join('')}</div>
+  <p class="small muted" style="margin-top:1vh">Clique numa frase para retirá-la do telão. ${fr.length>6?'<button class="btn sec" id="maisFrases" style="padding:4px 10px;font-size:.85rem">Próximas frases</button>':''}</p>` : '<p class="muted">Ninguém escreveu frases ainda.</p>'}`;
+}
+
+function fechamentoHTML(){
+  const L = lista(); const r2 = L.filter(x=>x.d.r2);
+  const M3 = mercadosCompletos('r3');
+  const pct = (n,d)=> d? Math.round(n/d*100)+'%' : '–';
+  const cel = (p)=> estEfetiva(p.a.d.r3)+'|'+estEfetiva(p.b.d.r3);
+  const kk = M3.filter(p=>cel(p)==='K|K').length, dd = M3.filter(p=>cel(p)==='D|D').length;
+  const nash = M3.filter(p=>NASH3.includes(cel(p))).length;
+  return `
+  <h2>O que os dados desta sala dizem</h2>
+  <div class="ind4">
+    <div><span class="small muted">mercados que formaram consórcio</span><b>${pct(kk, M3.length)}</b></div>
+    <div><span class="small muted">mercados em guerra de preços</span><b>${pct(dd, M3.length)}</b></div>
+    <div><span class="small muted">mercados em equilíbrio de Nash na Rodada 3</span><b>${pct(nash, M3.length)}</b></div>
+    <div><span class="small muted">equipes que compraram informação na crise</span><b>${pct(r2.filter(x=>x.d.r2.info.length>0).length, r2.length)}</b></div>
+  </div>
+  <div class="panelgrid" style="margin-top:2vh">
+    <div><h3 style="color:var(--accent)">Passado</h3><p>Planejar, organizar, dirigir e controlar: Fayol esteve em todas as rodadas. Qual dessas funções mais faltava às empresas?</p></div>
+    <div><h3 style="color:var(--accent)">Presente</h3><p>Nenhuma empresa decide sozinha. ${M3.length?`Em ${M3.length-kk} de ${M3.length} mercados, as duas empresas teriam ganhado mais com o consórcio do que ganharam.`:''} Por que foi tão difícil cooperar sem conversar?</p></div>
+    <div><h3 style="color:var(--accent)">Futuro</h3><p>A IA ajudou a prever a concorrente ou só a organizar as opções? O que ela não conseguiu decidir por vocês?</p></div>
+    <div><h3 style="color:var(--accent)">Síntese</h3><p>Equilíbrio de Nash não é o melhor resultado: é aquele em que ninguém muda sozinho. Administrar também é criar condições para a cooperação: contratos, confiança e informação.</p></div>
+  </div>`;
+}
+function gerarDemo(){
+  dados = {}; comp = []; sorteio = [];
+  const T = CONFIG.MAX_EQUIPES;
+  for(let k=0;k<T*5-13;k++){ sorteio.push({equipe:(k*7)%T+1, cargo:CARGOS[Math.floor(k/T)%5].id}); }
+  const pick = (a)=>a[Math.floor(Math.random()*a.length)];
+  for(let eq=1; eq<=T; eq++){
+    const pool = R1_PROB.map(p=>p.id).sort(()=>Math.random()-.5);
+    dados[eq] = {decisoes:{ r1:{prob:pool.slice(0,3), kpi:pick(R1_KPI).id},
+      r2:{info:R2_INFO.filter(()=>Math.random()<.4).map(i=>i.id), opc:pick(['A','A','B','C','D','D','E']), ia:Math.random()<.55},
+      r3:{est:pick(['C','D','D','D','K','K']), inc:pick(['EXW','FOB','FOB','CIF','DDP']), esg:pick(['X1','X1','X2','X3','X3','X4'])} }};
+  }
+  const frases = ['ler dados sem perder de vista as pessoas','negociar em outra língua e outra cultura sem medo','usar IA como assistente, não como chefe','entender de cadeia global tanto quanto de planilha','ter ética quando ninguém estiver olhando','aprender rápido e desaprender mais rápido ainda','liderar equipes que nunca se encontram pessoalmente','transformar ESG em estratégia, não em relatório'];
+  for(let i=0;i<120;i++){
+    const h=[...R4_HARD].sort(()=>Math.random()-.5).slice(0,2), so=[...R4_SOFT].sort(()=>Math.random()-.5).slice(0,2);
+    comp.push({id:'d'+i, hard:h, soft:so, frase: i<frases.length? frases[i] : ''});
+  }
+}
+
+/* ===================== INÍCIO ===================== */
+const qs = new URLSearchParams(location.search);
+if(qs.has('prof') || location.hash==='#prof') initProf(); else initPart();
+</script>
+</body>
+</html>
