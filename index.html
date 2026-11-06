@@ -955,7 +955,7 @@ function confete(ms){
 }
 function overlay(html, cls, fechar){
   const o = document.createElement('div'); o.className = 'ovl ' + (cls||'');
-  o.innerHTML = `<div class="ovl-box">${html}${fechar===false?'':'<button class="btn block ovl-x" style="margin-top:16px">Continuar</button>'}</div>`;
+  o.innerHTML = `<div class="ovl-box">${html}${fechar===false?'':`<button class="btn block ovl-x" style="margin-top:16px">${typeof fechar==='string'?fechar:'Continuar'}</button>`}</div>`;
   document.body.appendChild(o);
   o.addEventListener('click', e=>{ if(e.target===o || e.target.closest('.ovl-x')) o.remove(); });
   return o;
@@ -1216,7 +1216,7 @@ function aplicarFase(f){
   toast(`Rodada ${nova.slice(1)} liberada!`); vib([150,80,150]);
   if(P.tab===nova) render(); else desenharAbas();
 }
-function save(){ store('state',{nomeTrio:P.nomeTrio, rivalNome:P.rivalNome, evVistos:P.evVistos, flash:P.flash, flashRes:P.flashRes, flashFechado:P.flashFechado, team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
+function save(){ store('state',{ger:P.ger, nomeTrio:P.nomeTrio, rivalNome:P.rivalNome, evVistos:P.evVistos, flash:P.flash, flashRes:P.flashRes, flashFechado:P.flashFechado, team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
 function startGame(){
   document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
   $('#join').classList.add('hidden'); $('#game').classList.remove('hidden');
@@ -1872,6 +1872,11 @@ function bindNomeTrio(){
 /* ---------- comandos do professor (cronômetro, eventos, relâmpago) ---------- */
 function processarCtl(ctl){
   ctl = ctl || {};
+  if(P.ger === undefined){ P.ger = ctl.ger || 0; save(); }
+  else if((ctl.ger || 0) !== P.ger){            // o professor limpou a sessão: recomeça do zero
+    store('state', {}); try{ toast('O professor reiniciou o jogo. Entre de novo.'); }catch(e){}
+    setTimeout(()=>location.reload(), 1500); return false;
+  }
   P.ctl = ctl;
   const evs = ctl.evs || [];
   const antes = JSON.stringify(EVENTOS_ATIVOS);
@@ -2093,7 +2098,9 @@ function initProfExtras(){
     <button class="btn sec" id="tEv" title="Disparar evento surpresa">⚡ Evento</button>
     <button class="btn sec" id="tRank" title="Ranking (tecla R)">🏆</button>
     <button class="btn sec" id="tSom" title="Som">🔊</button>
-    <button class="btn sec" id="tExp" title="Exportar resultados (planilha)">⬇</button>`);
+    <button class="btn sec" id="tExp" title="Exportar resultados (planilha)">⬇</button>
+    <button class="btn sec" id="tLimpa" title="Limpar a sessão (apaga trios, votos e resultados)">🧹</button>`);
+  $('#tLimpa').onclick = limparSessao;
   $('#tEv').onclick = menuEventos;
   $('#tRank').onclick = rankingOverlay;
   $('#tSom').onclick = ()=>{ somOn=!somOn; $('#tSom').textContent = somOn?'🔊':'🔇'; if(somOn) som('tic'); };
@@ -2105,7 +2112,7 @@ function menuEventos(){
   const usados = (ctlP.evs||[]).map(x=>x.id);
   const o = overlay(`<h2 style="margin:0 0 6px">Evento surpresa</h2><p class="small muted" style="margin:0 0 12px">Todos os celulares recebem ao mesmo tempo. O efeito depende das decisões já tomadas por cada empresa. Sugestão: um evento na Rodada 2 e outro na Rodada 3.</p>
     ${EVENTOS.map(e=>`<div class="evrow"><div><b>${esc(e.t)}</b><div class="small muted">${esc(e.txt)}</div></div>${usados.includes(e.id)?'<span class="chip">disparado</span>':`<button class="btn" data-ev="${e.id}">Disparar</button>`}</div>`).join('')}
-    ${usados.length?'<button class="btn sec" data-ev="limpar" style="margin-top:10px">Desfazer todos os eventos</button>':''}`, 'menu');
+    ${usados.length?'<button class="btn sec" data-ev="limpar" style="margin-top:10px">Desfazer todos os eventos</button>':''}`, 'menu', 'Fechar');
   o.querySelectorAll('[data-ev]').forEach(b=>b.onclick=async ()=>{
     if(b.dataset.conf!=='1'){ b.dataset.conf='1'; b.textContent='Confirmar?'; return; }
     b.disabled=true; b.textContent='Enviando...';
@@ -2225,6 +2232,30 @@ function planoBHTML(){
     </ol>
     <p class="small muted">No modo sem planilha, o painel ao vivo e o quiz relâmpago não funcionam; os resultados ficam em cada celular.</p></div>
     <div><table class="rank">${[['Início do jogo','jogo'],['Rodada 2','r2'],['Rodada 3','r3'],['Rodada 4','r4']].map(([t,k])=>`<tr><td>${t}</td><td class="n" style="color:var(--accent);letter-spacing:.08em;font-size:1.6em">${esc(CONFIG.CODIGOS[k])}</td></tr>`).join('')}</table></div></div>`;
+}
+
+/* ---------- limpar a sessão ---------- */
+function limparSessao(){
+  const S = normS(CONFIG.SESSAO);
+  const o = overlay(`<h2 style="margin:0 0 6px">Limpar a sessão ${esc(S)}?</h2>
+    <p>Isso apaga <b>todos</b> os trios, votos, decisões, respostas do quiz e eventos desta sessão, e volta o jogo para a formação dos trios. Os celulares que estavam no jogo voltam sozinhos para a capa.</p>
+    <p class="small muted">Use depois do ensaio, antes da aula. Se quiser guardar os resultados, clique antes em ⬇ Exportar.</p>
+    <button class="btn" id="limpaOk" style="background:var(--warn);color:#fff;margin-top:6px">Apagar tudo da sessão ${esc(S)}</button>`, 'menu', 'Cancelar');
+  const b = o.querySelector('#limpaOk');
+  b.onclick = async ()=>{
+    if(b.dataset.conf!=='1'){ b.dataset.conf='1'; b.textContent='Tem certeza? Clique de novo para apagar'; return; }
+    b.disabled = true; b.textContent = 'Limpando...';
+    if(!CONFIG.ENDPOINT){ o.remove(); toastP('Sem planilha: não há dados no servidor para limpar.'); return; }
+    try{
+      const j = await consultar({acao:'limpar', s:S, chave:CONFIG.CHAVE}, 20000);
+      if(j && j.ok){
+        demo = false; dados = {}; comp = []; triosL = []; quizL = []; relL = []; partN = 0; ctlP = {}; EVENTOS_ATIVOS = []; evVistosP = null;
+        fase = 0; faseConfirmando = false; desenharFase(); CONFIG.MAX_EQUIPES = Math.max(2, Math.ceil(CONFIG.PARTICIPANTES/3)); if(CONFIG.MAX_EQUIPES%2) CONFIG.MAX_EQUIPES++;
+        o.remove(); toastP(`Sessão ${S} limpa · jogo de volta à formação dos trios · ${new Date().toLocaleTimeString('pt-BR')}`);
+        drawSlide(); poll();
+      } else { b.disabled=false; b.textContent='Chave recusada. Confira CONFIG.CHAVE'; }
+    }catch(e){ b.disabled=false; b.textContent='Sem conexão. Tentar de novo'; }
+  };
 }
 
 /* ---------- exportar ---------- */
