@@ -242,6 +242,104 @@ table.mtx{border-collapse:separate;border-spacing:4px;width:100%;font-size:.86re
 .qopt:disabled{cursor:default}
 .qexp{background:var(--surface2);border-radius:8px;padding:8px 10px}
 .coer li{margin:4px 0}
+/* orientação */
+.hp{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+.hp p{margin:2px 0 0;font-size:.92rem;color:var(--muted)}
+.hn{flex:0 0 28px;height:28px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font-weight:800;display:grid;place-items:center;font-size:.9rem}
+.help h3{margin:0 0 4px}
+.help-wrap summary{cursor:pointer;list-style:none;padding:2px 0}
+.help-wrap summary::-webkit-details-marker{display:none}
+.help-wrap summary::after{content:' ▾';color:var(--muted)}
+.help-wrap[open] summary::after{content:' ▴'}
+.help-wrap .help{box-shadow:none;border:0;padding:12px 0 0;margin:0;background:transparent}
+.forn{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.forn:last-child{border-bottom:0}
+.forn span{color:var(--muted);font-size:.85rem}
+.subtabs{display:flex;gap:6px;overflow-x:auto;margin:0 0 12px;scrollbar-width:none}
+.subtabs::-webkit-scrollbar{display:none}
+.subtab{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:.85rem;white-space:nowrap}
+.subtab[aria-selected=true]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+/* ===== extras ===== */
+.logo{vertical-align:middle;flex:0 0 auto}
+.tmr{font-family:Montserrat,sans-serif;font-weight:800;font-size:.85rem;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--ink);white-space:nowrap}
+.tmr.low{background:var(--warn);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.6}}
+.meter{position:relative;transition:box-shadow .3s}
+.meter.up{box-shadow:0 0 0 2px var(--ok)} .meter.down{box-shadow:0 0 0 2px var(--warn)}
+.meter .delta{position:absolute;right:6px;top:4px;font-style:normal;font-weight:800;font-size:.8rem;animation:sobe 1.8s forwards}
+.meter.up .delta{color:var(--ok)} .meter.down .delta{color:var(--warn)}
+@keyframes sobe{from{transform:translateY(6px);opacity:0}20%{opacity:1}to{transform:translateY(-10px);opacity:0}}
+.ovl{position:fixed;inset:0;background:rgba(8,14,30,.72);z-index:60;display:grid;place-items:center;padding:16px;animation:fadein .25s}
+.ovl-box{background:var(--surface);color:var(--ink);border-radius:20px;padding:22px;max-width:520px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+.ovl.evento .ovl-box{border-top:8px solid var(--warn)}
+.ovl-tag{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warn)}
+.ovl.revela .ovl-tag{color:var(--accent)}
+@keyframes fadein{from{opacity:0}} @keyframes pop{from{transform:scale(.85);opacity:0}}
+.flip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;perspective:800px}
+.fcard{border-radius:14px;background:var(--c);color:#fff;min-height:150px;animation:vira .9s both}
+.fcard.f2{animation-delay:.7s}
+.fin{padding:14px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.fin small{opacity:.85;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+.fin b{font-family:Montserrat,sans-serif;font-size:1.05rem;line-height:1.2}
+@keyframes vira{from{transform:rotateY(90deg);opacity:0}to{transform:none;opacity:1}}
+.locked{display:flex;gap:12px;align-items:flex-start;background:repeating-linear-gradient(45deg,var(--surface),var(--surface) 10px,var(--surface2) 10px,var(--surface2) 20px)}
+.locked .lk{font-size:1.6rem}
+.hl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px}
+.hl>div{background:var(--ink);color:var(--surface);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:2px}
+.hl b{font-family:Montserrat,sans-serif;font-size:1.25rem;line-height:1.1}
+.hl small{font-size:.7rem;opacity:.85;line-height:1.25}
+.hl>div.off{background:var(--surface2);color:var(--muted)}
+.conq{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cq{border:1.5px dashed var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:2px;opacity:.6}
+.cq.on{border:1.5px solid var(--accent);opacity:1;background:var(--surface2)}
+.cq span{font-size:1.5rem} .cq b{font-size:.85rem} .cq small{font-size:.72rem;color:var(--muted);line-height:1.3}
+#flash{position:fixed;inset:0;z-index:70;background:#0D1830;color:#EAF1FB;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px}
+#flash .fl-top{font-family:Montserrat,sans-serif;font-weight:800;color:#E3A51E;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem}
+#flash .fl-big{font-family:Montserrat,sans-serif;font-weight:800;font-size:5rem;line-height:1}
+#flash .fl-q{font-size:1rem;max-width:460px;margin:0}
+#flash .fl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:460px;flex:1;max-height:60vh}
+#flash .fl-op{border:0;border-radius:14px;color:#fff;font-weight:700;font-size:.95rem;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+#flash .fl-op span{font-size:2rem}
+#flash .fl-wait{font-size:1.4rem;font-weight:800}
+#flash .fl-res{font-family:Montserrat,sans-serif;font-size:2.6rem;font-weight:800}
+#flash .fl-res.ok{color:#5BD08A} #flash .fl-res.no{color:#FF7A6E}
+#flash .btn{background:#E3A51E;color:#14254A}
+.nomeTrio input{border:1.5px solid var(--line);border-radius:10px;padding:10px;font-size:1rem;background:var(--surface);color:var(--ink);min-width:0}
+canvas.confete{position:fixed;inset:0;z-index:80;pointer-events:none}
+/* telão */
+.manchete{display:flex;align-items:stretch;border-radius:10px;overflow:hidden;margin:0 0 2.2vh;font-size:clamp(.9rem,1.25vw,1.3rem);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.manchete span{background:var(--warn);color:#fff;font-weight:800;letter-spacing:.06em;padding:.6em 1em;white-space:nowrap}
+.manchete .mtk{flex:1;background:var(--ink);color:var(--surface);overflow:hidden;white-space:nowrap;padding:.6em 0}
+.manchete .mtk b{display:inline-block;padding-left:100%;animation:ticker 18s linear infinite}
+@keyframes ticker{to{transform:translateX(-100%)}}
+.manchete.big{font-size:clamp(1rem,1.6vw,1.6rem);display:inline-flex}
+.ovl.telao .ovl-box{max-width:min(1200px,92vw);padding:4vh 4vw}
+.ovl.telao h1{font-size:clamp(2rem,4vw,4rem)}
+.rk2{display:grid;grid-template-columns:1.3fr 1fr;gap:4vw}
+.evrow{display:flex;gap:12px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:10px 0}
+.fl-head{display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(1rem,1.6vw,1.6rem)}
+.fl-head b.low{color:var(--warn)}
+.fl-bar{height:10px;background:var(--surface2);border-radius:99px;overflow:hidden;margin:1vh 0 3vh}
+.fl-bar i{display:block;height:100%;background:var(--accent);transition:width .25s linear}
+.fl-qt{font-size:clamp(1.8rem,3.4vw,3.4rem);margin:0 0 3vh}
+.fl-opts{display:grid;grid-template-columns:1fr 1fr;gap:2vh 2vw}
+.fl-opts>div{color:#fff;border-radius:16px;padding:2.4vh 2vw;font-size:clamp(1.1rem,2vw,2rem);font-weight:700;display:flex;gap:1vw;align-items:center;transition:opacity .3s,transform .3s}
+.fl-opts>div span{font-size:1.4em}
+.fl-opts>div.dim{opacity:.25} .fl-opts>div.ok{transform:scale(1.04);box-shadow:0 0 0 6px var(--surface),0 0 0 10px var(--ok)}
+.fl-count{font-family:Montserrat,sans-serif;font-size:clamp(6rem,18vw,16rem);font-weight:800;text-align:center;color:var(--accent);line-height:1}
+.ts{margin:1.6vh 0}.ts-h{display:flex;justify-content:space-between;gap:12px}.ts .track{height:16px;background:var(--surface2);border-radius:99px;overflow:hidden;margin:.6vh 0}.ts .track i{display:block;height:100%}
+.ts p{margin:0}
+.podios{display:grid;grid-template-columns:1fr 1fr;gap:5vw;margin-top:2vh}
+.podios h3{text-align:center}
+.podio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1vw;align-items:end;height:52vh}
+.pd{display:flex;flex-direction:column;justify-content:flex-end;height:100%;text-align:center}
+.pd-top{display:flex;flex-direction:column;align-items:center;gap:.4vh;padding-bottom:1vh;animation:pop .6s both}
+.pd-top b{font-family:Montserrat,sans-serif;font-size:clamp(.9rem,1.3vw,1.3rem);line-height:1.15}
+.pd-top small{color:var(--muted)}
+.pd-col{background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 35%,transparent));color:var(--ink);border-radius:12px 12px 0 0;display:grid;place-items:start center;padding-top:1.4vh;font-size:clamp(2rem,3.5vw,3.6rem);animation:cresce 1s both}
+@keyframes cresce{from{transform:scaleY(0);transform-origin:bottom}}
+.tcell .nm,.mteams .nm{display:block;font-size:.72em;color:var(--accent);font-weight:700;line-height:1.15;margin-top:2px}
+.oc{border:0;background:none;color:var(--muted);cursor:pointer;font-size:.8em;padding:0 2px}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:20;max-width:90vw}
 
 /* ---------- professor (projeção) ---------- */
@@ -306,7 +404,7 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
   <!-- Jogo -->
   <section id="game" class="hidden">
     <div class="topbar"><div class="wrap">
-      <div class="who"><span id="whoLbl"></span><button class="btn sec" id="btnSair" style="padding:5px 10px;font-size:.8rem">Trocar</button></div>
+      <div class="who"><span id="whoLbl"></span><span id="tmrPill" class="tmr hidden"></span><button class="btn sec" id="btnSair" style="padding:5px 10px;font-size:.8rem">Trocar</button></div>
       <div class="meters" id="meters"></div>
       <nav class="tabs" id="tabs" role="tablist"></nav>
     </div></div>
@@ -354,7 +452,7 @@ const CONFIG = {
   PARTICIPANTES: 150,
   CHAVE: 'EGAD2026',   // chave do professor (igual a CHAVE_LIMPEZA no Codigo.gs)
   // Códigos reserva: só são necessários se a liberação pelo professor não chegar ao celular
-  CODIGOS: { jogo: 'COMECAR', r2: 'EMBALAGEM', r3: 'EXPORTAR', r4: '2030' },
+  CODIGOS: { jogo: 'COMECAR', r2: 'PROTEINA', r3: 'EXPORTAR', r4: '2030' },
   POLL_MS: 6000
 };
 CONFIG.MAX_EQUIPES = Math.max(2, Math.ceil(CONFIG.PARTICIPANTES/3));
@@ -374,14 +472,14 @@ const CARGOS = [
    meta:'Caixa deve terminar em 8 ou mais.',
    ok:(v)=> v.caixa >= 8,
    dica:'Cada relatório comprado e cada investimento grande saem do seu indicador. Questione o retorno de tudo. Uma guerra de preços com a concorrente também sai do seu caixa.'},
-  {id:'com', n:'Mercado', s:'Clientes, vendas e exportação',
+  {id:'com', n:'Comercial', s:'Clientes, vendas e exportação',
    meta:'Clientes deve terminar em 14 ou mais.',
    ok:(v)=> v.clientes >= 14,
-   dica:'Três redes concentram mais da metade da receita, e a empresa concorrente disputa o mesmo espaço nelas. Um cliente no exterior seria a sua saída.'},
+   dica:'Duas redes de supermercado e uma de farmácias concentram mais da metade da receita, e a concorrente disputa o mesmo espaço nelas. Um cliente no exterior seria a sua saída.'},
   {id:'ops', n:'Operações', s:'Pessoas, suprimentos e cadeia global',
    meta:'Pessoas deve terminar em 11 ou mais e Resiliência em 13 ou mais, sem demissões.',
    ok:(v,d)=> v.pessoas >= 11 && v.res >= 13 && d.r3 && d.r3.esg !== 'X2',
-   dica:'O estoque de embalagens cobre 20 dias, o fornecedor atrasou e a rotatividade na fábrica já é alta. Um único fornecedor é um único ponto de falha.'},
+   dica:'O estoque de whey cobre 20 dias, o importador atrasou e a rotatividade na fábrica já é alta. Um único fornecedor é um único ponto de falha.'},
   {id:'est', n:'Estratégia', s:'4º integrante: visão do conjunto',
    meta:'A soma dos quatro indicadores deve terminar em 48 ou mais.',
    ok:(v)=> v.caixa+v.clientes+v.pessoas+v.res >= 48,
@@ -413,10 +511,10 @@ function coerencia(d){
 /* ---------- Quiz individual (3 perguntas por rodada, 1 ponto cada) ---------- */
 const QUIZ = {
   r1:[
-    {id:'q11', curto:'5 forças: fornecedores', q:'A empresa depende de um único fornecedor de embalagens importadas. Nas cinco forças de Porter, isso indica:',
+    {id:'q11', curto:'5 forças: fornecedores', q:'A empresa depende de um único importador de proteína do soro (whey). Nas cinco forças de Porter, isso indica:',
      ops:['Alto poder de barganha dos fornecedores','Baixa rivalidade entre concorrentes','Alta ameaça de novos entrantes','Baixo poder dos compradores'], c:0,
      exp:'Poucos fornecedores, ou um só, conseguem impor preço e prazo. É o poder de barganha dos fornecedores, uma das cinco forças de Porter.'},
-    {id:'q12', curto:'5 forças: compradores', q:'Três redes de supermercados concentram cerca de 60% da receita. Pelas cinco forças, isso significa:',
+    {id:'q12', curto:'5 forças: compradores', q:'Três grandes redes (duas de supermercado e uma de farmácias) concentram cerca de 60% da receita. Pelas cinco forças, isso significa:',
      ops:['Alto poder de barganha dos compradores','Baixa ameaça de produtos substitutos','Barreiras de entrada elevadas','Fornecedores fracos'], c:0,
      exp:'Quando poucos clientes respondem por grande parte das vendas, eles negociam preço e condições com força.'},
     {id:'q13', curto:'VRIO', q:'Pela visão baseada em recursos (VRIO, de Barney), um recurso gera vantagem competitiva sustentável quando é:',
@@ -430,7 +528,7 @@ const QUIZ = {
     {id:'q22', curto:'Dois equilíbrios', q:'Na disputa pelo único fornecedor nacional, quantos equilíbrios de Nash existem?',
      ops:['Dois: uma empresa vai ao nacional e a outra não','Nenhum','Um: as duas vão ao nacional','Um: nenhuma vai ao nacional'], c:0,
      exp:'É um jogo de anticoordenação: há dois equilíbrios, um para cada empresa ficar com a vaga. Se as duas forem, as duas perdem.'},
-    {id:'q23', curto:'Mintzberg', q:'A resposta à crise das embalagens não estava no plano da empresa. Para Mintzberg, uma estratégia que surge assim, a partir de decisões tomadas no caminho, é:',
+    {id:'q23', curto:'Mintzberg', q:'A resposta à crise do whey não estava no plano da empresa. Para Mintzberg, uma estratégia que surge assim, a partir de decisões tomadas no caminho, é:',
      ops:['Emergente','Deliberada','Genérica','Corporativa'], c:0,
      exp:'Mintzberg distingue a estratégia deliberada (planejada e executada) da emergente (padrão que se forma nas decisões ao longo do tempo). Na prática, as duas convivem.'}
   ],
@@ -455,21 +553,24 @@ const QUIZ = {
 const TODAS_Q = [].concat(QUIZ.r1, QUIZ.r2, QUIZ.r3);
 
 const FORCAS = [
-  ['Rivalidade', 'Alta: a concorrente do seu mercado disputa as mesmas redes e a mesma verba promocional'],
-  ['Poder dos fornecedores', 'Alto: um único fornecedor de embalagens, importadas'],
+  ['Rivalidade', 'Alta: multinacionais, a concorrente do seu mercado e marcas de influenciadores disputam a mesma gôndola e a mesma verba promocional'],
+  ['Poder dos fornecedores', 'Alto: o whey é importado por um único fornecedor, e o baru depende da safra'],
   ['Poder dos compradores', 'Alto: três redes concentram cerca de 60% da receita'],
-  ['Ameaça de substitutos', 'Média: marcas próprias das redes avançam nas gôndolas'],
-  ['Ameaça de novos entrantes', 'Baixa a média: exige marca, distribuição e certificação sanitária']
+  ['Ameaça de substitutos', 'Alta: marcas próprias de farmácia até 25% mais baratas, além de comida de verdade (ovos, iogurte, frutas)'],
+  ['Ameaça de novos entrantes', 'Média: lançar uma marca no digital é barato, mas entrar nas grandes redes exige escala e registro sanitário']
 ];
 
 /* ---------- Empresas e mercados ----------
-   Equipes ímpares: Cerrado Alimentos. Equipes pares: Veredas Laticínios.
+   Setor: alimentos saudáveis (fit) em Goiás. Dados fictícios.
+   Equipes ímpares: Baruna Alimentos Funcionais. Equipes pares: Trilha Nutrição Esportiva.
    Cada mercado reúne uma de cada (1-2, 3-4, 5-6...). */
 const EMPRESAS = {
-  cerrado:{nome:'Cerrado Alimentos', curto:'Cerrado', seg:'biscoitos, massas e snacks', cidade:'Catalão (GO)'},
-  veredas:{nome:'Veredas Laticínios', curto:'Veredas', seg:'queijos, iogurtes e manteiga', cidade:'Morrinhos (GO)'}
+  baruna:{nome:'Baruna Alimentos Funcionais', curto:'Baruna', seg:'barras, granolas e snacks com castanha de baru', cidade:'Catalão (GO)',
+    slogan:'O Cerrado em cada mordida', fund:2015},
+  trilha:{nome:'Trilha Nutrição Esportiva', curto:'Trilha', seg:'pastas de amendoim, shakes prontos e snacks proteicos', cidade:'Goiânia (GO)',
+    slogan:'Proteína para quem não para', fund:2018}
 };
-const empresaKey = (t)=> t%2===1 ? 'cerrado' : 'veredas';
+const empresaKey = (t)=> t%2===1 ? 'baruna' : 'trilha';
 const empresaDe = (t)=> EMPRESAS[empresaKey(t)];
 const mercadoDe = (t)=> Math.ceil(t/2);
 const rivalDe = (t)=>{ const r = t%2===1 ? t+1 : t-1; return (r>=1 && r<=CONFIG.MAX_EQUIPES) ? r : null; };
@@ -477,38 +578,38 @@ const rivalDe = (t)=>{ const r = t%2===1 ? t+1 : t-1; return (r>=1 && r<=CONFIG.
 const ROBO = {r2:'D', r3:{est:'D', esg:'X3'}};
 
 const R1_PROB = [
-  {id:'P1', t:'Dependência de um único fornecedor de embalagens importadas', e:{res:+1}},
-  {id:'P2', t:'Concentração de receita em poucos clientes', e:{clientes:+1}},
-  {id:'P3', t:'Queda contínua da margem líquida', e:{caixa:+1}},
+  {id:'P1', t:'Dependência de um único importador de whey, o insumo mais caro', e:{res:+1}},
+  {id:'P2', t:'Concentração de receita em três grandes redes', e:{clientes:+1}},
+  {id:'P3', t:'Queda contínua da margem bruta e da margem líquida', e:{caixa:+1}},
   {id:'P4', t:'Pedidos e faturamento manuais, com alto índice de erro', e:{caixa:+1}},
   {id:'P5', t:'Rotatividade elevada na produção e pouco treinamento', e:{pessoas:+1}},
-  {id:'P6', t:'Identidade visual da marca desatualizada', e:{caixa:-1}},
-  {id:'P7', t:'Poucos seguidores nas redes sociais', e:{caixa:-1}},
-  {id:'P8', t:'Sede administrativa pequena', e:{caixa:-1}}
+  {id:'P6', t:'Embalagem pouco "instagramável"', e:{caixa:-1}},
+  {id:'P7', t:'Poucos influenciadores fitness contratados', e:{caixa:-1}},
+  {id:'P8', t:'Falta de um sabor da moda no portfólio', e:{caixa:-1}}
 ];
 const R1_KPI = [
-  {id:'K1', t:'Dias de cobertura do estoque de insumos críticos', e:{res:+1}},
-  {id:'K2', t:'Margem de contribuição por linha de produto', e:{caixa:+1}},
+  {id:'K1', t:'Dias de cobertura do estoque de whey e insumos críticos', e:{res:+1}},
+  {id:'K2', t:'Margem de contribuição por produto (SKU)', e:{caixa:+1}},
   {id:'K3', t:'Participação dos 3 maiores clientes na receita', e:{clientes:+1}},
   {id:'K4', t:'Taxa de rotatividade e horas de treinamento', e:{pessoas:+1}},
   {id:'K5', t:'Número de seguidores e curtidas', e:{}}
 ];
 
-/* ---------- Rodada 2: a crise das embalagens (jogo entre as duas empresas do mercado) ---------- */
+/* ---------- Rodada 2: a crise do whey (jogo entre as duas empresas do mercado) ---------- */
 const R2_INFO = [
-  {id:'I1', t:'Cotação do fornecedor nacional',
-   r:(t)=>`A fabricante de Anápolis (GO) entrega em 12 dias, com preço 15% acima do que vocês pagavam antes da crise: mais barato que o importado com o aumento de 25%. Mas ela só tem capacidade para UMA empresa, e a ${rivalDe(t)?empresaDe(rivalDe(t)).nome:'concorrente'} também pediu cotação ontem.`},
-  {id:'I2', t:'Histórico do fornecedor estrangeiro alternativo',
-   r:()=>'Nas últimas 6 entregas a clientes brasileiros, 2 atrasaram mais de 30 dias por problemas portuários e regulatórios. Risco de falha: cerca de 1 em 3.'},
+  {id:'I1', t:'Cotação do laticínio de Rio Verde',
+   r:(t)=>`O laticínio de Rio Verde (GO) produz whey concentrado nacional e entrega em 10 dias, com preço 15% acima do que vocês pagavam antes da crise: mais barato que o importado com o aumento de 25%. Mas ele só tem capacidade para UMA empresa, e a ${rivalDe(t)?empresaDe(rivalDe(t)).nome:'concorrente'} também pediu cotação ontem.`},
+  {id:'I2', t:'Histórico do importador alternativo (Argentina)',
+   r:()=>'Nas últimas 6 entregas a clientes brasileiros, 2 atrasaram mais de 30 dias por greves na fronteira e exigências sanitárias. Risco de falha: cerca de 1 em 3.'},
   {id:'I3', t:'Sondagem com as 3 grandes redes',
-   r:()=>'As redes aceitam reajuste se ele vier das duas empresas ao mesmo tempo. Se só uma reajustar, as redes vão priorizar a outra na gôndola e na verba promocional.'}
+   r:()=>'As redes aceitam reajuste se ele vier das duas empresas ao mesmo tempo. Se só uma reajustar, as redes vão priorizar a outra na gôndola, no encarte e na verba promocional.'}
 ];
 const R2_OPC = [
-  {id:'A', t:'Contratar o fornecedor nacional', d:'Abastecimento garantido em Goiás. Atenção: a fabricante só atende UMA empresa. Se a concorrente também for, a capacidade é dividida e o preço sobe.', e:{caixa:-1, res:+2}},
-  {id:'B', t:'Contratar novo fornecedor internacional', d:'Preço atrativo, mas origem com instabilidade logística. O resultado depende da sorte.', e:null},
-  {id:'C', t:'Reduzir a produção temporariamente', d:'Preserva o estoque, mas deixa pedidos sem atendimento e reduz turnos. O espaço de vocês nas redes fica para a concorrente.', e:{caixa:+1, clientes:-3, pessoas:-2}},
+  {id:'A', t:'Contratar o whey nacional de Rio Verde', d:'Abastecimento garantido em Goiás. Atenção: o laticínio só atende UMA empresa. Se a concorrente também for, a capacidade é dividida e o preço sobe.', e:{caixa:-1, res:+2}},
+  {id:'B', t:'Contratar novo importador (Argentina)', d:'Preço atrativo, mas com histórico de atrasos na fronteira. O resultado depende da sorte.', e:null},
+  {id:'C', t:'Reduzir a produção temporariamente', d:'Preserva o estoque de whey, mas deixa pedidos sem atendimento e reduz turnos. O espaço de vocês nas redes fica para a concorrente.', e:{caixa:+1, clientes:-3, pessoas:-2}},
   {id:'D', t:'Repassar o aumento ao preço', d:'Protege a margem. Se a concorrente não reajustar também, parte dos seus clientes migra para ela.', e:{caixa:+2, clientes:-3}},
-  {id:'E', t:'Investir em alternativa produtiva própria', d:'Nova linha de embalagem com insumo nacional. Investimento alto, ganho estrutural, não depende da concorrente.', e:{caixa:-4, pessoas:+1, res:+3}}
+  {id:'E', t:'Reformular com proteína vegetal própria', d:'Nova linha com proteína de ervilha e farinha de baru, produzida em Goiás. Investimento alto, ganho estrutural, não depende da concorrente.', e:{caixa:-4, pessoas:+1, res:+3}}
 ];
 const R2_B_OK = {caixa:-1, res:+1};
 const R2_B_FAIL = {caixa:-2, clientes:-2, res:-3};
@@ -522,21 +623,21 @@ function efeitoR2(opc, team, rivOpc){
   const proprio = opc==='B' ? (hashTeam(team)===0 ? R2_B_FAIL : R2_B_OK) : R2_OPC.find(o=>o.id===opc).e;
   let cruzado = {}; const msgs = [];
   if(rivOpc){
-    if(opc==='A' && rivOpc==='A'){ cruzado = somar(cruzado,{caixa:-1,res:-2}); msgs.push('As duas empresas foram à fabricante de Anápolis. Ela dividiu a capacidade e subiu o preço.'); }
+    if(opc==='A' && rivOpc==='A'){ cruzado = somar(cruzado,{caixa:-1,res:-2}); msgs.push('As duas empresas foram ao laticínio de Rio Verde. Ele dividiu a capacidade e subiu o preço.'); }
     if(opc==='D' && rivOpc==='D'){ cruzado = somar(cruzado,{clientes:+2}); msgs.push('As duas reajustaram juntas: as redes aceitaram e vocês perderam menos clientes.'); }
     if(opc==='D' && rivOpc!=='D') msgs.push('Vocês reajustaram sozinhos: parte dos seus clientes migrou para a concorrente.');
     if(opc!=='D' && rivOpc==='D'){ cruzado = somar(cruzado,{clientes:+1}); msgs.push('A concorrente subiu o preço e parte dos clientes dela veio para vocês.'); }
     if(rivOpc==='C'){ cruzado = somar(cruzado,{clientes:+1}); msgs.push('A concorrente reduziu a produção e vocês ocuparam o espaço dela nas redes.'); }
-    if(opc==='A' && rivOpc!=='A') msgs.push('Vocês ficaram com a vaga da fabricante de Anápolis sem disputa.');
+    if(opc==='A' && rivOpc!=='A') msgs.push('Vocês ficaram com o whey de Rio Verde sem disputa.');
   }
   return {proprio, cruzado, msgs};
 }
 
 /* ---------- Rodada 3: a proposta de Hamburgo ---------- */
 const R3_EST = [
-  {id:'C', t:'Preço cheio', d:'Proposta com margem normal. Se a concorrente também mantiver o preço, a Nordkost divide o pedido entre as duas.'},
+  {id:'C', t:'Preço cheio', d:'Proposta com margem normal. Se a concorrente também mantiver o preço, a Grünkorb divide o pedido entre as duas.'},
   {id:'D', t:'Desconto agressivo', d:'Corta a margem para ganhar a vaga. Se só vocês derem desconto, levam o pedido inteiro.'},
-  {id:'K', t:'Consórcio de exportação com a concorrente', d:'Proposta conjunta: o kit "café da manhã brasileiro" com biscoitos e laticínios, custos de certificação divididos. Só existe se a concorrente também escolher o consórcio.'}
+  {id:'K', t:'Consórcio de exportação com a concorrente', d:'Proposta conjunta: o kit "Energia do Cerrado", com barras de baru e pastas proteicas das duas marcas, custos de certificação divididos. Só existe se a concorrente também escolher o consórcio.'}
 ];
 const nomeEst = (id)=> (R3_EST.find(x=>x.id===id)||{t:'?'}).t;
 const curtoEst = {C:'Preço cheio', D:'Desconto', K:'Consórcio'};
@@ -574,23 +675,23 @@ function efeitoR3(meu, riv){
 }
 function desfechoR3(d, rv){
   if(!d) return null;
-  if(d.esg==='X4') return {ok:false, t:'Sem contrato. Vocês recusaram as exigências e a Nordkost nem avaliou o preço. Ela fechou com um fornecedor chileno que já tinha rastreabilidade.'};
-  if(!rv || !rv.r3) return {pend:true, t:'Proposta enviada. A Nordkost aguarda a proposta da concorrente para decidir.'};
+  if(d.esg==='X4') return {ok:false, t:'Sem contrato. Vocês recusaram as exigências e a Grünkorb nem avaliou o preço. Ela fechou com uma marca peruana de snacks de quinoa que já tinha rastreabilidade.'};
+  if(!rv || !rv.r3) return {pend:true, t:'Proposta enviada. A Grünkorb aguarda a proposta da concorrente para decidir.'};
   const r = rv.r3, fora = r.esg==='X4', cel = d.est+'|'+estEfetiva(r);
   const pre = fora ? 'A concorrente recusou as exigências ESG e ficou fora da disputa. ' : '';
   const T = {
-    'K|K':[true,'Consórcio aprovado! O kit "café da manhã brasileiro" convenceu a Nordkost, e as duas empresas dividem um contrato maior e os custos de certificação.'],
-    'K|C':[false,'Vocês apostaram no consórcio, mas a concorrente foi sozinha com preço cheio. A proposta conjunta não existia e a Nordkost fechou com ela.'],
+    'K|K':[true,'Consórcio aprovado! O kit "Energia do Cerrado" convenceu a Grünkorb, e as duas empresas dividem um contrato maior e os custos de certificação.'],
+    'K|C':[false,'Vocês apostaram no consórcio, mas a concorrente foi sozinha com preço cheio. A proposta conjunta não existia e a Grünkorb fechou com ela.'],
     'K|D':[false,'Vocês apostaram no consórcio, mas a concorrente foi sozinha com desconto e levou a vaga.'],
     'D|C':[true,'Vocês levaram o pedido inteiro com o desconto. A concorrente manteve o preço e ficou de fora.'],
     'D|K':[true,'Vocês levaram o pedido inteiro com o desconto. A concorrente esperava um consórcio e ficou sem nada.'],
-    'D|D':[true,'Guerra de preços: as duas deram desconto, a Nordkost dividiu o pedido e as margens encolheram.'],
-    'C|C':[true,'As duas mantiveram o preço. A Nordkost dividiu o pedido entre vocês, com boa margem.'],
+    'D|D':[true,'Guerra de preços: as duas deram desconto, a Grünkorb dividiu o pedido e as margens encolheram.'],
+    'C|C':[true,'As duas mantiveram o preço. A Grünkorb dividiu o pedido entre vocês, com boa margem.'],
     'C|D':[false,'A concorrente deu desconto e levou a vaga. O preço cheio de vocês ficou de fora.'],
     'C|K':[true,'A concorrente propôs um consórcio, mas vocês foram sozinhos e ficaram com o pedido a preço cheio.']
   }[cel];
   let t = pre + T[1];
-  if(T[0] && d.esg==='X2') t += ' Ressalva: a due diligence social da Nordkost vai auditar as 15 demissões. Na Europa, o "S" do ESG pesa.';
+  if(T[0] && d.esg==='X2') t += ' Ressalva: a due diligence social da Grünkorb vai auditar as 15 demissões. Na Europa, o "S" do ESG pesa.';
   if(T[0] && d.esg==='X3') t += ' O contrato começa como pedido-piloto, e o comprador quer ver o cronograma de certificação.';
   if(T[0] && d.inc==='EXW') t += ' O comprador cobrou desconto extra por ter de retirar a carga em Goiás (EXW).';
   return {ok:T[0], t, cel};
@@ -635,7 +736,7 @@ const R4_SOFT = [
 /* ---------- Conceitos-chave de cada rodada ---------- */
 const CONCEITOS = {
   r1:{t:'Diagnóstico, forças competitivas e posicionamento',
-      p:['Diagnosticar é separar sintoma de causa. A logomarca antiga incomoda, mas não explica a queda da margem. Um bom indicador (KPI) mede algo que muda uma decisão.',
+      p:['Diagnosticar é separar sintoma de causa. Uma embalagem mais bonita ou um sabor da moda não explicam a queda da margem. Um bom indicador (KPI) mede algo que muda uma decisão.',
          'As cinco forças de Porter (rivalidade, poder dos fornecedores, poder dos compradores, substitutos e novos entrantes) explicam por que a margem do setor é apertada.',
          'Porter propõe três estratégias genéricas: liderança em custo, diferenciação e enfoque. Ficar no meio do caminho, sem escolher, costuma ser a pior opção.',
          'Pela visão baseada em recursos (VRIO), a vantagem sustentável vem de recursos valiosos, raros, difíceis de imitar e bem aproveitados pela organização.'],
@@ -685,6 +786,7 @@ function calcular(d, team, rv){
     add(R3_INC.find(o=>o.id===d.r3.inc).e); add(R3_ESG.find(o=>o.id===d.r3.esg).e);
     add(efeitoR3(d.r3, rv.r3));
   }
+  add(efeitoEventos(d, team));   // eventos surpresa disparados pelo professor
   return v;
 }
 const resultadoFinal = (d, rv)=> !!(d.r3 && (d.r3.esg==='X4' || (rv && rv.r3)));
@@ -697,20 +799,168 @@ function pontuar(v,d,final,temEst){
 }
 
 /* ---------- Dossiê de cada empresa ---------- */
+/* Mercado goiano de alimentos saudáveis (fit): o mesmo para todas as equipes */
+const MERCADO = {
+  nome:'Alimentos saudáveis (fit) em Goiás',
+  tamanho:'R$ 640 milhões em vendas no varejo em 2025',
+  cresc:'cerca de 11% ao ano desde 2022',
+  share:[['Multinacionais (barras e shakes nacionais de grandes marcas)','37%'],['Baruna Alimentos Funcionais','13%'],['Trilha Nutrição Esportiva','12%'],['Marcas próprias das redes','11%'],['Startups e marcas de influenciadores','9%'],['Outros (regionais e artesanais)','18%']],
+  canais:[['Supermercados','46%'],['Farmácias e drogarias','21%'],['Academias e lojas de suplementos','17%'],['E-commerce e marketplaces','16%']],
+  tend:[
+    'Proteína é o atributo mais buscado: produtos com "alto teor de proteína" crescem mais rápido que o restante do setor.',
+    'A rotulagem nutricional frontal (lupa da Anvisa) penalizou produtos com açúcar adicionado: marcas reformularam receitas em 2023 e 2024.',
+    'Ingredientes regionais e rastreáveis (baru, pequi, cumbaru) ganham espaço no varejo premium e lá fora.',
+    'Marcas próprias das redes de farmácia avançam com preço até 25% menor.'
+  ]
+};
 const DOSSIE = {
-  cerrado:{
-    rec:['41,2','45,0','48,6'], mar:['9,1%','5,8%','3,2%'], err:['3,9%','5,1%','6,0%'], caixa:'3,1',
-    custo:[['Matéria-prima (trigo, açúcar, óleo)','46%'],['Embalagens (100% importadas, 1 fornecedor)','22%'],['Mão de obra','18%'],['Energia e logística','14%']],
-    cli:[['3 redes de supermercados','62% da receita'],['Cerca de 180 pequenos varejos','38% da receita'],['Pedidos recebidos por WhatsApp e planilha','70%'],['Seguidores no Instagram','1.900']],
-    pes:[['Funcionários','120'],['Rotatividade anual na produção','28%'],['Horas de treinamento por funcionário/ano','4 h'],['Área da sede administrativa','240 m²']]
+  baruna:{
+    hist:'Fundada em 2015 em Catalão por duas nutricionistas formadas na região. Começou vendendo granola artesanal em feiras e cresceu com a barra de proteína de baru, comprada de cooperativas extrativistas do Sudeste Goiano. Em 2022 entrou nas grandes redes; desde então cresce em receita, mas perde margem.',
+    cultura:'Familiar, próxima dos fornecedores do Cerrado e orgulhosa da origem. Decisões concentradas nas sócias-fundadoras.',
+    fortes:['Marca associada ao Cerrado e a ingredientes naturais','Relação de longo prazo com 3 cooperativas de baru','Receitas sem açúcar adicionado, já adequadas à lupa da Anvisa'],
+    fracos:['Custo alto: baru e whey importado pesam no produto','Processos manuais de pedido e faturamento','Pouca presença em academias e no e-commerce'],
+    linha:[['Barra Proteica Baru 45 g','R$ 7,90','38%'],['Granola Cerrado sem açúcar 300 g','R$ 24,90','27%'],['Mix de castanhas Baru & Caju 150 g','R$ 19,90','21%'],['Cookie integral proteico 120 g','R$ 12,90','14%']],
+    rec:['41,2','45,0','48,6'], mb:['41%','37%','34%'], mar:['9,1%','5,8%','3,2%'], err:['3,9%','5,1%','6,0%'], caixa:'3,1',
+    dre:[['Receita líquida','48,6'],['(−) Custo dos produtos vendidos','−32,1'],['(=) Lucro bruto','16,5'],['(−) Despesas comerciais e trade marketing','−9,8'],['(−) Despesas administrativas','−4,6'],['(=) Lucro líquido','1,6']],
+    custo:[['Proteína do soro (whey) importada, 1 fornecedor','29%'],['Baru e castanhas das cooperativas','24%'],['Outros ingredientes (aveia, mel, cacau)','15%'],['Embalagens','12%'],['Mão de obra','12%'],['Energia e logística','8%']],
+    forn:[['Whey isolado (Irlanda), 1 importador em São Paulo','prazo 45 dias, estoque para 20 dias'],['Baru (3 cooperativas do Sudeste Goiano)','safra de agosto a outubro'],['Embalagens flexíveis (Anápolis)','prazo 10 dias']],
+    cli:[['2 redes de supermercados + 1 rede de farmácias','62% da receita'],['Cerca de 180 pequenos varejos e empórios','24% da receita'],['Academias e e-commerce próprio','14% da receita'],['Pedidos recebidos por WhatsApp e planilha','70%'],['Seguidores no Instagram','18 mil']],
+    pes:[['Funcionários','120'],['Rotatividade anual na produção','28%'],['Horas de treinamento por funcionário/ano','4 h'],['Nutricionistas e P&D','3 pessoas']]
   },
-  veredas:{
-    rec:['36,8','39,5','41,9'], mar:['8,4%','5,2%','2,7%'], err:['4,4%','5,6%','6,3%'], caixa:'2,7',
-    custo:[['Matéria-prima (leite captado de 140 produtores)','52%'],['Embalagens cartonadas e potes (100% importados, 1 fornecedor)','19%'],['Mão de obra','16%'],['Energia e logística refrigerada','13%']],
-    cli:[['3 redes de supermercados','58% da receita'],['Cerca de 210 pequenos varejos','42% da receita'],['Pedidos recebidos por WhatsApp e planilha','65%'],['Seguidores no Instagram','2.400']],
-    pes:[['Funcionários','110'],['Rotatividade anual na produção','31%'],['Horas de treinamento por funcionário/ano','5 h'],['Área da sede administrativa','210 m²']]
+  trilha:{
+    hist:'Fundada em 2018 em Goiânia por um ex-atleta de corrida de montanha e um engenheiro de alimentos. Nasceu no e-commerce com pasta de amendoim proteica e cresceu com academias e influenciadores fitness. Em 2023 entrou nas grandes redes de supermercado e de farmácia para ganhar escala.',
+    cultura:'Jovem, digital e acelerada. Lança sabores novos com frequência e decide rápido, às vezes sem dados.',
+    fortes:['Marca forte entre praticantes de atividade física','Canal próprio de e-commerce e rede de 400 academias parceiras','Agilidade para lançar produtos'],
+    fracos:['Dependência total do whey importado nos shakes','Margem pressionada pela verba das redes e pelos influenciadores','Muitos sabores com baixo giro na gôndola'],
+    linha:[['Pasta de amendoim proteica 500 g','R$ 34,90','36%'],['Shake proteico pronto 250 ml','R$ 11,90','31%'],['Chips de proteína assados 40 g','R$ 8,90','19%'],['Barra Trilha Cacau 50 g','R$ 7,50','14%']],
+    rec:['36,8','39,5','41,9'], mb:['44%','39%','35%'], mar:['8,4%','5,2%','2,7%'], err:['4,4%','5,6%','6,3%'], caixa:'2,7',
+    dre:[['Receita líquida','41,9'],['(−) Custo dos produtos vendidos','−27,2'],['(=) Lucro bruto','14,7'],['(−) Despesas comerciais, influenciadores e trade','−9,6'],['(−) Despesas administrativas','−4,0'],['(=) Lucro líquido','1,1']],
+    custo:[['Proteína do soro (whey) importada, 1 fornecedor','34%'],['Amendoim e cacau','22%'],['Embalagens (potes e garrafas)','16%'],['Mão de obra','14%'],['Energia e logística refrigerada','14%']],
+    forn:[['Whey isolado (Irlanda), mesmo importador em São Paulo','prazo 45 dias, estoque para 20 dias'],['Amendoim (produtores do interior de SP)','contrato anual'],['Garrafas e potes (Anápolis)','prazo 12 dias']],
+    cli:[['2 redes de supermercados + 1 rede de farmácias','58% da receita'],['Academias e lojas de suplementos','22% da receita'],['E-commerce próprio e marketplaces','20% da receita'],['Pedidos recebidos por WhatsApp e planilha','65%'],['Seguidores no Instagram','96 mil']],
+    pes:[['Funcionários','110'],['Rotatividade anual na produção','31%'],['Horas de treinamento por funcionário/ano','5 h'],['Nutricionistas e P&D','2 pessoas']]
   }
 };
+/* ===================== EXTRAS: identidade, eventos, relâmpago, conquistas ===================== */
+const MARCA = {
+  baruna:{cor:'#2E7D4F', cor2:'#8B5A2B'},
+  trilha:{cor:'#E0662B', cor2:'#1F3A5F'}
+};
+function logo(k, s){
+  s = s || 36;
+  if(k==='baruna') return `<svg class="logo" width="${s}" height="${s}" viewBox="0 0 48 48" aria-label="Baruna"><circle cx="24" cy="24" r="23" fill="#2E7D4F"/><ellipse cx="24" cy="27" rx="10" ry="13" fill="#C99A5B"/><ellipse cx="24" cy="27" rx="5" ry="8" fill="#8B5A2B"/><path d="M24 14c5-8 13-8 15-6-3 5-9 8-15 6z" fill="#9BD3A7"/></svg>`;
+  return `<svg class="logo" width="${s}" height="${s}" viewBox="0 0 48 48" aria-label="Trilha"><rect x="1" y="1" width="46" height="46" rx="12" fill="#E0662B"/><path d="M7 36l11-15 7 9 5-6 11 12z" fill="#FFF4EA"/><path d="M12 40c6-3 10-1 14-4s9-2 12-6" stroke="#1F3A5F" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1 5"/><circle cx="34" cy="12" r="4" fill="#FFD7A8"/></svg>`;
+}
+const nomeTrioDe = (t)=> t && t.nome && !t.oculto ? t.nome : '';
+
+/* ---------- Eventos surpresa (disparados pelo professor) ---------- */
+const EVENTOS = [
+  {id:'E1', t:'Influenciadora adota a Trilha',
+   txt:'Uma influenciadora fitness com 2 milhões de seguidores publica a rotina de treino com os shakes da Trilha. As vendas da marca disparam no e-commerce.',
+   ef:(d,k)=> k==='trilha' ? {e:{clientes:+1}, por:'A Trilha ganhou clientes com a exposição.'}
+            : (d.r1 && d.r1.gen==='dif' ? {e:{}, por:'A marca diferenciada da Baruna segurou os clientes.'} : {e:{clientes:-1}, por:'Sem diferenciação clara, a Baruna perdeu clientes para a rival.'})},
+  {id:'E2', t:'Anvisa recolhe lotes de barras',
+   txt:'A Anvisa manda recolher lotes de uma marca nacional de barras proteicas com proteína abaixo do rótulo. Consumidores passam a desconfiar do setor.',
+   ef:(d)=>{ const mon = d.r1 && (d.r1.kpi==='K1' || (d.r1.prob||[]).includes('P1'));
+     return mon ? {e:{clientes:-1, res:+1}, por:'Todo o setor perdeu clientes, mas quem monitorava insumos provou a qualidade dos lotes.'}
+                : {e:{clientes:-1, res:-1}, por:'Todo o setor perdeu clientes, e sem controle dos insumos a empresa ficou exposta.'}; }},
+  {id:'E3', t:'Seca derruba a safra de baru',
+   txt:'A estiagem reduz em 40% a safra de baru no Sudeste Goiano. O preço da castanha dobra.',
+   ef:(d,k)=>{ const e = {}; const por = [];
+     if(k==='baruna'){ e.caixa=-1; e.res=-1; por.push('A Baruna depende do baru e sentiu no custo.'); }
+     if(d.r2 && d.r2.opc==='E'){ e.res=(e.res||0)-1; por.push('A nova linha com farinha de baru ficou sem insumo.'); }
+     return {e, por: por.join(' ') || 'A empresa não usa baru: sem impacto direto.'}; }},
+  {id:'E4', t:'Greve de caminhoneiros',
+   txt:'Uma greve de caminhoneiros fecha rodovias por 5 dias. Cargas vindas de fora do estado ficam paradas.',
+   ef:(d)=>{ const o = d.r2 && d.r2.opc;
+     if(o==='A') return {e:{}, por:'O whey de Rio Verde está no próprio estado: abastecimento mantido.'};
+     if(o==='B') return {e:{res:-2}, por:'A carga do importador argentino ficou parada na estrada.'};
+     return {e:{res:-1}, por:'O estoque baixo sofreu com o atraso das entregas.'}; }},
+  {id:'E5', t:'Farmácias lançam marca própria',
+   txt:'A rede de farmácias cliente lança barras e shakes de marca própria, 25% mais baratos, no melhor espaço da gôndola.',
+   ef:(d)=>{ const g = d.r1 && d.r1.gen;
+     if(g==='custo') return {e:{}, por:'Com custo baixo, a empresa conseguiu igualar o preço.'};
+     if(g==='enf') return {e:{}, por:'O nicho escolhido não compete com a marca própria.'};
+     return {e:{clientes:-1}, por:'Parte dos clientes trocou pela marca própria mais barata.'}; }}
+];
+let EVENTOS_ATIVOS = [];   // [{id,t,f}] vindo do professor
+function efeitoEventos(d, team){
+  const k = empresaKey(team); const tot = {};
+  EVENTOS_ATIVOS.forEach(x=>{ const ev = EVENTOS.find(e=>e.id===x.id); if(!ev) return; const r = ev.ef(d||{}, k); for(const c in r.e) tot[c]=(tot[c]||0)+r.e[c]; });
+  return tot;
+}
+
+/* ---------- Quiz relâmpago (estilo Kahoot, sincronizado pelo relógio do servidor) ---------- */
+const FLASH = [
+  {id:'f1', q:'Quem formulou o equilíbrio que leva seu nome na teoria dos jogos?', ops:['John Nash','Michael Porter','Henri Fayol','Herbert Simon'], c:0},
+  {id:'f2', q:'Planejar, organizar, dirigir e controlar: de quem são essas funções administrativas?', ops:['Frederick Taylor','Henri Fayol','Henry Mintzberg','Jay Barney'], c:1},
+  {id:'f3', q:'Na matriz de Ansoff, vender os produtos atuais em outro país é:', ops:['Penetração de mercado','Desenvolvimento de produto','Desenvolvimento de mercado','Diversificação'], c:2},
+  {id:'f4', q:'No modelo VRIO, a letra I significa:', ops:['Inovador','Difícil de imitar','Integrado','Internacional'], c:1},
+  {id:'f5', q:'Qual destas NÃO é uma das cinco forças de Porter?', ops:['Poder dos fornecedores','Ameaça de substitutos','Rivalidade','Cultura organizacional'], c:3},
+  {id:'f6', q:'"Racionalidade limitada" é um conceito de:', ops:['Herbert Simon','Adam Smith','Henry Ford','Peter Drucker'], c:0},
+  {id:'f7', q:'No Incoterm FOB, o risco passa ao comprador quando:', ops:['A carga chega ao destino','A carga é embarcada no porto de origem','O contrato é assinado','O comprador paga'], c:1},
+  {id:'f8', q:'A estratégia que surge das respostas a imprevistos, fora do plano, é chamada por Mintzberg de:', ops:['Deliberada','Emergente','Genérica','Competitiva'], c:1}
+];
+const FL_COR = ['#D64541','#2E6FD8','#E5A100','#2F9E5A'], FL_SIM = ['▲','◆','●','■'], FL_REVEAL = 6000;
+function flashPos(fl, agora){
+  if(!fl || !fl.t0) return null;
+  const n = Math.min(fl.n||FLASH.length, FLASH.length), slot = fl.dur*1000 + FL_REVEAL, dt = agora - fl.t0;
+  if(dt < 0) return {fase:'antes', falta:-dt, n};
+  const i = Math.floor(dt/slot), el = dt - i*slot;
+  if(i >= n) return {fase:'fim', n};
+  return {fase: el < fl.dur*1000 ? 'pergunta' : 'resposta', i, el, falta: el < fl.dur*1000 ? fl.dur*1000-el : slot-el, n, dur:fl.dur*1000};
+}
+const pontosFlash = (ok, ms, dur)=> ok ? Math.round(1000 - 500*Math.min(1, ms/dur)) : 0;
+
+/* ---------- Conquistas ---------- */
+const CONQ = [
+  {id:'coer', ic:'🎯', t:'Estrategista coerente', d:'Três escolhas coerentes com o posicionamento (3 pontos de coerência).', ok:(x)=> x.s && x.s.coer && x.s.coer.pts===3},
+  {id:'nash', ic:'♟️', t:'Caçador de Nash', d:'O mercado de vocês terminou a Rodada 3 num equilíbrio de Nash.', ok:(x)=> x.d.r3 && x.rv.r3 && NASH3.includes(estEfetiva(x.d.r3)+'|'+estEfetiva(x.rv.r3))},
+  {id:'diplo', ic:'🤝', t:'Diplomata', d:'Fecharam o consórcio de exportação com a concorrente.', ok:(x)=> x.d.r3 && x.rv.r3 && estEfetiva(x.d.r3)==='K' && estEfetiva(x.rv.r3)==='K'},
+  {id:'info', ic:'🔎', t:'Decisão com dados', d:'Compraram informação antes de decidir na crise.', ok:(x)=> x.d.r2 && (x.d.r2.info||[]).length>0},
+  {id:'meta', ic:'🏅', t:'Meta batida', d:'Você cumpriu a meta secreta do seu cargo.', ok:(x)=> x.fin && x.s.metas.some(m=>m.id===P.role && m.ok)},
+  {id:'resil', ic:'🛡️', t:'À prova de crise', d:'A empresa terminou com Resiliência 14 ou mais.', ok:(x)=> x.fin && x.v.res>=14},
+  {id:'quiz', ic:'🧠', t:'Gabaritou o quiz', d:'Acertou as 9 perguntas das rodadas.', ok:()=> acertosQuiz()===TODAS_Q.length},
+  {id:'raio', ic:'⚡', t:'Raio', d:'Acertou todas as perguntas do quiz relâmpago.', ok:()=> P.flashRes && P.flashRes.acertos>0 && P.flashRes.acertos===P.flashRes.n}
+];
+function minhasConquistas(){
+  atualizaRv();
+  const v = calcular(P.d, P.team, P.rv), fin = resultadoFinal(P.d, P.rv);
+  const temEst = (P.membros||[]).some(m=>m.cargo==='est') || P.role==='est';
+  const x = {d:P.d, rv:P.rv, v, fin, s:pontuar(v,P.d,fin,temEst)};
+  return CONQ.map(c=>({...c, ok: !!(()=>{ try{ return c.ok(x); }catch(e){ return false; } })()}));
+}
+
+/* ---------- utilidades de efeito ---------- */
+function vib(p){ try{ if(navigator.vibrate) navigator.vibrate(p); }catch(e){} }
+let audioCtx = null;
+function som(tipo){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const notas = {alerta:[[880,0,.12],[660,.15,.12],[880,.3,.18]], revela:[[523,0,.1],[659,.1,.1],[784,.2,.25]], fim:[[392,0,.2],[330,.22,.35]], tic:[[1200,0,.04]], fanfarra:[[523,0,.12],[659,.12,.12],[784,.24,.12],[1047,.36,.4]]}[tipo]||[[600,0,.1]];
+    notas.forEach(([f,t,d])=>{ const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type='triangle'; o.frequency.value=f;
+      g.gain.setValueAtTime(.0001,audioCtx.currentTime+t); g.gain.exponentialRampToValueAtTime(.25,audioCtx.currentTime+t+.01); g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+t+d);
+      o.connect(g); g.connect(audioCtx.destination); o.start(audioCtx.currentTime+t); o.stop(audioCtx.currentTime+t+d+.05); });
+  }catch(e){}
+}
+function confete(ms){
+  const cv = document.createElement('canvas'); cv.className='confete'; document.body.appendChild(cv);
+  const W = cv.width = innerWidth, H = cv.height = innerHeight, ctx = cv.getContext('2d');
+  const cores = ['#E3A51E','#2E7D4F','#E0662B','#2E6FD8','#D64541','#FBFBF8'];
+  const ps = Array.from({length:Math.min(260, Math.round(W/5))},()=>({x:Math.random()*W, y:-Math.random()*H, vy:2+Math.random()*4, vx:-1.5+Math.random()*3, r:4+Math.random()*6, a:Math.random()*6, c:cores[Math.floor(Math.random()*cores.length)]}));
+  const ini = performance.now();
+  (function f(t){ ctx.clearRect(0,0,W,H);
+    ps.forEach(p=>{ p.y+=p.vy; p.x+=p.vx; p.a+=.1; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle=p.c; ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); ctx.restore(); if(p.y>H && t-ini<ms-1500){ p.y=-10; } });
+    if(t-ini < ms) requestAnimationFrame(f); else cv.remove(); })(ini);
+}
+function overlay(html, cls, fechar){
+  const o = document.createElement('div'); o.className = 'ovl ' + (cls||'');
+  o.innerHTML = `<div class="ovl-box">${html}${fechar===false?'':'<button class="btn block ovl-x" style="margin-top:16px">Continuar</button>'}</div>`;
+  document.body.appendChild(o);
+  o.addEventListener('click', e=>{ if(e.target===o || e.target.closest('.ovl-x')) o.remove(); });
+  return o;
+}
+
 /* ===================== UTIL ===================== */
 const $ = (s,el=document)=>el.querySelector(s);
 const esc = (s)=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -833,7 +1083,7 @@ async function cadastrar(acao, nome, codigo){
 function aplicarEu(eu){
   let mudou = false;
   const set = (k,v)=>{ if(v!==undefined && v!==null && JSON.stringify(P[k])!==JSON.stringify(v)){ P[k]=v; mudou=true; } };
-  set('trio', eu.trio); set('codigo', eu.codigo); set('role', eu.cargo); set('membros', eu.membros);
+  set('trio', eu.trio); set('codigo', eu.codigo); set('role', eu.cargo); set('membros', eu.membros); if(eu.nomeTrio!==undefined) set('nomeTrio', eu.nomeTrio);
   if(eu.equipe) set('team', eu.equipe);
   return mudou;
 }
@@ -874,13 +1124,14 @@ function telaEspera(){
     <p class="small muted" style="margin:6px 0 0">Mostre este código aos colegas que vão jogar com você.</p>
     <p class="lbl">Seu cargo</p><div class="cargo">${esc(c.n)}</div>
   </div>
-  <div class="card"><h3 style="margin:0">Seu trio <span class="muted small">(<span id="nMembros">${(P.membros||[]).length}</span>)</span></h3><ul class="roster" id="roster">${rosterHTML()}</ul></div>` :
+  <div class="card"><h3 style="margin:0">Seu trio <span class="muted small">(<span id="nMembros">${(P.membros||[]).length}</span>)</span></h3><ul class="roster" id="roster">${rosterHTML()}</ul></div>${nomeTrioFormHTML()}` :
   `<div class="card reveal"><span class="badge">Equipe <b>${P.team}</b> · ${esc(c.n)}</span></div>`}
   <div class="card reveal" aria-live="polite">
     <div class="loader" role="img" aria-label="Carregando"></div>
     <h3 style="margin:0">Aguardando o professor</h3>
     <p class="muted" style="margin:6px 0 0">${remoto?'Quando o professor liberar o jogo, o sistema forma os mercados e revela a sua empresa e a concorrente. Não feche esta página.':'Quando o professor autorizar, digite o código de início projetado no telão.'}</p>
   </div>
+  <details class="card help-wrap"><summary><b>Como jogar</b> <span class="muted small">(leia enquanto aguarda)</span></summary>${comoJogarHTML()}</details>
   <div class="card">
     ${remoto?'<div class="divider" style="margin-top:0">o jogo não abriu?</div>':''}
     <label for="iniIn" class="small muted">Código de início ${remoto?'(projetado pelo professor)':''}</label>
@@ -893,6 +1144,7 @@ function telaEspera(){
     P.unlock.jogo=true; save(); startGame();
   };
   $('#iniOk').onclick = go; $('#iniIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
+  bindNomeTrio();
   syncFase();
 }
 let faseRodando = false, syncTmr = null, syncTick = null;
@@ -915,15 +1167,18 @@ function syncFase(){
       if(j && j.ok) aplicarEstado(j);
     }catch(e){}
     const pend = pendente();
-    if(P.unlock.r4 && !pend){ faseRodando = false; return; }
+    const fimJogo = P.unlock.r4 && !pend;   // continua consultando devagar: eventos, cronômetro e quiz relâmpago
     const aguardaVoto = [1,2,3].some(r=>P.voto && P.voto[r] && !(P.oficial||{})['r'+r]);
-    const espera = !P.unlock.jogo ? 5000 : (aguardaVoto ? 5000 : (pend ? 7000 : 12000));
+    const espera = !P.unlock.jogo ? 5000 : (aguardaVoto ? 5000 : (fimJogo ? 6000 : (pend ? 7000 : 12000)));
     clearTimeout(syncTmr); syncTmr = setTimeout(syncTick, espera + Math.random()*3000);   // espalha as consultas
   };
   syncTick();
 }
 function aplicarEstado(j){
   let mudou = false;
+  if(j.agora) P.off = j.agora - Date.now();
+  if(j.rivalNome!==undefined && j.rivalNome!==P.rivalNome){ P.rivalNome = j.rivalNome; mudou = true; }
+  if(processarCtl(j.ctl)) mudou = true;
   if(j.nEq && j.nEq !== CONFIG.MAX_EQUIPES){ CONFIG.MAX_EQUIPES = j.nEq; mudou = true; }
   const antes = {...atualizaRv()};
   const f = Number(j.fase)||0;
@@ -942,8 +1197,8 @@ function aplicarEstado(j){
   if(j.rival && JSON.stringify(j.rival) !== JSON.stringify(P.rivDec||{})){ P.rivDec = j.rival; mudou = true; }
   const depois = atualizaRv();
   const emJogo = !$('#game').classList.contains('hidden');
-  if(emJogo && ((!antes.r2 && depois.r2 && P.d.r2) || (!antes.r3 && depois.r3 && P.d.r3)))
-    toast('A concorrente decidiu! Vejam como as decisões se encontraram.');
+  if(emJogo && !antes.r3 && depois.r3 && P.d.r3) setTimeout(()=>revelarRival(3), 300);
+  else if(emJogo && !antes.r2 && depois.r2 && P.d.r2) setTimeout(()=>revelarRival(2), 300);
   aplicarFase(f);
   if(mudou){ save(); if(!$('#game').classList.contains('hidden')) render(); }
 }
@@ -954,26 +1209,65 @@ function aplicarFase(f){
   if(!nova) return;
   save();
   if($('#game').classList.contains('hidden')){
-    if(P.unlock.jogo && P.team){ startGame(); toast(`Vocês são a Equipe ${P.team}: ${empresaDe(P.team).nome}.`); }
+    if(P.unlock.jogo && P.team){ startGame(); vib([200,100,200]); overlay(`<div style="text-align:center">${logo(empresaKey(P.team),90)}<div class="ovl-tag" style="margin-top:10px;color:var(--accent)">O jogo começou</div><h2 style="margin:6px 0">${esc(empresaDe(P.team).nome)}</h2><p class="muted" style="margin:0">“${esc(empresaDe(P.team).slogan)}”</p><p>Vocês são a <b>Equipe ${P.team}</b>${P.nomeTrio?` · ${esc(P.nomeTrio)}`:''}. A concorrente é outro trio da sala.</p></div>`, 'revela'); }
     return;
   }
   if(nova==='jogo') return;
-  toast(`Rodada ${nova.slice(1)} liberada!`);
+  toast(`Rodada ${nova.slice(1)} liberada!`); vib([150,80,150]);
   if(P.tab===nova) render(); else desenharAbas();
 }
-function save(){ store('state',{team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
+function save(){ store('state',{nomeTrio:P.nomeTrio, rivalNome:P.rivalNome, evVistos:P.evVistos, flash:P.flash, flashRes:P.flashRes, flashFechado:P.flashFechado, team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
 function startGame(){
   document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
   $('#join').classList.add('hidden'); $('#game').classList.remove('hidden');
   const c = cargoDe(P.role);
-  $('#whoLbl').innerHTML = `<b>Equipe ${P.team} · ${esc(empresaDe(P.team).curto)}</b> · ${esc(c.n)}${P.nome?` · ${esc(P.nome)}`:''}${P.codigo?` · trio ${esc(P.codigo)}`:''}`;
+  $('#whoLbl').innerHTML = `${logo(empresaKey(P.team),22)} <b>${esc(P.nomeTrio||('Equipe '+P.team))} · ${esc(empresaDe(P.team).curto)}</b> · ${esc(c.n)}${P.nome?` · ${esc(P.nome)}`:''}${P.codigo && !P.nomeTrio?` · trio ${esc(P.codigo)}`:''}`;
   $('#btnSair').classList.toggle('hidden', !!P.sorteado);
   syncFase();
   $('#btnSair').onclick = ()=>{ if(confirm('Trocar de equipe ou cargo apaga as decisões registradas neste aparelho. Continuar?')){ store('state',{}); location.reload(); } };
   render();
 }
+/* ---------- Orientação aos alunos ---------- */
+function comoJogarHTML(){
+  const passo = (n,t,txt)=>`<div class="hp"><span class="hn">${n}</span><div><b>${t}</b><p>${txt}</p></div></div>`;
+  return `
+  <div class="card help">
+    <span class="tag">Como jogar</span>
+    <h2 style="margin-top:8px">Vocês vão dirigir uma empresa</h2>
+    <p>Cada <b>trio</b> é uma empresa goiana. No mesmo mercado há uma <b>concorrente</b>, que é outro trio da sala. Vocês não conversam com ela: as duas decidem ao mesmo tempo, e o jogo mostra depois como as decisões se encontraram.</p>
+  </div>
+  <div class="card help"><h3>Antes de começar</h3>
+    ${passo(1,'Entre pelo QR Code','Digite seu primeiro nome. Cada pessoa joga no próprio celular.')}
+    ${passo(2,'Forme o trio','Um colega toca em <b>Criar um trio</b> e mostra o código. Os outros digitam o código e tocam em <b>Entrar no trio</b>. Sozinho? Toque em <b>Me encaixe num trio</b>. Depois, deem um <b>nome à consultoria</b> do trio: ele aparece no telão.')}
+    ${passo(3,'Aguarde o professor','O jogo só abre quando o professor liberar. Nesse momento vocês descobrem a empresa e a concorrente.')}
+  </div>
+  <div class="card help"><h3>Em cada rodada</h3>
+    ${passo(1,'Leiam o caso','Usem as abas <b>O caso</b>, <b>Dossiê</b> e <b>Meu cargo</b>. Cada cargo vê <b>dados exclusivos</b> no Dossiê; nas partes dos colegas aparece um 🔒. Os números do topo são os indicadores da empresa.')}
+    ${passo(2,'Discutam no trio','Cada integrante tem um cargo e uma <b>meta secreta</b>. As metas podem entrar em conflito: defendam a sua, mas o placar é coletivo.')}
+    ${passo(3,'Cada um vota','Cada pessoa envia o próprio voto. Vale a decisão da <b>maioria</b> (2 de 3, ou 3 de 4). Sem maioria, conversem e toquem em <b>Alterar meu voto</b>.')}
+    ${passo(4,'Vejam o resultado','Depois da decisão, o celular mostra os efeitos, a escolha da concorrente e um conceito de Administração.')}
+    ${passo(5,'Responda o quiz','Ao fim da rodada aparecem 3 perguntas individuais. Uma tentativa por pergunta.')}
+  </div>
+  <div class="card help"><h3>Como se pontua</h3>
+    <div class="kv">
+      <div><b>Empresa</b></div><div style="font-weight:400;text-align:left">Indicadores + 2 pontos por meta de cargo cumprida + até 3 pontos de coerência estratégica.</div>
+      <div><b>Individual</b></div><div style="font-weight:400;text-align:left">1 ponto por acerto no quiz. O ranking aparece no telão.</div>
+    </div>
+    <p class="small muted" style="margin:10px 0 0">A Rodada 4 é individual: cada um responde por si sobre o administrador do futuro.</p>
+  </div>
+  <div class="card help small"><h3>Dicas</h3>
+    <ul style="margin:0;padding-left:18px">
+      <li>🔒 indica uma rodada ainda não liberada ou dados de outro cargo.</li>
+      <li>⚡ Fiquem atentos: o professor pode disparar <b>eventos surpresa</b>, e o celular vibra.</li>
+      <li>No fim, um <b>quiz relâmpago</b> vale pontos extras no ranking individual, e a aba Placar gera o seu card para os stories.</li>
+      <li>Não troque de aparelho. Se a página fechar, abra o mesmo link: o jogo lembra de você.</li>
+      <li>Decisões oficiais não podem ser desfeitas. Discutam antes de votar.</li>
+      <li>Se o professor abrir a rodada seguinte, vale a opção mais votada da anterior.</li>
+    </ul>
+  </div>`;
+}
 const TABS = [
-  {id:'caso', n:'O caso'}, {id:'dossie', n:'Dossiê'}, {id:'cargo', n:'Meu cargo'},
+  {id:'ajuda', n:'Como jogar'}, {id:'caso', n:'O caso'}, {id:'dossie', n:'Dossiê'}, {id:'cargo', n:'Meu cargo'},
   {id:'r1', n:'Rodada 1'}, {id:'r2', n:'Rodada 2', lock:'r2'}, {id:'r3', n:'Rodada 3', lock:'r3'}, {id:'r4', n:'Rodada 4', lock:'r4'}, {id:'placar', n:'Placar'}
 ];
 function desenharAbas(){
@@ -983,6 +1277,7 @@ function render(){
   atualizaRv();
   const v = calcular(P.d, P.team, P.rv);
   $('#meters').innerHTML = IND.map(i=>`<div class="meter"><span>${i.n}</span><b>${v[i.k]}</b><div class="bar"><i style="width:${Math.max(0,Math.min(100,v[i.k]/16*100))}%;background:${i.c}"></i></div></div>`).join('');
+  animarMedidores(v);
   desenharAbas();
   $('#tabs').onclick = (e)=>{ const b=e.target.closest('.tab'); if(!b) return; P.tab=b.dataset.t; save(); render(); window.scrollTo(0,0); };
   const sel = $('#tabs [aria-selected="true"]'); if(sel) sel.scrollIntoView({inline:'center',block:'nearest'});
@@ -992,23 +1287,25 @@ function render(){
 
 
 const VIEWS = {
+ajuda: ()=> comoJogarHTML(),
 caso: ()=>{ const E = empresaDe(P.team), rt = rivalDe(P.team), R = rt?empresaDe(rt):null; return `
-  ${P.sorteado && CONFIG.ENDPOINT ? `<div class="card" id="teamBox"><h3 style="margin:0">Seu trio · código ${esc(P.codigo||'')}</h3><ul class="roster" id="roster">${rosterHTML()}</ul></div>`:''}
+  ${P.sorteado && CONFIG.ENDPOINT ? `<div class="card" id="teamBox"><h3 style="margin:0">Seu trio · código ${esc(P.codigo||'')}</h3><ul class="roster" id="roster">${rosterHTML()}</ul></div>${nomeTrioFormHTML()}`:''}
   <div class="card">
     <span class="tag">Caso fictício · Mercado ${mercadoDe(P.team)}</span>
     <div class="vs" style="margin-top:12px">
-      <div class="me"><small>Sua empresa · Equipe ${P.team}</small><b>${esc(E.nome)}</b><span>${esc(E.seg)} · ${esc(E.cidade)}</span></div>
+      <div class="me">${logo(empresaKey(P.team),40)}<small>Sua empresa · ${esc(P.nomeTrio||'Equipe '+P.team)}</small><b>${esc(E.nome)}</b><span>${esc(E.seg)} · ${esc(E.cidade)}</span></div>
       <div class="x">×</div>
-      <div><small>Concorrente · ${rt?'Equipe '+rt:'reação padrão do mercado'}</small><b>${esc(R?R.nome:'Empresa concorrente')}</b><span>${esc(R?R.seg:'')}</span></div>
+      <div>${logo(empresaKey(rt||P.team%2+1),40)}<small>Concorrente · ${rt?esc(P.rivalNome||'Equipe '+rt):'reação padrão do mercado'}</small><b>${esc(R?R.nome:'Empresa concorrente')}</b><span>${esc(R?R.seg:'')}</span></div>
     </div>
+    <p class="small muted" style="margin:10px 0 0">Setor: ${esc(MERCADO.nome)} · ${esc(MERCADO.tamanho)}, crescendo ${esc(MERCADO.cresc)}.</p>
     <p style="margin-top:14px">A diretoria da ${esc(E.nome)} contratou a sua equipe como consultoria para reorganizar a empresa e prepará-la para crescer. O problema é que a empresa não está sozinha: cada decisão de vocês encontra a decisão da ${esc(R?R.nome:'concorrente')}.</p>
   </div>
   <div class="card">
     <h3>Onde as duas empresas se cruzam</h3>
     <ol class="small" style="padding-left:20px;margin:6px 0 0">
-      <li><b>Mesmo fornecedor:</b> as duas dependem de embalagens importadas e do único fornecedor nacional da região.</li>
-      <li><b>Mesmos clientes:</b> as três grandes redes de Goiás dividem espaço e verba promocional entre as duas.</li>
-      <li><b>Mesma oportunidade:</b> uma rede alemã procura uma linha brasileira de café da manhã, e biscoito com laticínio formam um kit.</li>
+      <li><b>Mesmo insumo:</b> as duas compram whey do mesmo importador, e só existe um produtor nacional em Goiás.</li>
+      <li><b>Mesmos clientes:</b> duas redes de supermercado e uma de farmácias dividem a gôndola e a verba promocional entre as duas.</li>
+      <li><b>Mesma oportunidade:</b> uma rede alemã de produtos naturais procura snacks proteicos brasileiros, e barra de baru com pasta proteica formam um kit.</li>
     </ol>
     <p class="small muted" style="margin:10px 0 0">Vocês decidem sem ver a escolha da concorrente. O jogo revela como as duas decisões se encontraram assim que as duas equipes registrarem.</p>
   </div>
@@ -1030,39 +1327,75 @@ caso: ()=>{ const E = empresaDe(P.team), rt = rivalDe(P.team), R = rt?empresaDe(
     <p class="small muted" style="margin-top:8px">As rodadas abrem quando o professor liberar. Ao final de cada uma aparece um <b>conceito-chave</b> da Administração.</p>
   </div>`; },
 
-dossie: ()=>{ const D = DOSSIE[empresaKey(P.team)], E = empresaDe(P.team), rt = rivalDe(P.team); return `
+dossie: ()=>{ const k = empresaKey(P.team), D = DOSSIE[k], E = empresaDe(P.team), rt = rivalDe(P.team);
+  const rk = k==='baruna' ? 'trilha' : 'baruna', R = EMPRESAS[rk], RD = DOSSIE[rk];
+  const kv = (arr)=> `<div class="kv">${arr.map(([a,b])=>`<div>${esc(a)}</div><div>${esc(b)}</div>`).join('')}</div>`;
+  const lista = (arr)=> `<ul class="small" style="margin:4px 0 0;padding-left:18px">${arr.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+  const sub = [['perfil','Empresa'],['num','Números'],['ops','Operação'],['mkt','Setor'],['riv','Concorrente']];
+  const aba = P.dsub || 'perfil';
+  const nav = `<div class="subtabs">${sub.map(([id,n])=>`<button class="subtab" data-dsub="${id}" aria-selected="${aba===id}">${n}</button>`).join('')}</div>`;
+  const C = {
+  perfil: destaques([[E.fund,'ano de fundação'],[(MERCADO.share.find(x=>x[0]===E.nome)||[])[1]||'-','do mercado goiano'],[D.linha.length+' itens','na linha de produtos']]) + `
   <div class="card">
-    <span class="tag">${esc(E.nome)} · dados de gestão 2023 a 2025</span>
-    <h3 style="margin-top:8px">Desempenho financeiro</h3>
-    <table><tr><th></th><th class="n">2023</th><th class="n">2024</th><th class="n">2025</th></tr>
-    <tr><td>Receita líquida (R$ mi)</td>${D.rec.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
+    <div style="display:flex;gap:12px;align-items:center">${logo(k,52)}<span class="tag">${esc(E.nome)} · fundada em ${E.fund}</span></div>
+    <h3 style="margin-top:8px">“${esc(E.slogan)}”</h3>
+    <p class="small">${esc(D.hist)}</p>
+    <p class="small"><b>Cultura:</b> ${esc(D.cultura)}</p>
+  </div>
+  <div class="card"><h3>Pontos fortes</h3>${lista(D.fortes)}<h3 style="margin-top:12px">Pontos fracos</h3>${lista(D.fracos)}</div>
+  <div class="card"><h3>Linha de produtos</h3>
+    <table><tr><th>Produto</th><th class="n">Preço</th><th class="n">Receita</th></tr>${D.linha.map(([a,b,c])=>`<tr><td>${esc(a)}</td><td class="n" style="white-space:nowrap">${b}</td><td class="n">${c}</td></tr>`).join('')}</table>
+    <p class="small muted" style="margin-top:8px">Preço sugerido ao consumidor. A última coluna é a participação de cada produto na receita.</p>
+  </div>`,
+  num: destaques([[D.mar[2],'margem líquida em 2025','fin'],['R$ '+D.caixa+' mi','de caixa hoje','fin'],[D.err[2],'dos pedidos com erro','fin']]) + (!veDados('fin') ? trancado('fin','Números financeiros: DRE, margens e custos') : `
+  <div class="card">
+    <span class="tag">Dados de gestão 2023 a 2025 · R$ milhões</span>
+    <table style="margin-top:10px"><tr><th></th><th class="n">2023</th><th class="n">2024</th><th class="n">2025</th></tr>
+    <tr><td>Receita líquida</td>${D.rec.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
+    <tr><td>Margem bruta</td>${D.mb.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
     <tr><td>Margem líquida</td>${D.mar.map(x=>`<td class="n">${x}</td>`).join('')}</tr>
     <tr><td>Erros de faturamento (% pedidos)</td>${D.err.map(x=>`<td class="n">${x}</td>`).join('')}</tr></table>
     <p class="small muted" style="margin-top:8px">Caixa disponível hoje: R$ ${D.caixa} milhões.</p>
   </div>
-  <div class="card">
-    <h3>Composição do custo do produto vendido</h3>
-    <div class="kv">${D.custo.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
-    <p class="small muted" style="margin-top:8px">Prazo de entrega do fornecedor de embalagens: 45 dias. Estoque atual de embalagens: 20 dias de produção.</p>
+  <div class="card"><h3>Resultado de 2025 (DRE resumida)</h3>
+    <table>${D.dre.map(([a,b],i)=>`<tr${a.startsWith('(=)')?' style="font-weight:700"':''}><td>${esc(a)}</td><td class="n">${b}</td></tr>`).join('')}</table>
   </div>
+  <div class="card"><h3>Composição do custo do produto vendido</h3>${kv(D.custo)}</div>`),
+  ops: destaques([['20 dias','de estoque de whey','ops'],[D.cli[0][1].split(' ')[0],'da receita em 3 redes','com'],[D.pes[1][1],'de rotatividade','ops']])
+  + (veDados('ops') ? `<div class="card"><h3>Fornecedores críticos</h3>${D.forn.map(([a,b])=>`<div class="forn"><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('')}</div>` : trancado('ops','Fornecedores críticos'))
+  + (veDados('com') ? `<div class="card"><h3>Clientes e canais</h3>${kv(D.cli)}</div>` : trancado('com','Clientes e canais de venda'))
+  + (veDados('ops') ? `<div class="card"><h3>Pessoas e estrutura</h3>${kv(D.pes)}</div>` : trancado('ops','Pessoas e estrutura'))
+  + `<div class="card small muted">A diretoria quer trocar a embalagem, contratar mais influenciadores e lançar um sabor de pistache.</div>`,
+  mkt: `
   <div class="card">
-    <h3>Clientes e mercado</h3>
-    <div class="kv">${D.cli.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
+    <span class="tag">O setor</span>
+    <h3 style="margin-top:8px">${esc(MERCADO.nome)}</h3>
+    <p class="small" style="margin:0">${esc(MERCADO.tamanho)}, crescendo ${esc(MERCADO.cresc)}.</p>
   </div>
-  <div class="card">
-    <h3>Pessoas e estrutura</h3>
-    <div class="kv">${D.pes.map(([a,b])=>`<div>${esc(a)}</div><div>${b}</div>`).join('')}</div>
-    <p class="small muted" style="margin-top:8px">A diretoria reclama da logomarca antiga e da sede apertada.</p>
-  </div>
+  ${destaques([['R$ 640 mi','vendidos em 2025'],['+11%','de crescimento ao ano'],['46%','das vendas em supermercados','com']])}
+  ${veDados('com') ? `<div class="card"><h3>Participação de mercado em Goiás</h3>${kv(MERCADO.share)}</div>
+  <div class="card"><h3>Vendas do setor por canal</h3>${kv(MERCADO.canais)}</div>` : trancado('com','Participação de mercado e canais')}
+  ${veDados('est') ? `<div class="card"><h3>Tendências</h3>${lista(MERCADO.tend)}</div>
   <div class="card">
     <span class="tag">Análise do setor · Porter</span>
     <h3 style="margin-top:8px">As cinco forças competitivas</h3>
     <div class="kv">${FORCAS.map(([a,b])=>`<div><b>${esc(a)}</b></div><div style="font-weight:400;text-align:left">${esc(b)}</div>`).join('')}</div>
-  </div>
+  </div>` : trancado('est','Tendências do setor e cinco forças')}`,
+  riv: !veDados('com') ? trancado('com','Perfil da concorrente') : `
   <div class="card">
-    <h3>Mercado compartilhado</h3>
-    <p class="small" style="margin:0">A ${esc(rt?empresaDe(rt).nome:'concorrente')} ${rt?`(Equipe ${rt})`:''} compra do mesmo fornecedor de embalagens, vende para as mesmas três redes e também recebeu a sondagem da rede alemã Nordkost.</p>
-  </div>`; },
+    <span class="tag">Concorrente ${rt?`· Equipe ${rt}`:'· reação padrão do mercado'}</span>
+    <h3 style="margin-top:8px">${esc(R.nome)}</h3>
+    <p class="small muted" style="margin:0">${esc(R.seg)} · ${esc(R.cidade)} · fundada em ${R.fund} · “${esc(R.slogan)}”</p>
+    <p class="small">${esc(RD.hist)}</p>
+  </div>
+  <div class="card"><h3>O que se sabe dela</h3>${lista(RD.fortes.concat(RD.fracos))}
+    <div class="kv" style="margin-top:10px"><div>Receita líquida 2025</div><div>R$ ${RD.rec[2]} mi</div><div>Participação no mercado goiano</div><div>${(MERCADO.share.find(x=>x[0]===R.nome)||[])[1]||'-'}</div><div>Seguidores no Instagram</div><div>${RD.cli[4][1]}</div></div>
+    <p class="small muted" style="margin-top:8px">Informação pública (site, imprensa e redes sociais). Margens e custos internos da concorrente não são divulgados.</p>
+  </div>
+  <div class="card"><h3>Onde vocês se cruzam</h3>
+    <p class="small" style="margin:0">A ${esc(R.nome)} compra whey do mesmo importador, vende para as mesmas três redes e também recebeu a sondagem da rede alemã Grünkorb.</p></div>`
+  };
+  return nav + C[aba]; },
 
 cargo: ()=>{ const c = cargoDe(P.role); return `
   <div class="card secret">
@@ -1070,6 +1403,7 @@ cargo: ()=>{ const c = cargoDe(P.role); return `
     <h2 style="margin-top:8px">${esc(c.n)}</h2>
     <h3>Sua meta</h3><p style="font-size:1.1rem"><b>${esc(c.meta)}</b></p>
     <h3>O que você sabe</h3><p>${esc(c.dica)}</p>
+    ${remotoTrio() ? `<h3>Seus dados exclusivos no Dossiê</h3><p>${esc(EXCL[P.role]||'')}. Os colegas veem um cadeado nessas partes: compartilhe o que for importante.</p>` : ''}
   </div>
   <div class="card small muted">Cada meta cumprida vale 2 pontos para o trio. As metas dos cargos entram em conflito. Defenda a sua no momento de votar, mas lembre que o placar é coletivo.</div>`; },
 
@@ -1099,8 +1433,8 @@ r2: ()=>{ if(!P.unlock.r2) return lockView('r2','Aguardem o comunicado da direto
   const falha = hashTeam(P.team)===0;
   const rt = rivalDe(P.team), Rn = rt? empresaDe(rt).nome : 'concorrente';
   return `
-  <div class="alert"><div class="small" style="letter-spacing:.1em;font-weight:700">COMUNICADO URGENTE</div><div class="big">+25%</div><div>no custo das embalagens importadas. O fornecedor atrasou e o estoque cobre 20 dias. A ${esc(Rn)} foi atingida pela mesma crise.</div></div>
-  <div class="card small"><b>Atenção:</b> a única fabricante nacional, em Anápolis, só tem capacidade para atender <b>uma</b> das duas empresas do seu mercado. Vocês e a ${esc(Rn)} decidem ao mesmo tempo, sem ver a escolha da outra.</div>
+  <div class="alert"><div class="small" style="letter-spacing:.1em;font-weight:700">COMUNICADO URGENTE</div><div class="big">+25%</div><div>no custo do whey importado. O câmbio subiu, a Irlanda atrasou os embarques e o estoque cobre 20 dias. A ${esc(Rn)} foi atingida pela mesma crise.</div></div>
+  <div class="card small"><b>Atenção:</b> o único produtor de whey nacional de Goiás, um laticínio de Rio Verde, só tem capacidade para atender <b>uma</b> das duas empresas do seu mercado. Vocês e a ${esc(Rn)} decidem ao mesmo tempo, sem ver a escolha da outra.</div>
   <div class="card">
     <h3>Comprar informação antes de decidir</h3>
     <p class="small muted">Cada relatório custa <b>1 ponto de Caixa</b> para a empresa. Se mais de um integrante comprar o mesmo relatório, ele conta uma vez só.</p>
@@ -1111,7 +1445,7 @@ r2: ()=>{ if(!P.unlock.r2) return lockView('r2','Aguardem o comunicado da direto
   <label class="opt ${ia?'on':''} ${trav?'done':''}" style="margin-top:14px"><input type="checkbox" id="ia" ${ia?'checked':''} ${trav?'disabled':''}><div><b>Usei IA nesta rodada</b><div class="desc">Cada integrante pode fazer uma consulta de até 2 minutos a uma IA no celular. Marque se usou. Isso não altera o placar, mas entra na discussão final.</div></div></label>
   </div>
   ${botaoVotoHTML(2)}
-  ${done ? (opc==='B' ? `<div class="card" style="text-align:center"><div class="dice">${falha?'⚠️':'✅'}</div><b>${falha?'O fornecedor estrangeiro falhou: o navio ficou retido no porto de origem.':'O fornecedor estrangeiro entregou no prazo. Desta vez.'}</b></div>`:'')
+  ${done ? (opc==='B' ? `<div class="card" style="text-align:center"><div class="dice">${falha?'⚠️':'✅'}</div><b>${falha?'O importador argentino falhou: a carga ficou retida na fronteira.':'O importador argentino entregou no prazo. Desta vez.'}</b></div>`:'')
     + `<div class="notice">Decisão do trio registrada.</div>`
     + (P.rv.r2 ? encontroR2HTML() : aguardandoHTML('O trio de vocês já decidiu.'))
     + conceitoHTML('r2') + quizHTML(2) : ''}`; },
@@ -1126,10 +1460,11 @@ r3: ()=>{ if(!P.unlock.r3) return lockView('r3','A diretoria ainda está reunida
   <div class="card">
     <span class="tag">Rodada 3 · Oportunidade internacional</span>
     <h2 style="margin-top:8px">A proposta de Hamburgo</h2>
-    <p>A <b>Nordkost</b>, rede varejista alemã (fictícia), procura uma <b>linha brasileira de café da manhã</b> e tem espaço para uma proposta. Ela sondou as duas empresas do seu mercado. O contrato vale cerca de 15% da receita. Exigências do comprador:</p>
+    <p>A <b>Grünkorb</b>, rede alemã de supermercados de produtos naturais (fictícia), procura uma <b>linha brasileira de snacks proteicos com ingredientes nativos</b> e tem espaço para uma proposta. Ela sondou as duas empresas do seu mercado. O contrato vale cerca de 15% da receita. Exigências do comprador:</p>
     <ol class="small">
-      <li>Rastreabilidade digital de cada lote, da origem dos insumos até a entrega.</li>
-      <li>Certificação socioambiental da cadeia de fornecedores.</li>
+      <li>Rastreabilidade digital de cada lote, da cooperativa ou fazenda até a gôndola.</li>
+      <li>Comprovação de cadeia livre de desmatamento e certificação socioambiental dos fornecedores.</li>
+      <li>Rótulo em alemão com a tabela nutricional europeia.</li>
       <li>Contrato em inglês, com arbitragem internacional em caso de disputa.</li>
     </ol>
   </div>
@@ -1137,7 +1472,7 @@ r3: ()=>{ if(!P.unlock.r3) return lockView('r3','A diretoria ainda está reunida
   ${grupo('Incoterm proposto ao comprador','Passo 2', R3_INC,'inc',true)}
   ${grupo('Resposta às exigências ESG','Passo 3 · só há dinheiro para uma grande mudança', R3_ESG,'esg',true)}
   ${botaoVotoHTML(3)}
-  ${done ? ((t.esg==='X4' || P.rv.r3) ? encontroR3HTML() : aguardandoHTML('A proposta do trio de vocês já foi enviada à Nordkost.'))
+  ${done ? ((t.esg==='X4' || P.rv.r3) ? encontroR3HTML() : aguardandoHTML('A proposta do trio de vocês já foi enviada à Grünkorb.'))
     + conceitoHTML('r3') + quizHTML(3) + '<div class="notice">Vejam o resultado completo na aba Placar.</div>' : ''}`; },
 
 r4: ()=>{ if(!P.unlock.r4) return lockView('r4','O futuro ainda não chegou.');
@@ -1168,7 +1503,7 @@ placar: (v)=>{ const fin = resultadoFinal(P.d, P.rv); const temEst = (P.membros|
   </div>
   <div class="card"><h3>Metas dos cargos</h3>
   ${fin ? s.metas.map(m=>{ const c=cargoDe(m.id); return `<div class="goal"><div><b>${esc(c.n)}</b><div class="small muted">${esc(c.meta)}</div></div><div class="st" style="color:${m.ok?'var(--ok)':'var(--warn)'}">${m.ok?'Cumprida':'Não cumprida'}</div></div>`; }).join('')
-        : `<p class="muted">${P.d.r3?'As metas aparecem quando a Nordkost decidir, depois que a concorrente registrar a proposta.':'As metas de todos os cargos são reveladas quando a Rodada 3 terminar.'}</p>`}
+        : `<p class="muted">${P.d.r3?'As metas aparecem quando a Grünkorb decidir, depois que a concorrente registrar a proposta.':'As metas de todos os cargos são reveladas quando a Rodada 3 terminar.'}</p>`}
   </div>
   <div class="card"><span class="tag">Estratégia é coerência · Porter</span>
     <h3 style="margin-top:8px">Posicionamento: ${P.d.r1 && P.d.r1.gen ? esc((R1_GEN.find(g=>g.id===P.d.r1.gen)||{}).t) : 'a definir na Rodada 1'}</h3>
@@ -1179,6 +1514,7 @@ placar: (v)=>{ const fin = resultadoFinal(P.d, P.rv); const temEst = (P.membros|
     <h3 style="margin-top:8px">Seus acertos no quiz: ${acertosQuiz()} de ${TODAS_Q.length}</h3>
     <p class="small muted" style="margin:0">Respondidas: ${Object.keys(P.quiz||{}).length}. O quiz de cada rodada aparece logo abaixo da decisão do trio.</p>
   </div>
+  ${conquistasHTML()}
   ${fin ? `<div class="card"><h3>Para a discussão final</h3><p>Em quais decisões vocês tentaram prever o que a concorrente faria? As escolhas do trio foram coerentes com o posicionamento escolhido? Que função administrativa (planejar, organizar, dirigir, controlar) mais faltou às empresas no início do jogo?</p></div>`:''}`; }
 
 };
@@ -1242,7 +1578,7 @@ function encontroR3HTML(){
   const rivTxt = rv.r3.esg==='X4' ? 'Recusou o ESG e ficou fora' : nomeEst(rv.r3.est);
   return `<div class="card enc"><span class="tag">Como as decisões se encontraram</span>
     ${vsHTML(nomeEst(d.est), rivTxt, rv.robo3)}
-    <div class="result ${fim.ok?'ok':'bad'}"><b>${fim.ok?'Resposta da Nordkost':'Sem contrato'}</b><p style="margin:.4em 0 0">${esc(fim.t)}</p></div>
+    <div class="result ${fim.ok?'ok':'bad'}"><b>${fim.ok?'Resposta da Grünkorb':'Sem contrato'}</b><p style="margin:.4em 0 0">${esc(fim.t)}</p></div>
     <h4>Onde vocês caíram na matriz</h4>
     ${matrizHTML(fim.cel, true)}
     <h4>Melhor resposta</h4>
@@ -1363,7 +1699,9 @@ function bindQuiz(){
 const acertosQuiz = ()=> Object.values(P.quiz||{}).filter(x=>x.ok).length;
 
 const BIND = {
-  caso: ()=>{ atualizaRoster(); },
+  caso: ()=>{ atualizaRoster(); bindNomeTrio(); },
+  placar: ()=>{ const b=$('#btnCard'); if(b) b.onclick = async ()=>{ b.disabled=true; b.textContent='Gerando...'; try{ await gerarCard(); }catch(e){ toast('Não foi possível gerar o card.'); } b.disabled=false; b.textContent='📸 Gerar meu card para os stories'; }; },
+  dossie: ()=>{ document.querySelectorAll('[data-dsub]').forEach(b=>b.onclick=()=>{ P.dsub=b.dataset.dsub; render(); }); },
   r1: ()=>{
     bindEditar(); bindQuiz();
     if(situacao(1)!=='aberto') return;
@@ -1456,7 +1794,7 @@ const SLIDES = [
     </div>`},
   {n:'Abertura', min:4, h:()=>`
     <h2>Se você fosse responsável por uma empresa hoje, conseguiria decidir sem tempo, sem dinheiro e sem todas as informações?</h2>
-    <p class="lead" style="margin-top:3vh">Cada <b>trio</b> é uma empresa goiana: <b>Cerrado Alimentos</b> ou <b>Veredas Laticínios</b>, sorteada quando o jogo começa. Cada <b>mercado</b> reúne uma de cada: elas dividem o fornecedor, os clientes e a mesma oportunidade de exportação. Cada empresa começa com 10 pontos em cada indicador:</p>
+    <p class="lead" style="margin-top:3vh">Cada <b>trio</b> é uma empresa goiana de alimentos saudáveis: <b>Baruna Alimentos Funcionais</b> (barras e snacks de baru, Catalão) ou <b>Trilha Nutrição Esportiva</b> (pastas e shakes proteicos, Goiânia), sorteada quando o jogo começa. Cada <b>mercado</b> reúne uma de cada: elas dividem o fornecedor, os clientes e a mesma oportunidade de exportação. Cada empresa começa com 10 pontos em cada indicador:</p>
     <div class="ind4">${IND.map(i=>`<div><span class="small muted">INDICADOR</span><b style="color:${i.c}">${i.n}</b></div>`).join('')}</div>
     <p><b>Pontuação da empresa:</b> indicadores + 2 por meta de cargo cumprida + até 3 de coerência estratégica. Cada integrante vota; vale a maioria do trio. <b>Ranking individual:</b> quiz ao fim de cada rodada.</p>
     <p class="muted">Vocês decidem sem ver a concorrente. O celular revela como as decisões se encontraram. Quatro rodadas: <b>diagnosticar</b>, <b>reagir</b>, <b>negociar com o mundo</b>, <b>projetar o futuro</b>.</p>`},
@@ -1472,8 +1810,8 @@ const SLIDES = [
     <div class="cols">
       <div><p class="tag" style="background:var(--warn);color:#fff">Comunicado urgente</p>
       <h1 style="font-size:clamp(4rem,12vw,10rem);color:var(--warn);margin:2vh 0 0">+25%</h1>
-      <p class="lead">no custo das embalagens importadas. O fornecedor vai atrasar. O estoque cobre <b>20 dias</b>.</p>
-      <p>A fabricante nacional de Anápolis só atende <b>uma empresa por mercado</b>. Cerrado e Veredas decidem ao mesmo tempo, sem ver a escolha da outra.</p>
+      <p class="lead">no custo do whey importado. O importador vai atrasar. O estoque cobre <b>20 dias</b>.</p>
+      <p>O laticínio de Rio Verde, único produtor nacional, só atende <b>uma empresa por mercado</b>. Baruna e Trilha decidem ao mesmo tempo, sem ver a escolha da outra.</p>
       <p class="small muted">Vocês podem comprar relatórios de informação (custam Caixa) e fazer uma consulta de 2 minutos a uma IA.</p></div>
       ${codigoBox('r2',2)}
     </div>${conceitoSlide('r2')}`},
@@ -1481,10 +1819,10 @@ const SLIDES = [
     <div class="cols">
       <div><p class="tag">Rodada 3 · Negociação internacional</p>
       <h1 style="margin-top:10px;font-size:clamp(2.2rem,4.4vw,4rem)">A proposta de Hamburgo</h1>
-      <p class="lead">A Nordkost quer uma linha brasileira de café da manhã e tem espaço para <b>uma proposta por mercado</b>.</p>
+      <p class="lead">A Grünkorb, rede alemã de produtos naturais, quer snacks proteicos com ingredientes do Cerrado e tem espaço para <b>uma proposta por mercado</b>.</p>
       <p>Cada empresa escolhe: <b>preço cheio</b>, <b>desconto agressivo</b> ou <b>consórcio</b> com a concorrente. Depois, Incoterm e resposta às exigências ESG.</p>
       <div style="margin-top:3vh">${codigoBox('r3',3)}</div></div>
-      <div>${matrizSalaHTML({}, 0, {count:false, nash:mostraConceito})}<p class="small muted" style="margin-top:1vh">Pontos da Cerrado / pontos da Veredas.${mostraConceito?' ★ = equilíbrio de Nash.':''}</p></div>
+      <div>${matrizSalaHTML({}, 0, {count:false, nash:mostraConceito})}<p class="small muted" style="margin-top:1vh">Pontos da Baruna / pontos da Trilha.${mostraConceito?' ★ = equilíbrio de Nash.':''}</p></div>
     </div>${conceitoSlide('r3')}`},
   {n:'Rodada 4', min:6, h:()=>`
     <div class="cols">
@@ -1494,12 +1832,413 @@ const SLIDES = [
       ${codigoBox('r4',4)}
     </div>`},
   {n:'Painel', min:10, live:true, h:()=>painelHTML()},
+  {n:'Teoria x Sala', min:4, live:true, h:()=>teoriaSalaHTML()},
   {n:'Carta', min:5, live:true, h:()=>cartaHTML()},
   {n:'Quiz', min:4, live:true, h:()=>quizSlideHTML()},
-  {n:'Fechamento', min:8, live:true, h:()=>fechamentoHTML()}
+  {n:'Relâmpago', min:4, h:()=>flashSlideHTML()},
+  {n:'Pódio', min:2, live:true, h:()=>podioHTML()},
+  {n:'Fechamento', min:8, live:true, h:()=>fechamentoHTML()},
+  {n:'Plano B', min:0, h:()=>planoBHTML()}
 ];
 let cur = 0, tEnd = null, tLeft = null, tRun = false, mostraConceito = false;
 let comp = []; let triosL = []; let quizL = []; let partN = 0; const ocultas = new Set(); let fraseIni = 0;
+
+/* ===================== CELULAR: relógio, eventos, revelação, relâmpago, card ===================== */
+const srvNow = ()=> Date.now() + (P.off||0);
+const remotoTrio = ()=> !!(CONFIG.ENDPOINT && P.sorteado);
+
+/* ---------- nome do trio ---------- */
+function nomeTrioFormHTML(){
+  if(!remotoTrio()) return '';
+  return `<div class="card nomeTrio"><h3 style="margin:0 0 4px">Nome da consultoria do trio</h3>
+    <p class="small muted" style="margin:0 0 8px">${P.nomeTrio ? `Vocês são <b>${esc(P.nomeTrio)}</b>. Qualquer integrante pode trocar.` : 'Escolham um nome. Ele aparece no telão e no ranking.'}</p>
+    <div style="display:flex;gap:8px"><input id="nomeTrioIn" maxlength="28" placeholder="Ex.: Consultoria Baru de Ouro" value="${esc(P.nomeTrio||'')}" style="flex:1"><button class="btn" id="nomeTrioOk">Salvar</button></div></div>`;
+}
+function bindNomeTrio(){
+  const b = $('#nomeTrioOk'); if(!b) return;
+  b.onclick = async ()=>{
+    const nome = $('#nomeTrioIn').value.trim(); if(!nome) return toast('Digite um nome.');
+    b.disabled = true; b.textContent = '...';
+    try{
+      const j = await consultar({acao:'nome_trio', s:P.sessao||normS(CONFIG.SESSAO), id:clientId(), nome}, 12000);
+      if(j && j.ok){ P.nomeTrio = j.nomeTrio; save(); toast('Nome salvo!'); vib(60); }
+      else toast((j && j.erro) || 'Não foi possível salvar.');
+    }catch(e){ toast('Sem conexão. Tente de novo.'); }
+    b.disabled = false; b.textContent = 'Salvar';
+    if(!$('#game').classList.contains('hidden')) render(); else { const box=$('.nomeTrio'); if(box) box.outerHTML = nomeTrioFormHTML(); bindNomeTrio(); }
+  };
+}
+
+/* ---------- comandos do professor (cronômetro, eventos, relâmpago) ---------- */
+function processarCtl(ctl){
+  ctl = ctl || {};
+  P.ctl = ctl;
+  const evs = ctl.evs || [];
+  const antes = JSON.stringify(EVENTOS_ATIVOS);
+  EVENTOS_ATIVOS = evs;
+  P.evVistos = P.evVistos || [];
+  const novos = evs.filter(x=>!P.evVistos.includes(x.id));
+  if(novos.length){
+    novos.forEach(x=>P.evVistos.push(x.id)); save();
+    const emJogo = !$('#game').classList.contains('hidden');
+    if(emJogo && P.team) novos.forEach(x=>mostrarEvento(x.id));
+  }
+  if(ctl.flash && ctl.flash.t0) iniciarFlashLoop();
+  return antes !== JSON.stringify(EVENTOS_ATIVOS);
+}
+function mostrarEvento(id){
+  const ev = EVENTOS.find(e=>e.id===id); if(!ev) return;
+  const r = ev.ef(P.d||{}, empresaKey(P.team));
+  vib([200,80,200,80,300]);
+  overlay(`<div class="ovl-tag">⚡ Evento surpresa · Jornal do Cerrado</div>
+    <h2 style="margin:8px 0">${esc(ev.t)}</h2><p>${esc(ev.txt)}</p>
+    <div class="card" style="margin:12px 0 0;background:var(--surface2)"><b>Na ${esc(empresaDe(P.team).curto)}:</b> ${esc(r.por)}<div class="effect" style="margin-top:6px">${Object.keys(r.e).length?chips(r.e):'<span class="chip">sem impacto</span>'}</div></div>
+    <p class="small muted" style="margin:10px 0 0">Ninguém planejou isso. Para Mintzberg, a resposta a imprevistos forma a estratégia emergente.</p>`, 'evento');
+}
+function tickRelogio(){
+  const el = $('#tmrPill'); if(!el) return;
+  const fim = P.ctl && P.ctl.fim;
+  if(!fim){ el.classList.add('hidden'); return; }
+  const ms = fim - srvNow();
+  if(ms <= -60000){ el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  const s = Math.max(0, Math.ceil(ms/1000));
+  el.textContent = ms>0 ? `⏱ ${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}` : '⏱ Tempo esgotado';
+  el.classList.toggle('low', ms < 60000);
+  if(ms<=0 && !el.dataset.vib){ el.dataset.vib='1'; vib([300,100,300]); } else if(ms>0) delete el.dataset.vib;
+}
+setInterval(()=>{ if(!document.documentElement.classList.contains('prof')) tickRelogio(); }, 500);
+
+/* ---------- indicadores animados ---------- */
+function animarMedidores(v){
+  const ant = P.lastV; P.lastV = {...v};
+  if(!ant) return;
+  IND.forEach((i,k)=>{
+    const dif = v[i.k] - ant[i.k]; if(!dif) return;
+    const m = document.querySelectorAll('#meters .meter')[k]; if(!m) return;
+    m.classList.add(dif>0?'up':'down');
+    const t = document.createElement('em'); t.className='delta'; t.textContent = (dif>0?'+':'')+dif; m.appendChild(t);
+    setTimeout(()=>{ m.classList.remove('up','down'); t.remove(); }, 1800);
+  });
+}
+
+/* ---------- revelação da concorrente ---------- */
+function revelarRival(r){
+  const rt = rivalDe(P.team), R = empresaDe(rt||P.team%2+1), E = empresaDe(P.team);
+  const nomeR = P.rivalNome ? `${esc(P.rivalNome)} · ${esc(R.curto)}` : esc(R.curto);
+  const meu = r===2 ? nomeR2(P.d.r2.opc) : nomeEst(estEfetiva(P.d.r3));
+  const dele = r===2 ? nomeR2(P.rv.r2) : nomeEst(estEfetiva(P.rv.r3));
+  vib([120,60,120,60,250]);
+  const o = overlay(`<div class="ovl-tag">Rodada ${r} · a concorrente decidiu</div>
+    <div class="flip">
+      <div class="fcard" style="--c:${MARCA[empresaKey(P.team)].cor}"><div class="fin">${logo(empresaKey(P.team),44)}<small>Vocês · ${esc(P.nomeTrio||E.curto)}</small><b>${esc(meu)}</b></div></div>
+      <div class="fcard f2" style="--c:${MARCA[empresaKey(rt||P.team%2+1)].cor}"><div class="fin">${logo(empresaKey(rt||P.team%2+1),44)}<small>Concorrente · ${nomeR}</small><b>${esc(dele)}</b></div></div>
+    </div>
+    <p style="margin:14px 0 0">${r===3 && NASH3.includes(estEfetiva(P.d.r3)+'|'+estEfetiva(P.rv.r3)) ? '<b>O mercado de vocês caiu num equilíbrio de Nash.</b> ' : ''}Vejam na aba da rodada como as decisões se encontraram e o efeito no placar.</p>`, 'revela');
+  o.querySelector('.ovl-x').addEventListener('click', ()=>{ P.tab = 'r'+r; save(); render(); });
+}
+
+/* ---------- quiz relâmpago no celular ---------- */
+let flashTmr = null;
+function iniciarFlashLoop(){
+  if(flashTmr || !P.team) return;
+  flashTmr = setInterval(desenharFlash, 250); desenharFlash();
+}
+function desenharFlash(){
+  const fl = P.ctl && P.ctl.flash;
+  let box = $('#flash');
+  if(!fl){ if(box) box.remove(); clearInterval(flashTmr); flashTmr=null; return; }
+  const pos = flashPos(fl, srvNow());
+  P.flash = P.flash && P.flash.t0===fl.t0 ? P.flash : {t0:fl.t0, resp:{}, pontos:0, enviado:false};
+  if(pos.fase==='fim'){
+    const acertos = Object.values(P.flash.resp).filter(x=>x.ok).length;
+    P.flashRes = {pontos:P.flash.pontos, acertos, n:pos.n};
+    if(!P.flash.enviado){ P.flash.enviado = true; save();
+      enviar({tipo:'relampago', id:clientId(), nome:P.nome||'', equipe:P.team, pontos:P.flash.pontos, respostas:P.flash.resp}); }
+    if(box && !box.dataset.fim){ box.dataset.fim='1'; box.innerHTML = `<div class="fl-top">Quiz relâmpago encerrado</div><div class="fl-big">${P.flash.pontos}</div><p>pontos · ${acertos} de ${pos.n} acertos</p><p class="small">Olhem o telão: o ranking aparece lá.</p><button class="btn" id="flClose" style="margin-top:16px">Voltar ao jogo</button>`;
+      $('#flClose').onclick = ()=>{ box.remove(); P.flashFechado = fl.t0; save(); if(P.unlock.jogo) render(); }; }
+    clearInterval(flashTmr); flashTmr=null;
+    return;
+  }
+  if(P.flashFechado===fl.t0) return;
+  if(!box){ box = document.createElement('div'); box.id='flash'; document.body.appendChild(box); }
+  delete box.dataset.fim;
+  if(pos.fase==='antes'){
+    const s = Math.ceil(pos.falta/1000);
+    const h = `<div class="fl-top">⚡ Quiz relâmpago</div><div class="fl-big">${s}</div><p>Prepare-se! ${pos.n} perguntas. Quanto mais rápido acertar, mais pontos.</p><p class="small">As perguntas aparecem no telão. Aqui você escolhe a cor.</p>`;
+    if(box.dataset.k!=='a'+s){ box.dataset.k='a'+s; box.innerHTML=h; if(s<=3) vib(40); }
+    return;
+  }
+  const q = FLASH[pos.i], minha = P.flash.resp[q.id];
+  const s = Math.ceil(pos.falta/1000);
+  if(pos.fase==='pergunta'){
+    const k = 'p'+pos.i+(minha?'r':'')+s;
+    if(box.dataset.k===k) return; box.dataset.k=k;
+    box.innerHTML = `<div class="fl-top">Pergunta ${pos.i+1} de ${pos.n} · ${s}s</div><p class="fl-q">${esc(q.q)}</p>
+      ${minha ? `<div class="fl-wait">Resposta enviada!<br><small>Aguarde o tempo acabar.</small></div>` :
+      `<div class="fl-grid">${q.ops.map((o,i)=>`<button class="fl-op" data-fl="${i}" style="background:${FL_COR[i]}"><span>${FL_SIM[i]}</span>${esc(o)}</button>`).join('')}</div>`}`;
+    box.querySelectorAll('[data-fl]').forEach(b=>b.onclick=()=>{
+      const p2 = flashPos(fl, srvNow()); if(!p2 || p2.fase!=='pergunta' || p2.i!==pos.i) return;
+      const i = +b.dataset.fl, ok = i===q.c, pts = pontosFlash(ok, p2.el, p2.dur);
+      P.flash.resp[q.id] = {i, ok, ms:Math.round(p2.el)}; P.flash.pontos += pts; save(); vib(30); box.dataset.k=''; desenharFlash();
+    });
+  } else {
+    const k = 'r'+pos.i; if(box.dataset.k===k) return; box.dataset.k=k;
+    const ok = minha && minha.ok;
+    if(minha) vib(ok?[60,40,60]:200);
+    box.innerHTML = `<div class="fl-top">Pergunta ${pos.i+1} de ${pos.n}</div>
+      <div class="fl-res ${ok?'ok':'no'}">${!minha?'Sem resposta':(ok?'Acertou!':'Errou')}</div>
+      <p>Resposta: <b style="color:${FL_COR[q.c]}">${FL_SIM[q.c]} ${esc(q.ops[q.c])}</b></p>
+      <p class="fl-tot">Seu total: <b>${P.flash.pontos}</b> pontos</p>`;
+  }
+}
+
+/* ---------- card final para compartilhar ---------- */
+async function gerarCard(){
+  const W=1080, H=1920, cv=document.createElement('canvas'); cv.width=W; cv.height=H; const c=cv.getContext('2d');
+  const k = empresaKey(P.team), E = empresaDe(P.team);
+  atualizaRv(); const v = calcular(P.d,P.team,P.rv), fin = resultadoFinal(P.d,P.rv);
+  const temEst = (P.membros||[]).some(m=>m.cargo==='est') || P.role==='est', sc = pontuar(v,P.d,fin,temEst);
+  const cq = minhasConquistas().filter(x=>x.ok);
+  const g = c.createLinearGradient(0,0,0,H); g.addColorStop(0,'#0D1830'); g.addColorStop(1,'#14254A'); c.fillStyle=g; c.fillRect(0,0,W,H);
+  c.fillStyle='#14254A'; c.fillRect(0,H-36,W*0.5,36); c.fillStyle='#E3A51E'; c.fillRect(W*0.5,H-36,W*0.3,36); c.fillStyle='#3F8F3C'; c.fillRect(W*0.8,H-36,W*0.2,36);
+  const txt=(t,x,y,size,cor,peso,al)=>{ c.font=`${peso||700} ${size}px Montserrat, Inter, Arial, sans-serif`; c.fillStyle=cor||'#EAF1FB'; c.textAlign=al||'center'; c.fillText(t,x,y); };
+  const quebra=(t,x,y,size,cor,max,lh,peso)=>{ c.font=`${peso||500} ${size}px Inter, Arial, sans-serif`; c.fillStyle=cor; c.textAlign='center'; const ps=t.split(' '); let l=''; ps.forEach(p=>{ if(c.measureText(l+p).width>max){ c.fillText(l.trim(),x,y); y+=lh; l=''; } l+=p+' '; }); c.fillText(l.trim(),x,y); return y; };
+  txt('XV EGAD 2026 · ADMINISTRAÇÃO EM JOGO',W/2,150,34,'#E3A51E',800);
+  txt(P.nome||'Participante',W/2,300,92,'#EAF1FB',800);
+  txt(cargoDe(P.role).n.toUpperCase(),W/2,370,34,'#B9C7DE',700);
+  // logo da empresa
+  const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(logo(k,220).replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '));
+  await new Promise(r=>{ img.onload=r; img.onerror=r; setTimeout(r,800); });
+  try{ c.drawImage(img, W/2-110, 430, 220, 220); }catch(e){}
+  txt(E.nome,W/2,720,52,'#EAF1FB',800);
+  if(P.nomeTrio) txt('“'+P.nomeTrio+'”',W/2,790,40,'#E3A51E',700);
+  c.fillStyle='rgba(255,255,255,.06)'; c.beginPath(); c.roundRect ? c.roundRect(90,850,W-180,330,36) : c.rect(90,850,W-180,330); c.fill();
+  txt(String(sc.total),W/2-220,1040,150,'#EAF1FB',800); txt('pontos da empresa',W/2-220,1100,30,'#B9C7DE',600);
+  const qz = acertosQuiz() + '/' + TODAS_Q.length;
+  txt(qz,W/2+220,1040,150,'#E3A51E',800); txt('acertos no quiz',W/2+220,1100,30,'#B9C7DE',600);
+  if(P.flashRes) txt(`⚡ ${P.flashRes.pontos} pontos no quiz relâmpago`,W/2,1250,38,'#EAF1FB',700);
+  txt('CONQUISTAS',W/2,1360,30,'#E3A51E',800);
+  let y = 1430;
+  if(!cq.length) txt('A próxima é sua!',W/2,y,40,'#B9C7DE',600);
+  cq.slice(0,5).forEach(x=>{ txt(`${x.ic}  ${x.t}`,W/2,y,44,'#EAF1FB',700); y+=72; });
+  quebra('Gestão, inovação e desenvolvimento regional · 20 anos do curso de Administração',W/2,H-110,28,'#8FA3C4',W-200,38);
+  const blob = await new Promise(r=>cv.toBlob(r,'image/png'));
+  const arq = new File([blob], 'administracao-em-jogo.png', {type:'image/png'});
+  if(navigator.canShare && navigator.canShare({files:[arq]})){
+    try{ await navigator.share({files:[arq], title:'Administração em Jogo', text:'Joguei o Administração em Jogo no XV EGAD 2026!'}); return; }catch(e){ if(e && e.name==='AbortError') return; }
+  }
+  const url = URL.createObjectURL(blob);
+  overlay(`<h3 style="margin:0 0 8px">Seu card</h3><img src="${url}" alt="Card de resultado" style="width:100%;border-radius:12px"><a class="btn block" href="${url}" download="administracao-em-jogo.png" style="margin-top:12px;text-align:center">Baixar imagem</a><p class="small muted" style="margin:8px 0 0">Poste nos stories e marque o evento.</p>`, 'card-final');
+}
+function conquistasHTML(){
+  const cs = minhasConquistas(), n = cs.filter(c=>c.ok).length;
+  return `<div class="card"><span class="tag">Conquistas · ${n} de ${cs.length}</span>
+    <div class="conq">${cs.map(c=>`<div class="cq ${c.ok?'on':''}"><span>${c.ok?c.ic:'🔒'}</span><b>${esc(c.t)}</b><small>${esc(c.d)}</small></div>`).join('')}</div>
+    <button class="btn block" id="btnCard" style="margin-top:12px">📸 Gerar meu card para os stories</button></div>`;
+}
+
+/* ---------- dossiê por cargo ---------- */
+const EXCL = {fin:'Números: DRE, margens e composição do custo', com:'Clientes e canais, participação de mercado e o perfil da concorrente', ops:'Fornecedores críticos e pessoas', est:'Tendências do setor e as cinco forças (sem um 4º integrante, esses dados ficam abertos a todos)'};
+function veDados(dono){
+  if(!remotoTrio()) return true;
+  if(P.role===dono) return true;
+  return !(P.membros||[]).some(m=>m.cargo===dono);   // ninguém do trio tem esse cargo: dados abertos
+}
+function trancado(dono, titulo){
+  const quem = (P.membros||[]).filter(m=>m.cargo===dono).map(m=>m.nome).join(', ');
+  return `<div class="card locked"><span class="lk">🔒</span><div><b>${esc(titulo)}</b><p class="small" style="margin:2px 0 0">Dados exclusivos de <b>${esc(cargoDe(dono).n)}</b>${quem?` (${esc(quem)})`:''}. Perguntem a ${quem?'essa pessoa':'quem tem esse cargo'}: a decisão do trio depende disso.</p></div></div>`;
+}
+function destaques(arr){
+  return `<div class="hl">${arr.map(([n,t,dono])=>{ const ok = !dono || veDados(dono);
+    return `<div class="${ok?'':'off'}"><b>${ok?n:'?'}</b><small>${esc(t)}${ok?'':' · '+esc(cargoDe(dono).n)}</small></div>`; }).join('')}</div>`;
+}
+
+/* ===================== TELÃO: comandos, manchetes, ranking, relâmpago, pódio ===================== */
+let ctlP = {}, offP = 0, relL = [], somOn = true, evVistosP = null;
+const agoraP = ()=> Date.now() + offP;
+async function ctlEnviar(params){
+  if(!CONFIG.ENDPOINT){ toastP('Sem planilha: comando só vale no telão.'); return null; }
+  try{
+    const j = await consultar({acao:'ctl', s:normS(CONFIG.SESSAO), chave:CONFIG.CHAVE, ...params}, 12000);
+    if(j && j.ok){ ctlP = j.ctl||{}; offP = (j.agora||Date.now()) - Date.now(); EVENTOS_ATIVOS = ctlP.evs||[]; return j; }
+    toastP('Chave do professor recusada.');
+  }catch(e){ toastP('Sem conexão com a planilha.'); }
+  return null;
+}
+function toastP(m){ const st=$('#feedStatus'); if(st) st.textContent = m; }
+function nomeEquipe(eq){ const t = triosL.find(x=>x.equipe===eq); const n = nomeTrioDe(t); return n || (t ? 'Trio '+t.codigo : 'Equipe '+eq); }
+
+/* ---------- manchetes ---------- */
+const MANCHETES = {
+  'Rodada 1':'Mercado fit goiano cresce 11% ao ano, mas margens das marcas regionais despencam',
+  'Rodada 2':'URGENTE: whey importado sobe 25% e único produtor nacional de Goiás não atende todo mundo',
+  'Rodada 3':'Rede alemã Grünkorb desembarca em Goiás atrás de snacks proteicos com sabor do Cerrado',
+  'Rodada 4':'Pesquisa: 7 em cada 10 empresas dizem que o administrador de 2030 ainda não está pronto'
+};
+function mancheteHTML(t){ return `<div class="manchete"><span>JORNAL DO CERRADO · AO VIVO</span><div class="mtk"><b>${esc(t)}</b></div></div>`; }
+function mostrarEventoTelao(id){
+  const ev = EVENTOS.find(e=>e.id===id); if(!ev) return;
+  if(somOn) som('alerta');
+  const L = lista(); const afet = L.length ? L.map(x=>ev.ef(x.d, empresaKey(x.eq))).filter(r=>Object.values(r.e).some(n=>n<0)).length : 0;
+  overlay(`<div class="manchete big"><span>JORNAL DO CERRADO · URGENTE</span></div>
+    <h1 style="margin:2vh 0 1vh">${esc(ev.t)}</h1><p class="lead">${esc(ev.txt)}</p>
+    ${L.length?`<p class="muted">${afet} de ${L.length} empresas foram prejudicadas. As decisões anteriores fizeram a diferença.</p>`:''}`, 'evento telao');
+}
+
+/* ---------- barra de comandos extra ---------- */
+function initProfExtras(){
+  const c = $('.ctrls');
+  c.insertAdjacentHTML('beforeend', `
+    <button class="btn sec" id="tEv" title="Disparar evento surpresa">⚡ Evento</button>
+    <button class="btn sec" id="tRank" title="Ranking (tecla R)">🏆</button>
+    <button class="btn sec" id="tSom" title="Som">🔊</button>
+    <button class="btn sec" id="tExp" title="Exportar resultados (planilha)">⬇</button>`);
+  $('#tEv').onclick = menuEventos;
+  $('#tRank').onclick = rankingOverlay;
+  $('#tSom').onclick = ()=>{ somOn=!somOn; $('#tSom').textContent = somOn?'🔊':'🔇'; if(somOn) som('tic'); };
+  $('#tExp').onclick = exportar;
+  document.addEventListener('keydown', e=>{ if((e.key==='r'||e.key==='R') && !e.target.closest('input')) rankingOverlay(); if(e.key==='Escape') document.querySelectorAll('.ovl').forEach(o=>o.remove()); });
+  setInterval(()=>{ const b=$('#flashBox'); if(b) b.innerHTML = flashTelaoHTML(); }, 250);
+}
+function menuEventos(){
+  const usados = (ctlP.evs||[]).map(x=>x.id);
+  const o = overlay(`<h2 style="margin:0 0 6px">Evento surpresa</h2><p class="small muted" style="margin:0 0 12px">Todos os celulares recebem ao mesmo tempo. O efeito depende das decisões já tomadas por cada empresa. Sugestão: um evento na Rodada 2 e outro na Rodada 3.</p>
+    ${EVENTOS.map(e=>`<div class="evrow"><div><b>${esc(e.t)}</b><div class="small muted">${esc(e.txt)}</div></div>${usados.includes(e.id)?'<span class="chip">disparado</span>':`<button class="btn" data-ev="${e.id}">Disparar</button>`}</div>`).join('')}
+    ${usados.length?'<button class="btn sec" data-ev="limpar" style="margin-top:10px">Desfazer todos os eventos</button>':''}`, 'menu');
+  o.querySelectorAll('[data-ev]').forEach(b=>b.onclick=async ()=>{
+    if(b.dataset.conf!=='1'){ b.dataset.conf='1'; b.textContent='Confirmar?'; return; }
+    b.disabled=true; b.textContent='Enviando...';
+    if(!CONFIG.ENDPOINT){ if(b.dataset.ev==='limpar') EVENTOS_ATIVOS=[]; else EVENTOS_ATIVOS.push({id:b.dataset.ev,t:Date.now()}); ctlP.evs = EVENTOS_ATIVOS; }
+    else await ctlEnviar({ev:b.dataset.ev});
+    o.remove();
+    if(b.dataset.ev!=='limpar'){ evVistosP = (ctlP.evs||[]).map(x=>x.id); mostrarEventoTelao(b.dataset.ev); }
+    drawSlide();
+  });
+}
+function rankingOverlay(){
+  const L = lista().sort((a,b)=>b.s.total-a.s.total).slice(0,10);
+  const ind = rankingIndividual().slice(0,8);
+  overlay(`<div class="rk2"><div><h2>🏆 Empresas</h2>${L.length?`<table class="rank">${L.map((x,i)=>`<tr><td>${i+1}º</td><td>${logo(empresaKey(x.eq),26)} ${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${EMPRESAS[empresaKey(x.eq)].curto} · M${mercadoDe(x.eq)}</span></td><td class="n">${x.s.total}</td></tr>`).join('')}</table>`:'<p class="muted">Sem decisões ainda.</p>'}</div>
+    <div><h2>⭐ Individual</h2>${ind.length?`<table class="rank">${ind.map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(x.nome)}</td><td class="n">${x.pts}</td></tr>`).join('')}</table><p class="small muted">100 por acerto no quiz das rodadas + pontos do quiz relâmpago.</p>`:'<p class="muted">Sem respostas ainda.</p>'}</div></div>`, 'telao ranking');
+  if(somOn) som('revela');
+}
+function rankingIndividual(){
+  const m = {};
+  quizL.forEach(q=>{ const k=q.id||q.nome+'|'+q.equipe; m[k]={nome:q.nome, equipe:q.equipe, quiz:q.acertos, fl:0}; });
+  relL.forEach(r=>{ const k=r.id||r.nome+'|'+r.equipe; m[k]=m[k]||{nome:r.nome, equipe:r.equipe, quiz:0, fl:0}; m[k].fl=r.pontos; });
+  return Object.values(m).map(x=>({...x, pts:x.quiz*100+x.fl})).sort((a,b)=>b.pts-a.pts);
+}
+
+/* ---------- cronômetro sincronizado ---------- */
+let syncTimerTmr = null;
+function syncTimer(){
+  clearTimeout(syncTimerTmr);
+  syncTimerTmr = setTimeout(()=>{ if(!CONFIG.ENDPOINT || demo) return;
+    const min = tRun ? Math.max(0,tEnd-Date.now())/60000 : 0;
+    if(!SLIDES[cur].n.startsWith('Rodada') && !tRun) return;
+    ctlEnviar({fim: min ? min.toFixed(3) : 0}); }, 600);
+}
+
+/* ---------- quiz relâmpago no telão ---------- */
+function flashSlideHTML(){
+  return `<div id="flashBox">${flashTelaoHTML()}</div>`;
+}
+function flashTelaoHTML(){
+  const fl = ctlP.flash;
+  if(!fl) return `<h2>⚡ Quiz relâmpago</h2><p class="lead">${FLASH.length} perguntas, ${20} segundos cada. Todos respondem no celular ao mesmo tempo, e quem acerta mais rápido ganha mais pontos.</p>
+    <button class="btn" id="flStart" style="font-size:1.3rem;padding:16px 28px">Iniciar quiz relâmpago</button>
+    <p class="small muted" style="margin-top:2vh">Os celulares começam juntos 15 segundos depois do clique. ${CONFIG.ENDPOINT?'':'Sem planilha, o quiz relâmpago não chega aos celulares.'}</p>`;
+  const pos = flashPos(fl, agoraP());
+  if(pos.fase==='antes') return `<h2>⚡ Quiz relâmpago</h2><div class="fl-count">${Math.ceil(pos.falta/1000)}</div><p class="lead" style="text-align:center">Peguem os celulares!</p>`;
+  if(pos.fase==='fim'){
+    const top = relL.slice().sort((a,b)=>b.pontos-a.pontos).slice(0,10);
+    return `<h2>⚡ Quiz relâmpago: resultado</h2>${top.length?`<table class="rank">${top.map((x,i)=>`<tr><td>${['🥇','🥈','🥉'][i]||i+1+'º'}</td><td>${esc(x.nome)} <span class="muted" style="font-size:.8em">${esc(nomeEquipe(+x.equipe))}</span></td><td class="n">${x.pontos}</td><td class="n muted">${x.acertos}/${pos.n}</td></tr>`).join('')}</table>`:'<p class="muted">Recebendo as respostas dos celulares...</p>'}
+      <button class="btn sec" id="flReset" style="margin-top:2vh">Encerrar e liberar novo quiz</button>`;
+  }
+  const q = FLASH[pos.i], rev = pos.fase==='resposta', s = Math.ceil(pos.falta/1000);
+  if(somOn && !rev && pos.falta<=5000 && flashTelaoHTML._t!==s){ flashTelaoHTML._t=s; som('tic'); }
+  if(rev && flashTelaoHTML._r!==pos.i){ flashTelaoHTML._r=pos.i; if(somOn) som('revela'); }
+  return `<div class="fl-head"><span>Pergunta ${pos.i+1} de ${pos.n}</span><b class="${!rev&&s<=5?'low':''}">${rev?'Resposta':s+'s'}</b></div>
+    <div class="fl-bar"><i style="width:${rev?0:Math.max(0,pos.falta/pos.dur*100)}%"></i></div>
+    <h1 class="fl-qt">${esc(q.q)}</h1>
+    <div class="fl-opts">${q.ops.map((o,i)=>`<div class="${rev ? (i===q.c?'ok':'dim') : ''}" style="background:${FL_COR[i]}"><span>${FL_SIM[i]}</span>${esc(o)}</div>`).join('')}</div>`;
+}
+document.addEventListener('click', async (e)=>{
+  if(e.target.id==='flStart'){ e.target.disabled=true; e.target.textContent='Iniciando...'; await ctlEnviar({flash:'iniciar', n:FLASH.length, dur:20}); if(!CONFIG.ENDPOINT){ ctlP.flash={t0:Date.now()+15000,dur:20,n:FLASH.length}; } if(somOn) som('fanfarra'); }
+  if(e.target.id==='flReset'){ await ctlEnviar({flash:'parar'}); if(!CONFIG.ENDPOINT) ctlP.flash=null; drawSlide(); }
+  const oc = e.target.closest('[data-ocultar]');
+  if(oc && document.documentElement.classList.contains('prof')){
+    e.stopPropagation();
+    if(!confirm('Ocultar o nome deste trio no telão? (o código continua aparecendo)')) return;
+    try{ await consultar({acao:'ocultar', s:normS(CONFIG.SESSAO), chave:CONFIG.CHAVE, trio:oc.dataset.ocultar, ocultar:'1'}, 12000); }catch(err){}
+    const t = triosL.find(x=>String(x.trio)===oc.dataset.ocultar); if(t) t.oculto = true; drawSlide();
+  }
+});
+
+/* ---------- teoria x sala ---------- */
+function teoriaSalaHTML(){
+  const m2 = mercadosCompletos('r2'), m3 = mercadosCompletos('r3');
+  if(!m2.length && !m3.length) return `<h2>Teoria x sala</h2>`+semDados('Ainda não há mercados completos');
+  const pct = (a,b)=> b ? Math.round(a/b*100) : 0;
+  const coord = m2.filter(x=>(x.a.d.r2.opc==='A')!==(x.b.d.r2.opc==='A')).length, colis = m2.filter(x=>x.a.d.r2.opc==='A' && x.b.d.r2.opc==='A').length;
+  const cel = (x)=> estEfetiva(x.a.d.r3)+'|'+estEfetiva(x.b.d.r3);
+  const nash = m3.filter(x=>NASH3.includes(cel(x))).length, kk = m3.filter(x=>cel(x)==='K|K').length, dd = m3.filter(x=>cel(x)==='D|D').length;
+  const bar = (t, p, n, cor, nota)=>`<div class="ts"><div class="ts-h"><b>${t}</b><span>${p}% <small>(${n})</small></span></div><div class="track"><i style="width:${p}%;background:${cor}"></i></div><p class="small muted">${nota}</p></div>`;
+  return `<h2>Teoria x sala: o que Nash previa e o que vocês fizeram</h2>
+  <div class="panelgrid">
+    <div><h3>Rodada 2 · o fornecedor de Rio Verde</h3>
+      <p class="small">A teoria prevê dois equilíbrios: <b>uma</b> empresa vai a Rio Verde e a outra não. O problema é saber qual.</p>
+      ${bar('Coordenaram (só uma foi a Rio Verde)', pct(coord,m2.length), coord+' de '+m2.length, 'var(--ok)', 'Chegaram a um dos equilíbrios sem conversar.')}
+      ${bar('Colidiram (as duas foram)', pct(colis,m2.length), colis+' de '+m2.length, 'var(--warn)', 'Falha de coordenação: capacidade dividida e preço maior.')}
+    </div>
+    <div><h3>Rodada 3 · a proposta de Hamburgo</h3>
+      <p class="small">Equilíbrios de Nash: <b>desconto mútuo</b> (dilema do prisioneiro) e <b>consórcio mútuo</b> (o melhor para as duas).</p>
+      ${bar('Terminaram num equilíbrio de Nash', pct(nash,m3.length), nash+' de '+m3.length, 'var(--brand)', 'Nenhuma empresa ganharia mudando sozinha.')}
+      ${bar('Consórcio (6 / 6)', pct(kk,m3.length), kk+' de '+m3.length, 'var(--ok)', 'Cooperação: o equilíbrio que todas preferem.')}
+      ${bar('Guerra de preços (1 / 1)', pct(dd,m3.length), dd+' de '+m3.length, 'var(--warn)', 'O dilema do prisioneiro na prática.')}
+    </div>
+  </div>`;
+}
+
+/* ---------- pódio ---------- */
+function podioHTML(){
+  const L = lista().sort((a,b)=>b.s.total-a.s.total).slice(0,3), I = rankingIndividual().slice(0,3);
+  if(!L.length && !I.length) return `<h2>Pódio</h2>`+semDados('O pódio aparece quando houver resultados');
+  const ord = [1,0,2], alt = ['62%','80%','48%'];
+  const bloco = (x,i,tipo)=> !x ? '<div></div>' : `<div class="pd"><div class="pd-top">${tipo==='e'?logo(empresaKey(x.eq),54):'<span style="font-size:2.4rem">⭐</span>'}<b>${esc(tipo==='e'?nomeEquipe(x.eq):x.nome)}</b><small>${tipo==='e'?esc(EMPRESAS[empresaKey(x.eq)].curto)+' · '+x.s.total+' pts':x.pts+' pts'}</small></div><div class="pd-col" style="height:${alt[ord.indexOf(i)]}">${['🥇','🥈','🥉'][i]}</div></div>`;
+  return `<h2 style="text-align:center">Pódio do XV EGAD</h2>
+  <div class="podios">
+    <div><h3>Empresas</h3><div class="podio">${ord.map(i=>bloco(L[i],i,'e')).join('')}</div></div>
+    <div><h3>Individual</h3><div class="podio">${ord.map(i=>bloco(I[i],i,'i')).join('')}</div></div>
+  </div>`;
+}
+
+/* ---------- plano B ---------- */
+function planoBHTML(){
+  return `<h2>Plano B: se a internet cair</h2>
+  <div class="cols"><div>
+    <ol class="lead">
+      <li>Cada trio usa <b>um</b> celular que ainda abra a página (ela funciona sem internet depois de carregada).</li>
+      <li>Se a entrada falhar, toque em <b>Escolher equipe e cargo manualmente</b> e use o número da equipe combinado com o professor.</li>
+      <li>Cada rodada abre com o código projetado aqui.</li>
+    </ol>
+    <p class="small muted">No modo sem planilha, o painel ao vivo e o quiz relâmpago não funcionam; os resultados ficam em cada celular.</p></div>
+    <div><table class="rank">${[['Início do jogo','jogo'],['Rodada 2','r2'],['Rodada 3','r3'],['Rodada 4','r4']].map(([t,k])=>`<tr><td>${t}</td><td class="n" style="color:var(--accent);letter-spacing:.08em;font-size:1.6em">${esc(CONFIG.CODIGOS[k])}</td></tr>`).join('')}</table></div></div>`;
+}
+
+/* ---------- exportar ---------- */
+function exportar(){
+  const L = lista(), linhas = [['Equipe','Mercado','Empresa','Trio','Nome do trio','Posicionamento','R2 decisão','R3 estratégia','R3 Incoterm','R3 ESG','Caixa','Clientes','Pessoas','Resiliência','Metas','Coerência','Total']];
+  L.sort((a,b)=>b.s.total-a.s.total).forEach(x=>{ const t = triosL.find(y=>y.equipe===x.eq)||{};
+    linhas.push([x.eq, mercadoDe(x.eq), EMPRESAS[empresaKey(x.eq)].nome, t.codigo||'', t.nome||'', x.d.r1&&x.d.r1.gen||'', x.d.r2&&x.d.r2.opc||'', x.d.r3&&x.d.r3.est||'', x.d.r3&&x.d.r3.inc||'', x.d.r3&&x.d.r3.esg||'', x.v.caixa, x.v.clientes, x.v.pessoas, x.v.res, x.s.nm, x.s.coer?x.s.coer.pts:'', x.s.total]); });
+  linhas.push([]); linhas.push(['Individual','Equipe','Acertos quiz (de '+TODAS_Q.length+')','Pontos relâmpago','Pontos totais']);
+  rankingIndividual().forEach(x=>linhas.push([x.nome, x.equipe, x.quiz, x.fl, x.pts]));
+  const csv = '﻿' + linhas.map(l=>l.map(c=>`"${String(c??'').replace(/"/g,'""')}"`).join(';')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download = `administracao-em-jogo-${normS(CONFIG.SESSAO)}.csv`; a.click();
+  toastP('Planilha de resultados baixada (abre no Excel).');
+}
 
 function initProf(){
   document.documentElement.classList.add('prof');
@@ -1516,9 +2255,10 @@ function initProf(){
   $('#tStart').onclick = toggleTimer;
   $('#tFase').onclick = cliqueFase;
   desenharFase();
-  $('#tPlus').onclick = ()=>{ if(tRun) tEnd += 60000; else tLeft = (tLeft??0) + 60000; drawTimer(); };
-  $('#tReset').onclick = ()=>{ tRun=false; tLeft = SLIDES[cur].min*60000; $('#tStart').textContent='Iniciar'; drawTimer(); };
+  $('#tPlus').onclick = ()=>{ if(tRun) tEnd += 60000; else tLeft = (tLeft??0) + 60000; drawTimer(); syncTimer(); };
+  $('#tReset').onclick = ()=>{ tRun=false; tLeft = SLIDES[cur].min*60000; $('#tStart').textContent='Iniciar'; drawTimer(); syncTimer(); };
   setInterval(drawTimer, 250);
+  initProfExtras();
   go(0);
   poll(); setInterval(poll, CONFIG.POLL_MS);
 }
@@ -1532,10 +2272,12 @@ function go(i){
   $('#tConc').classList.toggle('hidden', !s.conceito);
   tRun=false; tLeft = s.min*60000; $('#tStart').textContent='Iniciar';
   drawSlide();
+  if(MANCHETES[s.n] && somOn) som('alerta');
+  if(s.n==='Pódio'){ setTimeout(()=>{ confete(7000); if(somOn) som('fanfarra'); }, 400); }
 }
 function drawSlide(){
   const y = $('#slide').scrollTop;
-  $('#slide').innerHTML = SLIDES[cur].h();
+  $('#slide').innerHTML = (MANCHETES[SLIDES[cur].n] ? mancheteHTML(MANCHETES[SLIDES[cur].n]) : '') + SLIDES[cur].h();
   $('#slide').scrollTop = y;
   const q = $('#qrBox');
   if(q){ if(window.QRCode) new QRCode(q,{text:partURL,width:cur===0?300:200,height:cur===0?300:200,correctLevel:QRCode.CorrectLevel.M}); else q.textContent='QR indisponível'; }
@@ -1548,7 +2290,7 @@ function revelar(){ const c=$('.slideconcept'); if(c) c.scrollIntoView({behavior
 function toggleTimer(){
   if(tRun){ tLeft = Math.max(0,tEnd-Date.now()); tRun=false; $('#tStart').textContent='Retomar'; }
   else { if(tLeft==null||tLeft<=0) tLeft = SLIDES[cur].min*60000; tEnd = Date.now()+tLeft; tRun=true; $('#tStart').textContent='Pausar'; }
-  drawTimer();
+  drawTimer(); syncTimer();
 }
 function drawTimer(){
   const ms = tRun ? Math.max(0,tEnd-Date.now()) : (tLeft??0);
@@ -1566,7 +2308,12 @@ async function poll(){
   try{
     const r = await fetch(CONFIG.ENDPOINT+'?acao=ler&s='+encodeURIComponent(normS(CONFIG.SESSAO))+'&t='+Date.now());
     const j = await r.json();
-    dados = j.equipes || {}; comp = j.competencias || []; triosL = j.trios || []; quizL = j.quiz || []; partN = j.participantes || 0;
+    dados = j.equipes || {}; comp = j.competencias || []; triosL = j.trios || []; quizL = j.quiz || []; partN = j.participantes || 0; relL = j.relampago || [];
+    if(j.agora) offP = j.agora - Date.now();
+    ctlP = j.ctl || {}; EVENTOS_ATIVOS = ctlP.evs || [];
+    const ids = EVENTOS_ATIVOS.map(x=>x.id);
+    if(evVistosP){ ids.filter(x=>!evVistosP.includes(x)).forEach(mostrarEventoTelao); }
+    evVistosP = ids;
     if(j.nEq) CONFIG.MAX_EQUIPES = j.nEq;
     if(typeof j.fase==='number' && !faseConfirmando){ fase = j.fase; desenharFase(); }
     st.textContent = `${FASE_NOME[fase]} · ${partN} participante(s) · ${triosL.length} trio(s) · ${Object.keys(dados).length} equipe(s) com decisões · ${comp.length} resposta(s) individuais · ${new Date().toLocaleTimeString('pt-BR')}`;
@@ -1620,11 +2367,11 @@ function mercadosCompletos(r){
 function contar(arr, key, opts){ return opts.map(o=>({t:o.t, id:o.id, n:arr.filter(x=>key(x)===o.id).length})); }
 function barras(rows, semId){ const max = Math.max(1,...rows.map(r=>r.n)); return `<div class="bars">${rows.map(r=>`<div class="row"><span>${semId?'':esc(r.id)+'. '}${esc(r.t)}</span><div class="track"><i style="width:${r.n/max*100}%"></i></div><b>${r.n}</b></div>`).join('')}</div>`; }
 function semDados(msg){ return `<div class="card"><h3>${msg}</h3><p class="muted">${CONFIG.ENDPOINT?'As respostas aparecem aqui assim que forem registradas nos celulares.':'Configure o ENDPOINT da planilha para receber as respostas ao vivo.'}</p><button class="btn sec" id="demoBtn">Ver com dados de demonstração</button></div>`; }
-/* Matriz da Rodada 3 para o telão. cont = mercados por célula (linha Cerrado, coluna Veredas) */
+/* Matriz da Rodada 3 para o telão. cont = mercados por célula (linha Baruna, coluna Trilha) */
 function matrizSalaHTML(cont, tot, opt){
   opt = Object.assign({count:true, nash:true}, opt||{});
   return `<table class="mtx big">
-    <tr><th class="corner">Cerrado ↓ · Veredas →</th>${R3_EST.map(c=>`<th>${curtoEst[c.id]}</th>`).join('')}</tr>
+    <tr><th class="corner">Baruna ↓ · Trilha →</th>${R3_EST.map(c=>`<th>${curtoEst[c.id]}</th>`).join('')}</tr>
     ${R3_EST.map(l=>`<tr><th>${curtoEst[l.id]}</th>${R3_EST.map(c=>{
       const k = l.id+'|'+c.id, n = (cont||{})[k]||0, nash = opt.nash && NASH3.includes(k);
       return `<td class="${nash?'nash':''}" style="--alpha:${opt.count&&tot?n/tot:0}">${opt.count?`<b class="cnt">${n}</b>`:''}<span class="pp">${pontos(MATRIZ3[k])} / ${pontos(MATRIZ3[c.id+'|'+l.id])}${nash?' ★':''}</span></td>`;
@@ -1636,10 +2383,11 @@ function equipesHTML(){
   const ativo = CONFIG.ENDPOINT || demo;
   const comp3 = triosL.filter(t=>t.n>=3).length, pareado = triosL.some(t=>t.equipe);
   const porEq = {}; triosL.forEach(t=>{ if(t.equipe) porEq[t.equipe]=t; });
-  const celT = (t)=> t ? `<div class="${t.n>=3?'full':''}"><b>${esc(t.codigo)}</b><small>Equipe ${t.equipe} · ${EMPRESAS[empresaKey(t.equipe)].curto}</small><div class="pips">${pips(t.n, Math.max(3,t.n))}</div></div>` : `<div><b>Robô</b><small>reação padrão</small></div>`;
+  const nmT = (t)=> nomeTrioDe(t) ? `<span class="nm">${esc(t.nome)} <button class="oc" data-ocultar="${t.trio}" title="Ocultar nome">✕</button></span>` : '';
+  const celT = (t)=> t ? `<div class="${t.n>=3?'full':''}"><b>${logo(empresaKey(t.equipe),18)} ${esc(t.codigo)}</b>${nmT(t)}<small>Equipe ${t.equipe} · ${EMPRESAS[empresaKey(t.equipe)].curto}</small><div class="pips">${pips(t.n, Math.max(3,t.n))}</div></div>` : `<div><b>Robô</b><small>reação padrão</small></div>`;
   if(ativo && pareado) return `
   <h2>Mercados formados <span class="muted" style="font-size:1rem;font-family:Inter">${partN} participantes · ${triosL.length} trios · ${Math.ceil(CONFIG.MAX_EQUIPES/2)} mercados</span></h2>
-  <p class="small muted" style="margin:0">Cada mercado reúne uma Cerrado e uma Veredas. Os pontos mostram quantos integrantes cada trio tem. Trio sem par joga contra a reação padrão.</p>
+  <p class="small muted" style="margin:0">Cada mercado reúne uma Baruna e uma Trilha. Os pontos mostram quantos integrantes cada trio tem. Trio sem par joga contra a reação padrão.</p>
   <div class="mgrid ${CONFIG.MAX_EQUIPES>24?'dense':''}">${Array.from({length:Math.ceil(CONFIG.MAX_EQUIPES/2)},(_,i)=>`<div class="mcell"><small>Mercado ${i+1}</small><div class="mteams">${celT(porEq[2*i+1])}${celT(porEq[2*i+2])}</div></div>`).join('')}</div>`;
   return `
   <div class="cols" style="grid-template-columns:1.3fr 1fr;align-items:start">
@@ -1658,7 +2406,7 @@ function equipesHTML(){
   </div>
   ${!ativo ? '' : (pareado
     ? `<div class="mgrid">${Array.from({length:Math.ceil(CONFIG.MAX_EQUIPES/2)},(_,i)=>`<div class="mcell"><small>Mercado ${i+1}</small><div class="mteams">${celT(porEq[2*i+1])}${celT(porEq[2*i+2])}</div></div>`).join('')}</div>`
-    : `<div class="teamgrid">${triosL.map(t=>`<div class="tcell ${t.n>=3?'full':''}"><b>${esc(t.codigo)}</b><div class="pips">${pips(t.n, Math.max(3,t.n))}</div></div>`).join('')}</div>`)}`;
+    : `<div class="teamgrid">${triosL.map(t=>`<div class="tcell ${t.n>=3?'full':''}"><b>${esc(t.codigo)}</b>${nmT(t)}<div class="pips">${pips(t.n, Math.max(3,t.n))}</div></div>`).join('')}</div>`)}`;
 }
 function painelHTML(){
   const L = lista();
@@ -1674,7 +2422,7 @@ function painelHTML(){
   <h2>Painel da diretoria <span class="muted" style="font-size:1rem;font-family:Inter">${fin.length} de ${L.length} equipes com resultado final</span></h2>
   <div class="panelgrid">
     <div><h3>Ranking</h3>
-      <table class="rank">${fin.slice(0,10).map((x,i)=>`<tr><td>${i+1}º</td><td>Equipe ${x.eq} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
+      <table class="rank">${fin.slice(0,10).map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
       <h3 style="margin-top:2vh">Posicionamento estratégico (Porter)</h3>
       <div class="bars">${['custo','dif','enf'].map(g=>{ const n=L.filter(x=>x.d.r1&&x.d.r1.gen===g).length, tot=L.filter(x=>x.d.r1&&x.d.r1.gen).length; const p=tot?Math.round(n/tot*100):0; return `<div class="row"><span>${(R1_GEN.find(x=>x.id===g)||{}).t}</span><div class="track"><i style="width:${p}%;background:var(--brand)"></i></div><b>${n}</b></div>`; }).join('')}</div>
     </div>
@@ -1745,10 +2493,11 @@ function fechamentoHTML(){
   </div>`;
 }
 function gerarDemo(){
-  dados = {}; comp = []; triosL = []; quizL = []; partN = 0;
+  dados = {}; comp = []; triosL = []; quizL = []; partN = 0; relL = []; ctlP = {evs:[{id:'E2',t:0},{id:'E4',t:0}]}; EVENTOS_ATIVOS = ctlP.evs; evVistosP = ['E2','E4'];
   const T = CONFIG.MAX_EQUIPES;
   const AB='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  for(let t=1;t<=T;t++){ const n = t%7===0 ? 4 : (t%11===0 ? 2 : 3); partN += n; triosL.push({trio:t, codigo:Array.from({length:4},()=>AB[Math.floor(Math.random()*AB.length)]).join(''), equipe:t, n}); }
+  const NOMES_T = ['Baru de Ouro','Os Estrategistas','Nash Equilibrados','Consultoria Cerrado','Whey Better','Trilheiros','Fayol Fãs','Margem Positiva','Ansoff Squad','Pequi Power'];
+  for(let t=1;t<=T;t++){ const n = t%7===0 ? 4 : (t%11===0 ? 2 : 3); partN += n; triosL.push({trio:t, codigo:Array.from({length:4},()=>AB[Math.floor(Math.random()*AB.length)]).join(''), equipe:t, n, nome: t%3===0 ? '' : NOMES_T[t%NOMES_T.length]+(t>NOMES_T.length?' '+t:'')}); }
   const pick = (a)=>a[Math.floor(Math.random()*a.length)];
   for(let eq=1; eq<=T; eq++){
     const pool = R1_PROB.map(p=>p.id).sort(()=>Math.random()-.5);
@@ -1758,6 +2507,7 @@ function gerarDemo(){
   }
   const nomes = ['Ana','Bruno','Carla','Diego','Elisa','Fábio','Gabi','Hugo','Iara','João','Karen','Lucas','Marina','Nina','Otávio','Paula','Rafa','Sofia','Tiago','Vitória'];
   for(let i=0;i<partN;i++){ const resp={}; TODAS_Q.forEach((q,k)=>{ if(Math.random()<.9) resp[q.id]={ok: Math.random() < [.85,.7,.55,.8,.6,.5,.65,.45,.6][k]}; });
+    relL.push({nome:nomes[i%nomes.length]+(i>=nomes.length?' '+(Math.floor(i/nomes.length)+1):''), equipe:1+(i%T), pontos:Math.round(Math.random()*6500), acertos:Math.floor(Math.random()*9)});
     quizL.push({nome:nomes[i%nomes.length]+(i>=nomes.length?' '+(Math.floor(i/nomes.length)+1):''), equipe:1+(i%T), acertos:Object.values(resp).filter(x=>x.ok).length, respostas:resp}); }
   const frases = ['ler dados sem perder de vista as pessoas','negociar em outra língua e outra cultura sem medo','usar IA como assistente, não como chefe','entender de cadeia global tanto quanto de planilha','ter ética quando ninguém estiver olhando','aprender rápido e desaprender mais rápido ainda','liderar equipes que nunca se encontram pessoalmente','transformar ESG em estratégia, não em relatório'];
   for(let i=0;i<120;i++){
