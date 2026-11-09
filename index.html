@@ -332,6 +332,9 @@ canvas.confete{position:fixed;inset:0;z-index:80;pointer-events:none}
 .fl-count{font-family:Montserrat,sans-serif;font-size:clamp(6rem,18vw,16rem);font-weight:800;text-align:center;color:var(--accent);line-height:1}
 .ts{margin:1.6vh 0}.ts-h{display:flex;justify-content:space-between;gap:12px}.ts .track{height:16px;background:var(--surface2);border-radius:99px;overflow:hidden;margin:.6vh 0}.ts .track i{display:block;height:100%}
 .ts p{margin:0}
+.bigstats{display:grid;grid-template-columns:repeat(3,1fr);gap:1vw;margin-top:1vh}
+.bigstats>div{background:var(--surface2);border-radius:12px;padding:1.4vh 1vw;display:flex;flex-direction:column;gap:.3vh}
+.bigstats b{font-family:Montserrat,sans-serif;font-size:clamp(1.8rem,3vw,3rem);line-height:1;color:var(--accent)}
 .podios{display:grid;grid-template-columns:1fr 1fr;gap:5vw;margin-top:2vh}
 .podios h3{text-align:center}
 .podio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1vw;align-items:end;height:52vh}
@@ -366,6 +369,69 @@ canvas.confete{position:fixed;inset:0;z-index:80;pointer-events:none}
 .ext-e{text-align:right;flex:0 0 auto;max-width:48%}
 .ext.pend{opacity:.6}
 .effect .chip{font-size:.82rem}
+/* ===== telão de notícias ===== */
+html.tvmode,html.tvmode body{background:#0A1428;color:#EAF1FB;overflow:hidden;height:100%}
+#tvApp{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr);font-family:Inter,sans-serif;background:radial-gradient(1200px 600px at 30% 40%,#13284d 0%,#0A1428 70%)}
+.tv-top{display:flex;justify-content:space-between;align-items:center;padding:1.6vh 2.4vw;background:linear-gradient(90deg,#0D1830,#14254A);border-bottom:4px solid #E3A51E}
+.tv-marca{display:flex;align-items:center;gap:1.2vw}
+.tv-marca b{font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(1.3rem,2.2vw,2.4rem);letter-spacing:.04em}
+.tv-marca small{color:#9FB0CC;font-size:clamp(.8rem,1vw,1.1rem)}
+.aovivo{display:inline-flex;align-items:center;gap:.5em;background:#D64541;color:#fff;font-weight:800;padding:.35em .8em;border-radius:6px;font-size:clamp(.8rem,1vw,1.1rem);letter-spacing:.08em}
+.aovivo i{width:.7em;height:.7em;border-radius:50%;background:#fff;animation:pisca 1.2s infinite}
+@keyframes pisca{50%{opacity:.2}}
+.tv-info{display:flex;align-items:center;gap:1.4vw;color:#9FB0CC;font-size:clamp(.8rem,1.05vw,1.2rem)}
+.tv-info b{font-family:Montserrat,sans-serif;font-size:clamp(1.3rem,2vw,2.2rem);color:#EAF1FB}
+.tv-info button{background:none;border:1px solid #2A3F6B;color:#EAF1FB;border-radius:8px;padding:.3em .6em;font-size:1rem;cursor:pointer}
+.tv-main{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:2vw;padding:2.4vh 2.4vw;min-height:0}
+.tv-mapa{display:flex;flex-direction:column;min-height:0}
+.tv-mapa .trilha-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.tv-mapa h2,.tv-rank h3{font-family:Montserrat,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#E3A51E;font-size:clamp(.9rem,1.2vw,1.3rem);margin:0 0 1.2vh}
+.trilha{position:relative;width:min(100%, 132vh);aspect-ratio:2/1}
+.trilha svg{position:absolute;inset:0;width:100%;height:100%}
+.trilha path.base{fill:none;stroke:#2A3F6B;stroke-width:14;stroke-linecap:round;stroke-dasharray:2 22}
+.trilha path.seg{fill:none;stroke:transparent;stroke-width:14;stroke-linecap:round}
+.trilha path.seg.feito{stroke:#E3A51E;stroke-dasharray:2000;stroke-dashoffset:2000;animation:traca 1.6s ease-out forwards}
+@keyframes traca{to{stroke-dashoffset:0}}
+.no circle{fill:#14254A;stroke:#2A3F6B;stroke-width:4}
+.no text{font-size:26px;fill:#EAF1FB}
+.no.feito circle{fill:#E3A51E;stroke:#E3A51E} .no.feito text{fill:#14254A;font-weight:800}
+.no.atual circle{fill:#2E7D4F;stroke:#EAF1FB;stroke-width:5}
+.no .onda{fill:none;stroke:#5BD08A;stroke-width:3;animation:onda 2.2s infinite;transform-origin:center}
+.no .onda.o2{animation-delay:1.1s}
+@keyframes onda{from{r:30;opacity:.9}to{r:70;opacity:0}}
+.est{position:absolute;transform:translate(-50%,0);width:17%;text-align:center;pointer-events:none;display:flex;flex-direction:column;gap:.8vh}
+.est.baixo{margin-top:4.2vw}
+.est.cima{transform:translate(-50%,-100%);margin-top:-3.6vw;flex-direction:column-reverse}
+.est-t b{display:block;font-family:Montserrat,sans-serif;font-size:clamp(.85rem,1.15vw,1.25rem)}
+.est-t small{color:#9FB0CC;font-size:clamp(.65rem,.85vw,.95rem)}
+.est:not(.feito):not(.atual) .est-t{opacity:.45}
+.est.atual .est-t b{color:#5BD08A}
+.bal{background:#EAF1FB;color:#14254A;border-radius:10px;padding:.6em .7em;font-size:clamp(.7rem,.9vw,1rem);font-weight:600;line-height:1.25;box-shadow:0 8px 24px rgba(0,0,0,.35);animation:pop .5s both}
+.est.foco .bal{background:#E3A51E;transform:scale(1.06);transition:transform .4s}
+.pin{position:absolute;transform:translate(-50%,-1.3vw);display:flex;flex-direction:column;align-items:center;gap:.4vh;z-index:2}
+.pin span{width:2.6vw;height:2.6vw;min-width:30px;min-height:30px;border-radius:50%;background:#D64541;display:grid;place-items:center;font-size:clamp(.9rem,1.3vw,1.4rem);box-shadow:0 0 0 4px rgba(214,69,65,.3)}
+.pin.novo span{animation:alarme 1s 4}
+@keyframes alarme{50%{box-shadow:0 0 0 14px rgba(214,69,65,0)}}
+.pin-c{background:#D64541;color:#fff;font-size:clamp(.65rem,.8vw,.9rem);padding:.3em .55em;border-radius:6px;font-weight:700;max-width:11vw;text-align:center;line-height:1.2}
+.tv-lado{display:flex;flex-direction:column;gap:2vh;min-height:0}
+.manch{background:#EAF1FB;color:#14254A;border-radius:18px;padding:2.6vh 1.8vw;border-left:10px solid #E3A51E;min-height:30vh;display:flex;flex-direction:column;gap:1vh}
+.manch.ev{border-left-color:#D64541}
+.m-tag{font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(.75rem,.95vw,1.05rem);color:#C27F00}
+.manch.ev .m-tag{color:#D64541}
+.manch h1{font-family:Montserrat,sans-serif;font-size:clamp(1.4rem,2.3vw,2.7rem);line-height:1.12;margin:0}
+.manch p{margin:0;color:#3C4D6B;font-size:clamp(.85rem,1.1vw,1.25rem)}
+.m-dots{display:flex;gap:6px;margin-top:auto}.m-dots i{width:8px;height:8px;border-radius:50%;background:#C9D6EA}.m-dots i.on{background:#E3A51E;width:22px;border-radius:4px}
+.tv-rank{background:rgba(255,255,255,.04);border:1px solid #1E335C;border-radius:18px;padding:2vh 1.4vw;flex:1;min-height:0;overflow:hidden}
+.rk{display:grid;grid-template-columns:2.2vw auto 1fr auto;gap:.8vw;align-items:center;padding:1vh 0;border-bottom:1px solid #1E335C}
+.rk .pos{font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(1rem,1.5vw,1.7rem);color:#E3A51E}
+.rk b{display:block;font-size:clamp(.85rem,1.15vw,1.3rem)} .rk small{color:#9FB0CC;font-size:clamp(.65rem,.85vw,.95rem)}
+.rk em{font-style:normal;font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(1.1rem,1.7vw,2rem)}
+.vazio{color:#9FB0CC}
+.tv-tick{display:flex;min-width:0;align-items:stretch;background:#EAF1FB;color:#14254A;font-size:clamp(.95rem,1.35vw,1.5rem)}
+.tv-tick>span{background:#D64541;color:#fff;font-weight:800;letter-spacing:.08em;padding:1.2vh 1.6vw}
+.tk{flex:1;min-width:0;overflow:hidden;white-space:nowrap;padding:1.2vh 0}
+.tk-in{display:inline-block;padding-left:100%;animation:ticker 60s linear infinite}
+.tk-in b{font-weight:700} .tk-in i{font-style:normal;color:#E3A51E;margin:0 1.4vw}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:20;max-width:90vw}
 
 /* ---------- professor (projeção) ---------- */
@@ -377,8 +443,10 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
 .stage header .ttl{font-family:Montserrat,sans-serif;font-weight:800;font-size:1.2rem}
 .timer{font-family:Montserrat,sans-serif;font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;min-width:110px;text-align:right}
 .timer.low{color:var(--warn)}
-.ctrls{display:flex;gap:8px;flex-wrap:wrap}
-.ctrls .btn{padding:8px 12px;font-size:.9rem}
+.ctrls{display:flex;gap:6px;flex-wrap:nowrap}
+.ctrls .btn{padding:8px 11px;font-size:.88rem;white-space:nowrap}
+.stage header .ttl{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:1366px){.ctrls .btn{padding:7px 9px;font-size:.8rem}.stage header{padding:12px 18px}}
 .slide{flex:1;overflow:auto;padding:3vh 5vw;position:relative;z-index:1}
 .slide h1{font-size:clamp(2.2rem,5vw,4.6rem)}
 .slide h2{font-size:clamp(1.6rem,3vw,2.6rem)}
@@ -396,6 +464,15 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
 .rank{width:100%;font-size:1.15rem}
 .rank td{padding:8px 10px}
 .rank tr:first-child td{color:var(--accent);font-weight:700}
+html.prof{--muted:color-mix(in srgb,var(--muted) 55%,var(--ink))}
+html.prof .rank{font-size:clamp(1.1rem,1.4vw,1.7rem)}
+html.prof .rank td{padding:.35em .55em;font-weight:600}
+html.prof .rank td.n{white-space:nowrap}
+html.prof .small{font-size:max(1rem,.95vw)}
+.net{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--muted);margin-right:8px;vertical-align:middle}
+.net.on{background:var(--ok);animation:pulsa 2s infinite}
+.net.off{background:var(--warn)}
+@keyframes pulsa{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}}
 .panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:3vw}
 .foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:10px 28px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 .dots{display:flex;gap:6px}
@@ -456,7 +533,7 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
     <div class="foot">
       <button class="btn sec" id="prev">← Anterior</button>
       <div class="dots" id="dots"></div>
-      <span id="feedStatus" class="small"></span>
+      <span id="netDot" class="net" title="Conexão com a planilha"></span><span id="feedStatus" class="small"></span>
       <button class="btn" id="next">Próximo →</button>
     </div>
   </div>
@@ -473,7 +550,7 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
    CODIGOS: palavras que o professor projeta para liberar as rodadas
    ========================================================= */
 const CONFIG = {
-  ENDPOINT: 'https://script.google.com/macros/s/AKfycbwHoS57ggH5fci8Exa1RPBjM-bubQAL2YuTOX3cuphhTcfEes2JvPBgGcfVwwM3pB9bOg/exec',
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbyYVPnTACuNLhhAZK8IB9ysSudRg0Bz3uPSX6RDCuD1727byHdmis1cH_Em01kQ08DALQ/exec',
   SESSAO: 'EGAD2026',
   PARTICIPANTES: 150,
   CHAVE: 'EGAD2026',   // chave do professor (igual a CHAVE_LIMPEZA no Codigo.gs)
@@ -1054,7 +1131,7 @@ function telaQR(outra){
     ${outra?'<div class="notice small">Este QR Code é de outra sessão. Leia o QR Code que está no telão agora.</div>':''}
     <div class="divider">sem câmera?</div>
     <label for="salaIn" class="small muted">Digite o código da sala, que o professor informa</label>
-    <input type="text" id="salaIn" autocomplete="off" autocapitalize="characters" placeholder="Código da sala" style="margin-top:6px;text-align:center;letter-spacing:.08em">
+    <input type="text" id="salaIn" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" placeholder="Código da sala" style="margin-top:6px;text-align:center;letter-spacing:.08em">
     <button class="btn block sec" id="salaOk" style="margin-top:10px">Entrar</button>
   </div>`;
   const go = ()=>{
@@ -1069,11 +1146,11 @@ function telaNome(){
   $('#joinBox').innerHTML = `
   <div class="card">
     <h3>Como você se chama?</h3>
-    <input type="text" id="nomeIn" maxlength="30" autocomplete="given-name" placeholder="Seu primeiro nome">
+    <input type="text" id="nomeIn" maxlength="30" autocomplete="given-name" autocorrect="off" spellcheck="false" autocapitalize="words" placeholder="Seu primeiro nome">
     <p class="small muted" style="margin:10px 0 0">Vocês vão jogar em <b>trios</b>. Combine com dois colegas ao seu lado: um cria o trio e os outros entram com o código que aparecer na tela dele.</p>
     <button class="btn block" id="btnCriar" style="margin-top:14px">Criar um trio</button>
     <div class="divider">ou entre no trio de um colega</div>
-    <input type="text" id="codIn" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="Código do trio" style="text-align:center;letter-spacing:.2em;font-size:1.2rem">
+    <input type="text" id="codIn" maxlength="4" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" placeholder="Código do trio" style="text-align:center;letter-spacing:.2em;font-size:1.2rem">
     <button class="btn block sec" id="btnEntrar" style="margin-top:8px">Entrar no trio</button>
     <div class="divider">está sozinho?</div>
     <button class="btn block sec" id="btnEncaixar">Me encaixe num trio</button>
@@ -1178,7 +1255,7 @@ function telaEspera(){
   <div class="card">
     ${remoto?'<div class="divider" style="margin-top:0">o jogo não abriu?</div>':''}
     <label for="iniIn" class="small muted">Código de início ${remoto?'(projetado pelo professor)':''}</label>
-    <input type="text" id="iniIn" autocomplete="off" autocapitalize="characters" placeholder="Código" style="margin-top:6px;text-align:center;letter-spacing:.08em">
+    <input type="text" id="iniIn" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" placeholder="Código" style="margin-top:6px;text-align:center;letter-spacing:.08em">
     <button class="btn block sec" id="iniOk" style="margin-top:10px">Entrar no jogo</button>
   </div>`;
   const go = ()=>{
@@ -1881,6 +1958,7 @@ const SLIDES = [
     </div>`},
   {n:'Painel', min:10, live:true, h:()=>painelHTML()},
   {n:'Teoria x Sala', min:4, live:true, h:()=>teoriaSalaHTML()},
+  {n:'Informação e IA', min:3, live:true, h:()=>infoIAHTML()},
   {n:'Carta', min:5, live:true, h:()=>cartaHTML()},
   {n:'Quiz', min:4, live:true, h:()=>quizSlideHTML()},
   {n:'Relâmpago', min:4, h:()=>flashSlideHTML()},
@@ -1900,7 +1978,7 @@ function nomeTrioFormHTML(){
   if(!remotoTrio()) return '';
   return `<div class="card nomeTrio"><h3 style="margin:0 0 4px">Nome da consultoria do trio</h3>
     <p class="small muted" style="margin:0 0 8px">${P.nomeTrio ? `Vocês são <b>${esc(P.nomeTrio)}</b>. Qualquer integrante pode trocar.` : 'Escolham um nome. Ele aparece no telão e no ranking.'}</p>
-    <div style="display:flex;gap:8px"><input id="nomeTrioIn" maxlength="28" placeholder="Ex.: Consultoria Baru de Ouro" value="${esc(P.nomeTrio||'')}" style="flex:1"><button class="btn" id="nomeTrioOk">Salvar</button></div></div>`;
+    <div style="display:flex;gap:8px"><input id="nomeTrioIn" maxlength="28" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Ex.: Consultoria Baru de Ouro" value="${esc(P.nomeTrio||'')}" style="flex:1"><button class="btn" id="nomeTrioOk">Salvar</button></div></div>`;
 }
 function bindNomeTrio(){
   const b = $('#nomeTrioOk'); if(!b) return;
@@ -2150,7 +2228,9 @@ function initProfExtras(){
     <button class="btn sec" id="tRank" title="Ranking (tecla R)">🏆</button>
     <button class="btn sec" id="tSom" title="Som">🔊</button>
     <button class="btn sec" id="tExp" title="Exportar resultados (planilha)">⬇</button>
-    <button class="btn sec" id="tLimpa" title="Limpar a sessão (apaga trios, votos e resultados)">🧹</button>`);
+    <button class="btn sec" id="tLimpa" title="Limpar a sessão (apaga trios, votos e resultados)">🧹</button>
+    <button class="btn sec" id="tTv" title="Abrir o telão de notícias (Jornal do Cerrado) em outra janela">📺</button>`);
+  $('#tTv').onclick = ()=> window.open(location.pathname + '?telao=1' + (qs.get('s') ? '&s='+encodeURIComponent(qs.get('s')) : ''), 'telaoNoticias');
   $('#tLimpa').onclick = limparSessao;
   $('#tEv').onclick = menuEventos;
   $('#tRank').onclick = rankingOverlay;
@@ -2255,6 +2335,33 @@ function teoriaSalaHTML(){
       ${bar('Terminaram num equilíbrio de Nash', pct(nash,m3.length), nash+' de '+m3.length, 'var(--brand)', 'Nenhuma empresa ganharia mudando sozinha.')}
       ${bar('Consórcio (6 / 6)', pct(kk,m3.length), kk+' de '+m3.length, 'var(--ok)', 'Cooperação: o equilíbrio que todas preferem.')}
       ${bar('Guerra de preços (1 / 1)', pct(dd,m3.length), dd+' de '+m3.length, 'var(--warn)', 'O dilema do prisioneiro na prática.')}
+    </div>
+  </div>`;
+}
+
+/* ---------- informação (Simon) e uso de IA ---------- */
+function infoIAHTML(){
+  const L = lista().filter(x=>x.d.r2);
+  if(!L.length) return `<h2>Informação e IA na decisão</h2>`+semDados('Os dados aparecem depois da Rodada 2');
+  const med = (arr,f)=> arr.length ? (arr.reduce((a,x)=>a+f(x),0)/arr.length) : null;
+  const fmt = (n)=> n==null ? '–' : n.toFixed(1).replace('.',',');
+  const comp = L.filter(x=>(x.d.r2.info||[]).length), sem = L.filter(x=>!(x.d.r2.info||[]).length);
+  const gasto = comp.reduce((a,x)=>a+x.d.r2.info.length,0);
+  const viuCot = comp.filter(x=>x.d.r2.info.includes('I1') && x.d.r2.opc==='A' && x.rv && x.rv.r2==='A').length;
+  const ia = L.filter(x=>x.d.r2.ia), semIa = L.filter(x=>!x.d.r2.ia);
+  const coer = (x)=> x.s.coer ? x.s.coer.pts : 0;
+  const lin = (t,a,b)=>`<tr><td>${t}</td><td class="n">${a}</td><td class="n">${b}</td></tr>`;
+  return `<h2>Informação e IA na decisão</h2>
+  <div class="panelgrid">
+    <div><h3>Racionalidade limitada (Herbert Simon)</h3>
+      <p class="small">Informação custa caro e nem sempre muda a decisão. Quantas empresas compraram relatórios sem saber o que fazer com eles?</p>
+      <div class="bigstats"><div><b>${comp.length}</b><small>de ${L.length} empresas compraram informação</small></div><div><b>${gasto}</b><small>pontos de Caixa gastos em relatórios</small></div><div><b>${viuCot}</b><small>leram que a rival também cotou Rio Verde e mesmo assim colidiram</small></div></div>
+      <table class="rank" style="margin-top:1.5vh"><tr><td></td><td class="n">Compraram</td><td class="n">Não compraram</td></tr>${lin('Pontuação média', fmt(med(comp,x=>x.s.total)), fmt(med(sem,x=>x.s.total)))}</table>
+    </div>
+    <div><h3>Uso de IA na Rodada 2</h3>
+      <p class="small">As empresas que consultaram uma IA decidiram melhor, ou só mais rápido?</p>
+      <table class="rank">${lin('', 'Usaram IA ('+ia.length+')', 'Não usaram ('+semIa.length+')')}${lin('Pontuação média', fmt(med(ia,x=>x.s.total)), fmt(med(semIa,x=>x.s.total)))}${lin('Coerência estratégica média', fmt(med(ia,coer)), fmt(med(semIa,coer)))}${lin('Escolheram reformular (E)', ia.filter(x=>x.d.r2.opc==='E').length, semIa.filter(x=>x.d.r2.opc==='E').length)}</table>
+      <p class="small muted" style="margin-top:1vh">Atenção: com poucas empresas, diferença de média é correlação, não causa. Bom ponto para discutir método.</p>
     </div>
   </div>`;
 }
@@ -2388,6 +2495,172 @@ function mostrarImpacto(r, vA, nota){
     ${r>1?'<p class="small muted" style="margin:10px 0 0">O efeito do encontro com a concorrente aparece quando ela decidir.</p>':''}`, 'impacto');
 }
 
+/* ===================== TELÃO DE NOTÍCIAS: "Jornal do Cerrado · Ao vivo" (?telao=1) ===================== */
+const ESTACOES = [
+  {t:'Formação dos trios', s:'Quem joga com quem', ic:'👥'},
+  {t:'Rodada 1', s:'Diagnóstico e posicionamento', ic:'🔍'},
+  {t:'Rodada 2', s:'A crise do whey', ic:'⚠️'},
+  {t:'Rodada 3', s:'A proposta de Hamburgo', ic:'🌍'},
+  {t:'Rodada 4', s:'O administrador de 2030', ic:'🧭'},
+  {t:'Pódio', s:'Quem chegou mais longe', ic:'🏆'}
+];
+// posições das estações no desenho (viewBox 1200 x 430): uma trilha sinuosa pelo Cerrado
+const PTS = [[95,420],[305,190],[520,420],[735,190],[950,420],[1110,190]];
+let tvSom = false, tvHash = '', tvManchetes = [], tvIdx = 0, tvVistas = new Set(), tvPrimeira = true;
+
+function estacaoAtual(){
+  if(fase >= 4 && (relL.length || (ctlP && ctlP.flash))) return 5;
+  return Math.max(0, Math.min(4, fase||0));
+}
+function noticias(){
+  const N = [], L = lista(), pct = (a,b)=> b ? Math.round(a/b*100) : 0;
+  // 0. formação
+  if(partN) N.push({st:0, t:`${partN} participantes formam ${triosL.length} trios`, sub:'As consultorias chegam ao mercado fit goiano.'});
+  triosL.filter(t=>nomeTrioDe(t)).slice(-3).forEach(t=>N.push({st:0, t:`“${t.nome}” entra no jogo`, sub: t.equipe ? `Vai dirigir a ${EMPRESAS[empresaKey(t.equipe)].nome}.` : 'Aguardando o sorteio da empresa.'}));
+  // 1. diagnóstico
+  const r1 = L.filter(x=>x.d.r1);
+  if(r1.length){
+    const g = {custo:0, dif:0, enf:0}; r1.forEach(x=>{ if(g[x.d.r1.gen]!==undefined) g[x.d.r1.gen]++; });
+    const top = Object.keys(g).sort((a,b)=>g[b]-g[a])[0];
+    N.push({st:1, t:`${(R1_GEN.find(x=>x.id===top)||{}).t} é a aposta de ${g[top]} de ${r1.length} empresas`, sub:'Porter: escolher um posicionamento é decidir o que não fazer.'});
+    const vaid = r1.filter(x=>x.d.r1.kpi==='K5').length;
+    if(vaid) N.push({st:1, t:`${vaid} empresa${vaid>1?'s vão':' vai'} medir sucesso por curtidas`, sub:'Indicador de vaidade: não muda nenhuma decisão.'});
+    N.push({st:1, t:MANCHETES['Rodada 1'], sub:'Manchete do dia.'});
+  }
+  // 2. crise
+  const m2 = mercadosCompletos('r2');
+  if(m2.length || L.some(x=>x.d.r2)){
+    const col = m2.filter(x=>x.a.d.r2.opc==='A' && x.b.d.r2.opc==='A').length, coord = m2.filter(x=>(x.a.d.r2.opc==='A')!==(x.b.d.r2.opc==='A')).length;
+    if(m2.length) N.push({st:2, t: col ? `${col} mercado${col>1?'s':''}: as duas empresas correm para Rio Verde ao mesmo tempo` : 'Nenhuma disputa por Rio Verde: os mercados se coordenaram', sub:`${coord} de ${m2.length} mercados chegaram a um equilíbrio sem combinar nada.`});
+    const inf = L.filter(x=>x.d.r2 && (x.d.r2.info||[]).length).length;
+    if(inf) N.push({st:2, t:`${inf} empresas pagam por informação antes de decidir`, sub:'Racionalidade limitada: decidir sem saber tudo tem custo.'});
+    N.push({st:2, t:MANCHETES['Rodada 2'], sub:'Manchete do dia.'});
+  }
+  // 3. Hamburgo
+  const m3 = mercadosCompletos('r3');
+  if(m3.length || L.some(x=>x.d.r3)){
+    const cel = (x)=> estEfetiva(x.a.d.r3)+'|'+estEfetiva(x.b.d.r3);
+    const kk = m3.filter(x=>cel(x)==='K|K').length, dd = m3.filter(x=>cel(x)==='D|D').length;
+    if(kk) N.push({st:3, t:`Consórcio fechado em ${kk} mercado${kk>1?'s':''}: o kit “Energia do Cerrado” vai para a Alemanha`, sub:'Cooperação entre concorrentes: o melhor equilíbrio para as duas.'});
+    if(dd) N.push({st:3, t:`Guerra de preços em ${dd} mercado${dd>1?'s':''}: as duas dão desconto e a margem some`, sub:'O dilema do prisioneiro na prática.'});
+    const fora = L.filter(x=>x.d.r3 && x.d.r3.esg==='X4').length;
+    if(fora) N.push({st:3, t:`${fora} empresa${fora>1?'s recusam':' recusa'} as exigências ESG e fica${fora>1?'m':''} fora da disputa`, sub:'Em mercados exigentes, ESG virou condição de acesso.'});
+    N.push({st:3, t:MANCHETES['Rodada 3'], sub:'Manchete do dia.'});
+  }
+  // 4. futuro
+  if(fase >= 4){
+    N.push({st:4, t:MANCHETES['Rodada 4'], sub:'Manchete do dia.'});
+    if(comp.length){ const c = {}; comp.forEach(x=>(x.hard||[]).forEach(h=>c[h]=(c[h]||0)+1)); const k = Object.keys(c).sort((a,b)=>c[b]-c[a])[0];
+      if(k){ const h = k; N.push({st:4, t:`Competência mais citada para 2030: ${h}`, sub:`${comp.length} respostas individuais.`}); } }
+  }
+  // 5. pódio
+  const fin = L.filter(x=>x.fin).sort((a,b)=>b.s.total-a.s.total);
+  if(fin.length) N.push({st: estacaoAtual()>=5 ? 5 : Math.min(4, estacaoAtual()), t:`${nomeEquipe(fin[0].eq)} lidera com ${fin[0].s.total} pontos`, sub:`${EMPRESAS[empresaKey(fin[0].eq)].nome} · mercado ${mercadoDe(fin[0].eq)}.`, lider:fin[0].eq});
+  if(relL.length){ const r = relL.slice().sort((a,b)=>b.pontos-a.pontos)[0]; N.push({st:5, t:`${r.nome} vence o quiz relâmpago com ${r.pontos} pontos`, sub:'Rapidez e conceito: a combinação que vale ouro.'}); }
+  // eventos surpresa: entram na trilha na rodada em que aconteceram
+  (ctlP.evs||[]).forEach(x=>{ const ev = EVENTOS.find(e=>e.id===x.id); if(ev) N.push({st:Math.max(1, Math.min(4, x.f||estacaoAtual())), t:ev.t, sub:ev.txt, ev:true, id:x.id}); });
+  return N;
+}
+function trilhaSeg(i){
+  const [x1,y1] = PTS[i], [x2,y2] = PTS[i+1], dx = (x2-x1)*.55;
+  return `M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`;
+}
+function telaoHTML(N){
+  const cur = estacaoAtual(), L = lista(), rank = L.filter(x=>x.d.r1).sort((a,b)=>b.s.total-a.s.total).slice(0,5);
+  const segs = PTS.slice(0,-1).map((_,i)=>`<path class="seg ${i<cur?'feito':''}" d="${trilhaSeg(i)}"/>`).join('');
+  const nos = PTS.map(([x,y],i)=>`<g class="no ${i<cur?'feito':(i===cur?'atual':'')}" transform="translate(${x},${y})">${i===cur?'<circle class="onda" r="34"/><circle class="onda o2" r="34"/>':''}<circle r="30"/><text y="9" text-anchor="middle">${i<cur?'✓':ESTACOES[i].ic}</text></g>`).join('');
+  const rot = PTS.map(([x,y],i)=>{ const acima = y<300; const n = N.filter(z=>z.st===i && !z.ev && !/^Manchete/.test(z.sub)).slice(-1)[0];
+    return `<div class="est ${i<cur?'feito':(i===cur?'atual':'')} ${acima?'cima':'baixo'}" style="left:${x/12}%;top:${y/6}%">
+      <div class="est-t"><b>${esc(ESTACOES[i].t)}</b><small>${esc(ESTACOES[i].s)}</small></div>
+      ${n && i<=cur ? `<div class="bal">${esc(n.t)}</div>` : ''}</div>`; }).join('');
+  const evs = N.filter(z=>z.ev);
+  return `
+  <div class="tv-top">
+    <div class="tv-marca"><span class="aovivo"><i></i>AO VIVO</span><b>JORNAL DO CERRADO</b><small>Administração em Jogo · XV EGAD 2026</small></div>
+    <div class="tv-info"><span>${partN} participantes · ${triosL.length} trios · ${Math.ceil(CONFIG.MAX_EQUIPES/2)} mercados</span><b id="tvHora"></b><button id="tvSom" title="Som">${tvSom?'🔊':'🔇'}</button></div>
+  </div>
+  <div class="tv-main">
+    <div class="tv-mapa">
+      <h2>O caminho percorrido</h2>
+      <div class="trilha-wrap"><div class="trilha">
+        <svg viewBox="0 0 1200 600" aria-label="Trilha do jogo">
+          <defs><pattern id="cerrado" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="10" cy="12" r="1.6" fill="#2E7D4F" opacity=".35"/><circle cx="42" cy="40" r="1.2" fill="#E3A51E" opacity=".3"/></pattern></defs>
+          <rect width="1200" height="600" fill="url(#cerrado)"/>
+          ${PTS.slice(0,-1).map((_,i)=>`<path class="base" d="${trilhaSeg(i)}"/>`).join('')}
+          ${segs}${nos}
+        </svg>
+        ${rot}
+        <div id="tvPins"></div>
+      </div></div>
+    </div>
+    <div class="tv-lado">
+      <div class="manch" id="tvManch"></div>
+      <div class="tv-rank"><h3>Ranking ao vivo</h3>${rank.length ? rank.map((x,i)=>`<div class="rk"><span class="pos">${i+1}</span>${logo(empresaKey(x.eq),30)}<div><b>${esc(nomeEquipe(x.eq))}</b><small>${EMPRESAS[empresaKey(x.eq)].curto} · mercado ${mercadoDe(x.eq)}</small></div><em>${x.s.total}</em></div>`).join('') : '<p class="vazio">O ranking aparece depois da Rodada 1.</p>'}</div>
+    </div>
+  </div>
+  <div class="tv-tick"><span>ÚLTIMAS</span><div class="tk"><div class="tk-in">${(N.length?N:[{t:'Aguardando o início do jogo'}]).slice().reverse().map(z=>`<b>${z.ev?'⚡ ':''}${esc(z.t)}</b>`).join('<i>◆</i>')}</div></div></div>
+  ${evs.length?'':''}`;
+}
+function tvPinsPos(N){
+  const box = $('#tvPins'); if(!box) return;
+  const svg = document.querySelector('.trilha svg'); const segs = svg ? svg.querySelectorAll('path.base') : [];
+  const evs = N.filter(z=>z.ev);
+  box.innerHTML = evs.map((z,k)=>{ const i = Math.min(segs.length-1, z.st); const p = segs[i]; if(!p) return '';
+    const ln = p.getTotalLength(), mesmos = evs.filter(e=>e.st===z.st), idx = mesmos.indexOf(z), pt = p.getPointAtLength(ln*(mesmos.length===1 ? 0.5 : 0.36 + 0.28*(idx%2)));
+    return `<div class="pin ${tvVistas.has('ev'+z.id)?'':'novo'}" style="left:${pt.x/12}%;top:${pt.y/6}%"><span>⚡</span><div class="pin-c"><b>${esc(z.t)}</b></div></div>`; }).join('');
+}
+function tvManchete(){
+  const el = $('#tvManch'); if(!el || !tvManchetes.length) { if(el) el.innerHTML = '<div class="m-tag">Jornal do Cerrado</div><h1>O jogo vai começar</h1><p>Leiam o QR Code e formem seus trios.</p>'; return; }
+  const z = tvManchetes[tvIdx % tvManchetes.length];
+  el.className = 'manch' + (z.ev ? ' ev' : '');
+  el.innerHTML = `<div class="m-tag">${z.ev ? '⚡ Urgente' : '📍 '+esc(ESTACOES[z.st].t)}</div><h1>${esc(z.t)}</h1><p>${esc(z.sub||'')}</p>
+    <div class="m-dots">${tvManchetes.map((_,i)=>`<i class="${i===tvIdx%tvManchetes.length?'on':''}"></i>`).join('')}</div>`;
+  el.animate([{opacity:0, transform:'translateY(14px)'},{opacity:1, transform:'none'}], {duration:500, easing:'ease-out'});
+  document.querySelectorAll('.est').forEach((e,i)=>e.classList.toggle('foco', i===z.st));
+}
+function renderTelao(){
+  const N = noticias();
+  const hash = JSON.stringify([N.map(z=>z.t), estacaoAtual(), lista().map(x=>x.s.total), partN, triosL.length]);
+  if(hash === tvHash) return;
+  tvHash = hash;
+  const novas = N.filter(z=>!tvVistas.has(z.ev ? 'ev'+z.id : z.t));
+  $('#tvApp').innerHTML = telaoHTML(N);
+  requestAnimationFrame(()=>tvPinsPos(N));
+  $('#tvSom').onclick = ()=>{ tvSom = !tvSom; $('#tvSom').textContent = tvSom?'🔊':'🔇'; if(tvSom) som('tic'); };
+  // manchetes: as mais recentes primeiro; notícia nova entra na frente
+  tvManchetes = N.slice().reverse().slice(0, 8);
+  if(!tvPrimeira && novas.length){
+    const prior = novas.find(z=>z.ev) || novas[novas.length-1];
+    tvIdx = tvManchetes.indexOf(prior); if(tvIdx<0) tvIdx = 0;
+    if(tvSom) som(prior.ev ? 'alerta' : 'revela');
+  }
+  N.forEach(z=>tvVistas.add(z.ev ? 'ev'+z.id : z.t));
+  tvPrimeira = false;
+  tvManchete();
+}
+async function pollTelao(){
+  if(demo) return renderTelao();
+  if(!CONFIG.ENDPOINT){ renderTelao(); return; }
+  try{
+    const j = await consultar({acao:'ler', s:normS(CONFIG.SESSAO)}, 15000);
+    if(j && j.ok!==false){
+      dados = j.equipes || {}; comp = j.competencias || []; triosL = j.trios || []; quizL = j.quiz || []; partN = j.participantes || 0; relL = j.relampago || [];
+      ctlP = j.ctl || {}; EVENTOS_ATIVOS = ctlP.evs || []; if(j.nEq) CONFIG.MAX_EQUIPES = j.nEq; fase = Number(j.fase)||0;
+    }
+  }catch(e){}
+  renderTelao();
+}
+function initTelao(){
+  document.documentElement.classList.add('prof','tvmode');
+  document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
+  ['#appPart','#appProf'].forEach(s=>{ const e=$(s); if(e) e.classList.add('hidden'); });
+  const d = document.createElement('div'); d.id = 'tvApp'; document.body.appendChild(d);
+  if(qs.has('demo')){ demo = true; gerarDemo(); fase = Number(qs.get('fase')||4); ctlP = {evs:[{id:'E2',f:2},{id:'E4',f:3}]}; EVENTOS_ATIVOS = ctlP.evs; }
+  pollTelao(); setInterval(pollTelao, 6000);
+  setInterval(()=>{ if(tvManchetes.length>1){ tvIdx = (tvIdx+1) % tvManchetes.length; tvManchete(); } }, 9000);
+  setInterval(()=>{ const h=$('#tvHora'); if(h) h.textContent = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }, 1000);
+}
+
 function initProf(){
   document.documentElement.classList.add('prof');
   $('#appPart').classList.add('hidden'); $('#appProf').classList.remove('hidden');
@@ -2449,6 +2722,13 @@ function drawTimer(){
   t.classList.toggle('low', tRun && s<=60);
   if(tRun && ms<=0){ tRun=false; tLeft=0; $('#tStart').textContent='Iniciar'; }
 }
+let ultimoOk = 0;
+setInterval(()=>{ const d = $('#netDot'); if(!d || !document.documentElement.classList.contains('prof')) return;
+  if(!CONFIG.ENDPOINT || demo){ d.className='net'; d.title='Sem planilha (modo local ou demonstração)'; return; }
+  const ok = ultimoOk && Date.now()-ultimoOk < CONFIG.POLL_MS*2.5;
+  d.className = 'net ' + (ok ? 'on' : 'off');
+  d.title = ok ? 'Planilha respondendo' : (ultimoOk ? `Sem resposta da planilha há ${Math.round((Date.now()-ultimoOk)/1000)} s` : 'Aguardando a primeira resposta da planilha');
+}, 1000);
 async function poll(){
   const st = $('#feedStatus');
   if(demo){ st.textContent=`Dados de demonstração · ${partN} participantes · ${triosL.length} trios · ${comp.length} respostas individuais`; return; }
@@ -2456,6 +2736,7 @@ async function poll(){
   try{
     const r = await fetch(CONFIG.ENDPOINT+'?acao=ler&s='+encodeURIComponent(normS(CONFIG.SESSAO))+'&t='+Date.now());
     const j = await r.json();
+    if(j && j.ok!==false) ultimoOk = Date.now();
     dados = j.equipes || {}; comp = j.competencias || []; triosL = j.trios || []; quizL = j.quiz || []; partN = j.participantes || 0; relL = j.relampago || [];
     if(j.agora) offP = j.agora - Date.now();
     ctlP = j.ctl || {}; EVENTOS_ATIVOS = ctlP.evs || [];
@@ -2571,16 +2852,16 @@ function painelHTML(){
   <h2>Painel da diretoria <span class="muted" style="font-size:1rem;font-family:Inter">${fin.length} de ${L.length} equipes com resultado final</span></h2>
   <div class="panelgrid">
     <div><h3>Ranking</h3>
-      <table class="rank">${fin.slice(0,10).map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
-      <h3 style="margin-top:2vh">Posicionamento estratégico (Porter)</h3>
+      <table class="rank">${fin.slice(0,7).map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
+      <h3 style="margin-top:1vh">Posicionamento estratégico (Porter)</h3>
       <div class="bars">${['custo','dif','enf'].map(g=>{ const n=L.filter(x=>x.d.r1&&x.d.r1.gen===g).length, tot=L.filter(x=>x.d.r1&&x.d.r1.gen).length; const p=tot?Math.round(n/tot*100):0; return `<div class="row"><span>${(R1_GEN.find(x=>x.id===g)||{}).t}</span><div class="track"><i style="width:${p}%;background:var(--brand)"></i></div><b>${n}</b></div>`; }).join('')}</div>
     </div>
     <div>
       <h3>Rodada 3: onde os ${M3.length} mercados caíram</h3>
       ${matrizSalaHTML(cont, M3.length)}
-      <p style="margin-top:1.2vh"><b style="color:var(--accent)">${nashN} de ${M3.length}</b> mercados terminaram num equilíbrio de Nash · <b>${cont['K|K']||0}</b> em consórcio · <b>${cont['D|D']||0}</b> em guerra de preços</p>
-      <h3 style="margin-top:1.5vh">Rodada 2: a disputa pelo fornecedor</h3>
-      <p><b>${col}</b> mercado(s) com as duas empresas no fornecedor nacional · <b>${eq2} de ${M2.length}</b> terminaram em equilíbrio de Nash</p>
+      <p style="margin-top:1.2vh;font-size:clamp(.95rem,1.2vw,1.35rem)"><b style="color:var(--accent)">${nashN} de ${M3.length}</b> mercados terminaram num equilíbrio de Nash · <b>${cont['K|K']||0}</b> em consórcio · <b>${cont['D|D']||0}</b> em guerra de preços</p>
+      <h3 style="margin-top:.6vh">Rodada 2: a disputa pelo fornecedor</h3>
+      <p style="font-size:clamp(.95rem,1.2vw,1.35rem)"><b>${col}</b> mercado(s) com as duas empresas no fornecedor nacional · <b>${eq2} de ${M2.length}</b> terminaram em equilíbrio de Nash</p>
     </div>
   </div>`;
 }
@@ -2667,7 +2948,7 @@ function gerarDemo(){
 
 /* ===================== INÍCIO ===================== */
 const qs = new URLSearchParams(location.search);
-if(qs.has('prof') || location.hash==='#prof') initProf(); else initPart();
+if(qs.has('telao')) initTelao(); else if(qs.has('prof') || location.hash==='#prof') initProf(); else initPart();
 </script>
 </body>
 </html>
