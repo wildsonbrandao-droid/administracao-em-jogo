@@ -122,7 +122,7 @@ html.prof .hexdeco.tl{top:60px}
 .cv-line{display:inline-flex;align-items:center;gap:12px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
 .cv-line i{display:inline-block;width:34px;height:4px;background:var(--gold)}
 .cv-line i.g{background:var(--green)}
-.cv-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cv-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .cv-steps div{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-family:Montserrat,sans-serif;font-weight:700;color:var(--navy);line-height:1.15}
 .cv-hero{margin:0 -16px;padding:34px 20px 26px;text-align:center;background:#edf3fb;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
 .cv-hero .cv-title{font-size:2.5rem}
@@ -383,7 +383,25 @@ html.tvmode,html.tvmode body{background:#0A1428;color:#EAF1FB;overflow:hidden;he
 .tv-info b{font-family:Montserrat,sans-serif;font-size:clamp(1.3rem,2vw,2.2rem);color:#EAF1FB}
 .tv-info button{background:none;border:1px solid #2A3F6B;color:#EAF1FB;border-radius:8px;padding:.3em .6em;font-size:1rem;cursor:pointer}
 .tv-main{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:2vw;padding:2.4vh 2.4vw;min-height:0}
-.tv-mapa{display:flex;flex-direction:column;min-height:0}
+.tv-mapa{display:flex;flex-direction:column;min-height:0;position:relative}
+#tvQuiz{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:#0b1530;border:3px solid #D64541;box-shadow:0 0 0 6px rgba(214,69,65,.25),0 20px 60px rgba(0,0,0,.5);animation:tqEntra .7s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes tqEntra{from{transform:scale(.85) translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.tq-faixa{display:flex;align-items:center;gap:1.2vw;background:#D64541;color:#fff;padding:1.2vh 1.4vw}
+.tq-faixa span{font-family:Montserrat,sans-serif;font-weight:900;letter-spacing:.14em;background:#fff;color:#D64541;padding:.3vh .7vw;border-radius:6px;font-size:clamp(.8rem,min(1.1vw,2vh),1.3rem);animation:tqPisca 1s steps(2) infinite}
+@keyframes tqPisca{50%{opacity:.35}}
+.tq-faixa b{font-family:Montserrat,sans-serif;font-size:clamp(.95rem,min(1.45vw,2.6vh),1.7rem)}
+.tq-corpo{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.4vh;padding:2vh 1.6vw}
+.tq-h{display:flex;justify-content:space-between;color:#B9C7DE;font-weight:700;font-size:clamp(.85rem,min(1.1vw,2vh),1.3rem)}
+.tq-h b{color:#E3A51E;font-size:1.3em}
+.tq-bar{height:8px;background:#1c2e58;border-radius:99px;overflow:hidden}.tq-bar i{display:block;height:100%;background:#E3A51E;transition:width .6s}
+#tvQuiz h2{margin:1vh 0 .5vh;font-family:Montserrat,sans-serif;font-size:clamp(1.2rem,min(2.2vw,4vh),2.8rem);line-height:1.2;color:#EAF1FB;text-transform:none;letter-spacing:normal;font-weight:800}
+.tq-ops{display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 1vw}
+.tq-ops div{display:flex;align-items:center;gap:.8vw;color:#fff;font-weight:700;border-radius:12px;padding:2vh 1vw;font-size:clamp(.9rem,min(1.4vw,2.6vh),1.7rem);line-height:1.2}
+.tq-ops span{font-size:1.2em}
+.tq-rod{margin:auto 0 0;color:#B9C7DE;font-size:clamp(.78rem,min(1vw,1.9vh),1.15rem)}
+.est.uh .bal{background:#D64541;color:#fff;border-bottom-color:#D64541}
+.ovl.uh .ovl-box{border-top:6px solid #D64541;text-align:center}
+.uh-tag{display:inline-block;background:#D64541;color:#fff;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:6px;animation:tqPisca 1s steps(2) infinite}
 .tv-mapa .trilha-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
 .tv-mapa h2,.tv-rank h3{font-family:Montserrat,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#E3A51E;font-size:clamp(.9rem,1.2vw,1.3rem);margin:0 0 1.2vh}
 .trilha{position:relative;width:min(100%, 132vh);aspect-ratio:2/1}
@@ -412,14 +430,15 @@ html.tvmode,html.tvmode body{background:#0A1428;color:#EAF1FB;overflow:hidden;he
 .pin span{width:2.6vw;height:2.6vw;min-width:30px;min-height:30px;border-radius:50%;background:#D64541;display:grid;place-items:center;font-size:clamp(.9rem,1.3vw,1.4rem);box-shadow:0 0 0 4px rgba(214,69,65,.3)}
 .pin.novo span{animation:alarme 1s 4}
 @keyframes alarme{50%{box-shadow:0 0 0 14px rgba(214,69,65,0)}}
-.pin-c{background:#D64541;color:#fff;font-size:clamp(.7rem,.85vw,1rem);padding:.3em .5em;border-radius:6px;font-weight:700;max-width:8.5vw;text-align:center;line-height:1.2}
+.pin-c{background:#D64541;color:#fff;font-size:clamp(.7rem,.85vw,1rem);padding:.3em .5em;border-radius:6px;font-weight:700;max-width:7.2vw;text-align:center;line-height:1.15}
 .tv-lado{display:flex;flex-direction:column;gap:1.6vh;min-height:0}
 .manch{background:#EAF1FB;color:#14254A;border-radius:18px;padding:2.8vh 1.8vw;border-left:12px solid #E3A51E;flex:1 1 0;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:1vh}
 .manch.ev{border-left-color:#D64541}
+@media (max-height:800px){.manch h1{-webkit-line-clamp:2}.manch p{-webkit-line-clamp:1}.manch{padding:2vh 1.6vw}}
 .m-tag{font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(.85rem,1.15vw,1.3rem);color:#C27F00}
 .manch.ev .m-tag{color:#D64541}
-.manch h1{font-family:Montserrat,sans-serif;font-size:clamp(1.6rem,2.55vw,3.1rem);line-height:1.1;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.manch p{margin:0;color:#3C4D6B;font-size:clamp(1rem,1.3vw,1.5rem);line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.manch h1{font-family:Montserrat,sans-serif;font-size:clamp(1.4rem,min(2.4vw,4.6vh),3.1rem);line-height:1.12;margin:0;flex:none;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.manch p{margin:0;color:#3C4D6B;font-size:clamp(.9rem,min(1.2vw,2.3vh),1.5rem);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .m-dots{display:flex;gap:6px;margin-top:auto}.m-dots i{width:8px;height:8px;border-radius:50%;background:#C9D6EA}.m-dots i.on{background:#E3A51E;width:22px;border-radius:4px}
 .tv-rank{background:rgba(255,255,255,.04);border:1px solid #1E335C;border-radius:18px;padding:1.6vh 1.4vw;min-height:0;overflow:hidden}
 .tv-qr{display:flex;align-items:center;gap:1.4vw;background:#EAF1FB;color:#14254A;border-radius:18px;padding:1.6vh 1.4vw;border-left:12px solid #2E7D4F}
@@ -538,6 +557,43 @@ html.prof .small{font-size:max(1rem,.95vw)}
 .net.off{background:var(--warn)}
 @keyframes pulsa{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}}
 .panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:3vw}
+.aula{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4vw;margin-top:1vh}
+.slide h2.aula-h{margin:.4vh 0 0;font-size:clamp(1.4rem,min(2.5vw,4.4vh),2.8rem);line-height:1.12}
+.aula h3{margin:0 0 .7vh;color:var(--accent);font-size:clamp(.9rem,1.15vw,1.35rem);text-transform:uppercase;letter-spacing:.06em}
+.aula ul{margin:0;padding-left:1.1em}
+.slide .aula li{font-size:clamp(.82rem,min(1.12vw,2.15vh),1.45rem);line-height:1.3}
+.aula li{margin-bottom:.5vh}
+.slide .aula .viv{font-size:clamp(.88rem,min(1.2vw,2.3vh),1.5rem);margin:0 0 1vh;line-height:1.3}
+.aula-st b{font-size:clamp(1.4rem,2.3vw,2.6rem)!important}
+.slide .aula-st small{font-size:clamp(.72rem,.9vw,1rem);line-height:1.2}
+.aula-pe{display:grid;grid-template-columns:1.15fr 1fr 1.15fr;gap:1.1vw;margin-top:1.4vh}
+.aula-pe>div{background:var(--surface2);border:2px solid var(--line);border-radius:14px;padding:1vh 1vw}
+.aula-pe>div.n-sim{border-color:var(--ok)} .aula-pe>div.n-nao{border-color:var(--warn)}
+.aula-pe small{display:block;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--accent);font-size:clamp(.66rem,.8vw,.92rem);margin-bottom:.4vh}
+.aula-pe b{font-size:clamp(.98rem,1.3vw,1.5rem);font-family:Montserrat,sans-serif}
+.slide .aula-pe p{margin:.4vh 0 0;font-size:clamp(.78rem,.95vw,1.08rem);line-height:1.3}
+.slide .aula-rot td{font-size:clamp(1rem,1.5vw,1.7rem);padding:1.5vh .8vw}
+.vtop{display:grid;grid-template-columns:1.25fr 1fr;gap:2vw;align-items:stretch}
+.vres{display:grid;grid-template-columns:repeat(4,1fr);gap:.7vw}
+.vres>div{background:var(--surface2);border-radius:12px;padding:1vh .8vw}
+.vres small{display:block;font-size:clamp(.66rem,.8vw,.92rem);color:var(--muted);font-weight:700}
+.vres b{font-family:Montserrat,sans-serif;font-size:clamp(1.2rem,2vw,2.2rem);color:var(--accent)}
+.vwin{display:flex;gap:1vw;align-items:center;background:linear-gradient(135deg,rgba(227,165,30,.22),rgba(227,165,30,.06));border:2px solid var(--brand);border-radius:16px;padding:1.2vh 1.2vw}
+.vwin small{display:block;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--accent);font-size:clamp(.66rem,.8vw,.92rem)}
+.vwin b{display:block;font-family:Montserrat,sans-serif;font-size:clamp(1.2rem,2.1vw,2.4rem);line-height:1.1}
+.vwin span{font-size:clamp(.75rem,.9vw,1.05rem);color:var(--muted)}
+.vgrid{display:grid;gap:.5vw;margin-top:1.2vh}
+.vcell{border:1px solid var(--line);border-radius:10px;padding:.5vh .55vw;background:var(--surface);min-width:0}
+.vcell.top{border:2px solid var(--brand)}
+.vcell small{font-size:clamp(.62rem,.72vw,.85rem);color:var(--muted);font-weight:700}
+.vcell b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:clamp(.72rem,.85vw,1rem)}
+.vcell em{display:block;font-style:normal;font-size:clamp(.6rem,.7vw,.82rem);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vb{display:flex;gap:3px;margin:.3vh 0;flex-wrap:nowrap}
+.vb i{font-style:normal;font-weight:700;border-radius:5px;padding:0 4px;font-size:clamp(.58rem,.68vw,.8rem);background:var(--surface2);color:var(--muted)}
+.vb i.s{background:#2f7d3a;color:#fff} .vb i.n{background:#7a2b25;color:#fff}
+#tvFlash{position:fixed;inset:0;z-index:50;background:#0b1530;color:#EAF1FB;display:flex;flex-direction:column;justify-content:center;padding:4vh 5vw}
+#tvFlash .tf-marca{position:absolute;top:2.5vh;left:5vw;font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:.12em;color:#E3A51E}
+
 .foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:10px 28px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 .dots{display:flex;gap:6px}
 .dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
@@ -560,7 +616,7 @@ html.prof .small{font-size:max(1rem,.95vw)}
       <h1 class="cv-title" style="margin-top:14px">Administração<br><span>em Jogo</span></h1>
       <p class="cv-sub">Decisões, Estratégias e Desafios do Administrador Contemporâneo</p>
       <p class="cv-tag">Uma experiência prática de gestão, consultoria e tomada de decisão em cenários de incerteza</p>
-      <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Reagir à crise</div><div><span class="hexnum">3</span>Negociar com o mundo</div><div><span class="hexnum gold">4</span>Projetar o futuro</div></div>
+      <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Disputar a gôndola</div><div><span class="hexnum">3</span>Reagir à crise</div><div><span class="hexnum">4</span>Negociar com o mundo</div><div><span class="hexnum">5</span>Enfrentar a multinacional</div><div><span class="hexnum gold">6</span>Projetar o futuro</div></div>
       <p class="cv-by onlyfull">Prof. Me. Wildson Brandão</p>
       <button class="btn block cv-start onlyfull" id="btnCapa">Começar</button>
       <p class="cv-event onlyfull">XV EGAD · 20 anos do curso de Administração · UFCAT</p>
@@ -590,6 +646,7 @@ html.prof .small{font-size:max(1rem,.95vw)}
         <button class="btn sec" id="tStart">Iniciar</button>
         <button class="btn sec" id="tPlus">+1 min</button>
         <button class="btn sec" id="tReset">Zerar</button>
+        <button class="btn sec hidden" id="tFim" title="Encerrar a rodada agora: vale a maioria de cada trio e o quiz entra no telão">⏹ Encerrar</button>
       </div>
       <div class="timer" id="timer">--:--</div>
     </header>
@@ -614,7 +671,7 @@ html.prof .small{font-size:max(1rem,.95vw)}
    CODIGOS: palavras que o professor projeta para liberar as rodadas
    ========================================================= */
 const CONFIG = {
-  ENDPOINT: 'https://script.google.com/macros/s/AKfycbwQwgJMVsMcd6i9-yZKBT0FrQIhXipnwOPBVce_jnj9FbC6pb33u5CqXa1HFdixuWbuVA/exec',
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbyRU109q59nBJr47X5wV3tEDg5BXpVSdm5c9ZnfqoveCuOMEAfPPibGBEpARrNbo7SAKA/exec',
   SESSAO: 'EGAD2026',
   PARTICIPANTES: 150,
   CHAVE: 'EGAD2026',   // chave do professor (igual a CHAVE_LIMPEZA no Codigo.gs)
@@ -1529,6 +1586,30 @@ function aplicarEstado(j){
   else if(emJogo && vAntes && novaOf) setTimeout(()=>mostrarImpacto(novaOf, vAntes, porTempo(novaOf)), 300);
   aplicarFase(f);
   if(mudou){ save(); if(!$('#game').classList.contains('hidden')) render(); }
+  setTimeout(quizUltimaHora, 700);
+}
+function quizUltimaHora(){
+  if($('#game').classList.contains('hidden') || !P.team) return;
+  const r = FASE_R[P.fase]; if(!r || !QUIZ['r'+r]) return;
+  if(!(P.ctl && P.ctl.fechouRodada===r)) return;
+  P.quizAviso = P.quizAviso || {}; if(P.quizAviso[r]) return;
+  if(QUIZ['r'+r].every(q=>(P.quiz||{})[q.id])){ P.quizAviso[r] = true; save(); return; }
+  if(document.querySelector('.ovl, .plantao')) return;          // espera a revelação da rodada ser fechada
+  P.quizAviso[r] = true; save(); vib([200,80,200,80,200]);
+  const o = overlay(`<div class="uh-tag">⚡ Última hora</div><h2 style="margin:10px 0 6px">Quiz da Rodada ${numR(r)}</h2>
+    <p style="margin:0">A rodada fechou. Agora é com você: <b>${QUIZ['r'+r].length} perguntas individuais</b>, uma tentativa cada. Cada acerto vale 1 ponto no ranking individual.</p>
+    <p class="small muted" style="margin:8px 0 0">As perguntas também estão no telão.</p>
+    <div id="uhQuiz" style="text-align:left;margin-top:12px">${quizHTML(r)}</div>`, 'uh', 'Fechar');
+  o.addEventListener('click', (e)=>{
+    const b = e.target.closest('.qopt'); if(!b || b.disabled) return;
+    const q = TODAS_Q.find(x=>x.id===b.dataset.q), i = +b.dataset.i;
+    P.quiz = P.quiz || {}; if(P.quiz[q.id]) return;
+    P.quiz[q.id] = {i, ok: i===q.c}; save();
+    enviar({tipo:'quiz', id:clientId(), nome:P.nome||'', equipe:P.team, respostas:P.quiz});
+    const box = o.querySelector('#uhQuiz'); if(box) box.innerHTML = quizHTML(r);
+    if(QUIZ['r'+r].every(z=>P.quiz[z.id])){ const x = o.querySelector('.ovl-x'); if(x) x.textContent = 'Concluir'; }
+    render();
+  });
 }
 function aplicarFase(f){
   const ordem = ['jogo','r5','r2','r3','r6','r4'];
@@ -1544,7 +1625,7 @@ function aplicarFase(f){
   toast(`Rodada ${numR(nova)} liberada!`); vib([150,80,150]);
   if(P.tab===nova) render(); else desenharAbas();
 }
-function save(){ store('state',{ger:P.ger, nomeTrio:P.nomeTrio, rivalNome:P.rivalNome, evVistos:P.evVistos, flash:P.flash, flashRes:P.flashRes, flashFechado:P.flashFechado, team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
+function save(){ store('state',{ger:P.ger, nomeTrio:P.nomeTrio, rivalNome:P.rivalNome, evVistos:P.evVistos, flash:P.flash, flashRes:P.flashRes, flashFechado:P.flashFechado, team:P.team, role:P.role, d:P.d, unlock:P.unlock, tab:P.tab, sessao:P.sessao, nome:P.nome, sorteado:P.sorteado, fase:P.fase, oficial:P.oficial, rivDec:P.rivDec, trio:P.trio, codigo:P.codigo, membros:P.membros, voto:P.voto, quiz:P.quiz, quizAviso:P.quizAviso, vres:P.vres, nEq:CONFIG.MAX_EQUIPES}); }
 function startGame(){
   document.querySelectorAll('.hexdeco').forEach(h=>h.classList.add('hidden'));
   $('#join').classList.add('hidden'); $('#game').classList.remove('hidden');
@@ -1854,9 +1935,9 @@ r6: ()=>{ if(!P.unlock.r6) return lockView('r6','A notícia ainda não chegou.')
       <tr><td>Ninguém investe</td><td colspan="2">A multinacional entra. Guerra de preços: ${chips({caixa:-2,pessoas:-1})} · Acomodar: ${chips({clientes:-2})}</td></tr></table>
   </div>
   <div class="card papel ${lider?'lider':'seg'}">
-    ${lider ? `<span class="tag">Vocês são a líder</span><h3 style="margin:8px 0 4px">Vocês venceram o leilão e decidem primeiro</h3><p class="small" style="margin:0">A ${esc(Rn)} vai ver a escolha de vocês antes de decidir. Pensem no que ela fará depois de ver.</p>`
+    ${lider ? `<span class="tag">Vocês são a líder</span><h3 style="margin:8px 0 4px">Vocês venceram o leilão e decidem primeiro</h3><p class="small" style="margin:0">A ${esc(Rn)} vai ver a escolha de vocês antes de decidir. Pensem no que ela fará depois de ver. <b>Decidam em até 3 minutos:</b> a concorrente só vota depois de vocês.</p>`
       : `<span class="tag">Vocês decidem em segundo</span><h3 style="margin:8px 0 4px">${decLider ? `A líder decidiu: ${decLider.bar==='S'?'✅ investir em barreira':'❌ não investir'}` : 'Aguardando a líder decidir...'}</h3>
-         <p class="small" style="margin:0">${decLider ? (P.rv.r6 && P.rv.r6!=='ROBO' ? `A ${esc(Rn)} venceu o leilão e já escolheu. Agora é a vez de vocês.` : (P.rv.semPar ? 'A concorrente segue a reação padrão do mercado: ela não investiu.' : 'A líder não decidiu a tempo: considerem que ela não investiu.')) : `A ${esc(Rn)} venceu o leilão e decide primeiro. A escolha dela aparece aqui; depois vocês votam.`}</p>`}
+         <p class="small" style="margin:0">${decLider ? (P.rv.r6 && P.rv.r6!=='ROBO' ? `A ${esc(Rn)} venceu o leilão e já escolheu. Agora é a vez de vocês.` : (P.rv.semPar ? 'A concorrente segue a reação padrão do mercado: ela não investiu.' : 'A líder não decidiu a tempo: considerem que ela não investiu.')) : `A ${esc(Rn)} venceu o leilão e decide primeiro. A escolha dela aparece aqui; depois vocês votam. Enquanto isso, leiam a tabela e já discutam o que fariam em cada caso.`}</p>`}
   </div>
   ${grupo('Investir em barreira de entrada?', MUL_BAR, 'bar')}
   ${grupo('Se a multinacional entrar, como reagir?', MUL_RESP, 'resp')}
@@ -2086,7 +2167,7 @@ function quizHTML(r){
   </div>`;
 }
 function bindQuiz(){
-  document.querySelectorAll('.qopt:not([disabled])').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#view .qopt:not([disabled])').forEach(b=>b.onclick=()=>{
     const q = TODAS_Q.find(x=>x.id===b.dataset.q), i = +b.dataset.i;
     P.quiz = P.quiz||{}; if(P.quiz[q.id]) return;
     P.quiz[q.id] = {i, ok: i===q.c}; save(); render();
@@ -2197,7 +2278,7 @@ const SLIDES = [
         <h1 class="cv-title" style="margin-top:3vh">Administração<br><span>em Jogo</span></h1>
         <p class="cv-sub">Decisões, Estratégias e Desafios do Administrador Contemporâneo</p>
         <p class="cv-tag">Uma experiência prática de gestão, consultoria e tomada de decisão em cenários de incerteza</p>
-        <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Reagir à crise</div><div><span class="hexnum">3</span>Negociar com o mundo</div><div><span class="hexnum gold">4</span>Projetar o futuro</div></div>
+        <div class="cv-steps"><div><span class="hexnum">1</span>Diagnosticar</div><div><span class="hexnum">2</span>Disputar a gôndola</div><div><span class="hexnum">3</span>Reagir à crise</div><div><span class="hexnum">4</span>Negociar com o mundo</div><div><span class="hexnum">5</span>Enfrentar a multinacional</div><div><span class="hexnum gold">6</span>Projetar o futuro</div></div>
         <p class="cv-sub" style="margin-top:3.5vh;font-size:clamp(1rem,1.4vw,1.5rem)">Prof. Me. Wildson Brandão</p>
       </div>
       <div class="qrcard">
@@ -2213,14 +2294,15 @@ const SLIDES = [
     <p><b>Pontuação da empresa:</b> indicadores + 2 por meta de cargo cumprida + até 3 de coerência estratégica. Cada integrante vota; vale a maioria do trio. <b>Ranking individual:</b> quiz ao fim de cada rodada.</p>
     <p class="muted">Vocês decidem sem ver a concorrente. O celular revela como as decisões se encontraram. Seis rodadas: <b>diagnosticar</b>, <b>disputar a gôndola</b>, <b>reagir à crise</b>, <b>negociar com o mundo</b>, <b>defender o mercado</b> e <b>projetar o futuro</b>.</p>`},
   {n:'Equipes', min:5, live:true, h:()=>equipesHTML()},
-  {n:'Rodada 1', min:8, conceito:'r1', h:()=>`
+  {n:'Rodada 1', min:11, pos:3, conceito:'r1', h:()=>`
     <p class="tag">Rodada 1 · Passado e presente · Diagnóstico com dados</p>
     <h1 style="margin-top:10px">O que está errado nesta empresa?</h1>
+    <p><b>Primeiros 3 minutos:</b> leiam <b>O caso</b> e <b>Meu cargo</b>. Depois discutam no trio.</p>
     <p class="lead">Abram o <b>Dossiê</b>. Cada integrante vota: <b>3 problemas</b>, <b>1 indicador</b> e o <b>posicionamento de Porter</b> (custo, diferenciação ou enfoque).</p>
     <p>Atenção: nem todo incômodo da diretoria é um problema estratégico. Os números mostram o que pesa de verdade.</p>
     <p class="small muted">${CONFIG.ENDPOINT?'Se o jogo não abrir no celular, código de início:':'Código de início do jogo:'} <b style="color:var(--accent);letter-spacing:.08em;font-size:1.4em">${esc(CONFIG.CODIGOS.jogo)}</b></p>
     ${conceitoSlide('r1')}`},
-  {n:'Rodada 2', min:6, conceito:'r5', h:()=>`
+  {n:'Rodada 2', min:5, pos:2, conceito:'r5', h:()=>`
     <div class="cols">
       <div><p class="tag">Rodada 2 · Leilão da gôndola</p>
       <h1 style="margin-top:10px;font-size:clamp(2.2rem,4.4vw,4rem)">Quem leva a ponta de gôndola?</h1>
@@ -2228,16 +2310,16 @@ const SLIDES = [
       <p>Cada trio recebeu uma <b>pesquisa</b> estimando quanto a gôndola vale em Clientes, com margem de erro. <b>Quem vencer vira a líder do mercado</b> e decide primeiro na Rodada 5.</p></div>
       ${codigoBox('r5',2)}
     </div>${conceitoSlide('r5')}`},
-  {n:'Rodada 3', min:9, conceito:'r2', h:()=>`
+  {n:'Rodada 3', min:8, pos:3, conceito:'r2', h:()=>`
     <div class="cols">
       <div><p class="tag" style="background:var(--warn);color:#fff">Comunicado urgente</p>
-      <h1 style="font-size:clamp(4rem,12vw,10rem);color:var(--warn);margin:2vh 0 0">+25%</h1>
+      <h1 style="font-size:clamp(3rem,min(12vw,14vh),10rem);line-height:1;color:var(--warn);margin:2vh 0 0">+25%</h1>
       <p class="lead">no custo do whey importado. O importador vai atrasar. O estoque cobre <b>20 dias</b>.</p>
       <p>O laticínio de Rio Verde, único produtor nacional, só atende <b>uma empresa por mercado</b>. Baruna e Trilha decidem ao mesmo tempo, sem ver a escolha da outra.</p>
       <p class="small muted">Vocês podem comprar relatórios de informação (custam Caixa) e fazer uma consulta de 2 minutos a uma IA.</p></div>
       ${codigoBox('r2',3)}
     </div>${conceitoSlide('r2')}`},
-  {n:'Rodada 4', min:12, conceito:'r3', h:()=>`
+  {n:'Rodada 4', min:10, pos:3, conceito:'r3', h:()=>`
     <div class="cols">
       <div><p class="tag">Rodada 4 · Negociação internacional</p>
       <h1 style="margin-top:10px;font-size:clamp(2.2rem,4.4vw,4rem)">A proposta de Hamburgo</h1>
@@ -2246,12 +2328,12 @@ const SLIDES = [
       <div style="margin-top:3vh">${codigoBox('r3',4)}</div></div>
       <div>${matrizSalaHTML({}, 0, {count:false, nash:mostraConceito})}<p class="small muted" style="margin-top:1vh">Pontos da Baruna / pontos da Trilha.${mostraConceito?' ★ = equilíbrio de Nash.':''}</p></div>
     </div>${conceitoSlide('r3')}`},
-  {n:'Rodada 5', min:7, conceito:'r6', h:()=>`
+  {n:'Rodada 5', min:7, pos:3, conceito:'r6', h:()=>`
     <div class="cols">
       <div><p class="tag" style="background:#1F3A5F;color:#fff">Mercado em alerta</p>
       <h1 style="margin-top:10px;font-size:clamp(2.2rem,4.4vw,4rem)">Uma multinacional quer entrar em Goiás</h1>
-      <p class="lead">A NutriMax Global só entra se o mercado estiver desprotegido: <b>basta uma das duas empresas investir em barreira de entrada</b> para ela desistir. A barreira protege as duas.</p>
-      <p><b>Jogo sequencial:</b> a vencedora do leilão é a <b>líder</b> e decide primeiro. A seguidora vê a escolha da líder antes de decidir.</p></div>
+      <p class="lead">A NutriMax Global desiste se <b>pelo menos uma</b> das duas empresas investir em barreira de entrada. A barreira protege as duas.</p>
+      <p><b>Jogo sequencial:</b> quem venceu o leilão é a <b>líder</b> e decide primeiro, <b>em até 3 minutos</b>. A seguidora vê a escolha e decide depois.</p></div>
       ${codigoBox('r6',5)}
     </div>${conceitoSlide('r6')}`},
   {n:'Rodada 6', min:4, h:()=>`
@@ -2261,15 +2343,21 @@ const SLIDES = [
       <p class="lead">Todos respondem: 2 hard skills, 2 soft skills e, se quiser, uma frase para a Carta do Administrador Global.</p></div>
       ${codigoBox('r4',6)}
     </div>`},
-  {n:'Painel', min:6, live:true, h:()=>painelHTML()},
-  {n:'Teoria x Sala', min:3, live:true, h:()=>teoriaSalaHTML()},
-  {n:'Leilão e multinacional', min:3, live:true, h:()=>leilaoMulHTML()},
+  {n:'Painel', min:5, live:true, h:()=>painelHTML()},
   {n:'Informação e IA', min:0, live:true, h:()=>infoIAHTML()},
   {n:'Carta', min:0, live:true, h:()=>cartaHTML()},
   {n:'Quiz', min:0, live:true, h:()=>quizSlideHTML()},
   {n:'Relâmpago', min:4, h:()=>flashSlideHTML()},
   {n:'Pódio', min:2, live:true, h:()=>podioHTML()},
-  {n:'Fechamento', min:5, live:true, h:()=>fechamentoHTML()},
+  {n:'Aula: roteiro', min:1, live:true, h:()=>aulaRoteiroHTML()},
+  {n:'Aula: Rodada 1', min:2, live:true, h:()=>aulaRodadaHTML('r1')},
+  {n:'Aula: Rodada 2', min:2, live:true, h:()=>aulaRodadaHTML('r5')},
+  {n:'Aula: Rodada 3', min:2, live:true, h:()=>aulaRodadaHTML('r2')},
+  {n:'Aula: Rodada 4', min:2, live:true, h:()=>aulaRodadaHTML('r3')},
+  {n:'Aula: Rodada 5', min:2, live:true, h:()=>aulaRodadaHTML('r6')},
+  {n:'Aula: Rodada 6', min:1, live:true, h:()=>aulaRodadaHTML('r4')},
+  {n:'Veredito', min:2, live:true, h:()=>vereditoHTML()},
+  {n:'Fechamento', min:3, live:true, h:()=>fechamentoHTML()},
   {n:'Plano B', min:0, h:()=>planoBHTML()}
 ];
 let cur = 0, tEnd = null, tLeft = null, tRun = false, mostraConceito = false;
@@ -2718,6 +2806,155 @@ function infoIAHTML(){
   </div>`;
 }
 
+/* ===================== AULA DE FECHAMENTO: rodada a rodada, teoria, Nash e vencedores ===================== */
+const ganhoRodada = (x, r)=> extrato(x.d, x.eq, x.rv).filter(e=>e.r===r && !e.pend).reduce((a,e)=>a+pontos(e.e),0);
+function destaqueRodada(r){
+  const L = lista().filter(x=>x.d['r'+r]).map(x=>({x, g:ganhoRodada(x, r)}));
+  if(!L.length) return null;
+  L.sort((a,b)=> b.g-a.g || b.x.s.total-a.x.s.total);
+  return {eq:L[0].x.eq, g:L[0].g, empatados:L.filter(o=>o.g===L[0].g).length};
+}
+/* Leilão: equilíbrio de Nash olhando só o valor da gôndola (informação completa sobre o valor) */
+function ganhoLeilao(b, r, V){ if(b>r) return V-b; if(b<r) return 0; return b===0 ? 0 : Math.floor(V/2)-b; }
+function nashLeilao(b, r, V){
+  const u1 = ganhoLeilao(b,r,V), u2 = ganhoLeilao(r,b,V);
+  return LANCES.every(x=>ganhoLeilao(x,r,V) <= u1) && LANCES.every(x=>ganhoLeilao(x,b,V) <= u2);
+}
+/* Situação de Nash de um mercado em cada rodada estratégica: true, false ou null (sem as duas decisões) */
+function nashMercado(m){
+  const a = calcEquipe(2*m-1), b = calcEquipe(2*m), out = {};
+  const ok = (r)=> a && b && a.d[r] && b.d[r];
+  out.r5 = ok('r5') ? nashLeilao(lanceEf(a.eq, a.d.r5), lanceEf(b.eq, b.d.r5), valorGondola(m)) : null;
+  out.r2 = ok('r2') ? analiseR2(a.d.r2.opc, a.eq, b.d.r2.opc, b.eq).nash : null;
+  out.r3 = ok('r3') ? NASH3.includes(estEfetiva(a.d.r3)+'|'+estEfetiva(b.d.r3)) : null;
+  if(ok('r6')){
+    const sa = a.d.r6.bar==='S', sb = b.d.r6.bar==='S';
+    out.r6 = sa !== sb;
+    const lid = liderDe(a.eq, a.d, a.rv) ? a : b, seg = lid===a ? b : a;
+    out.r6p = lid.d.r6.bar!=='S' && seg.d.r6.bar==='S';
+  } else out.r6 = null;
+  const fa = a && a.fin, fb = b && b.fin;
+  out.venc = (fa && fb) ? (a.s.total===b.s.total ? 'empate' : (a.s.total>b.s.total ? a.eq : b.eq)) : (fa ? a.eq : (fb ? b.eq : null));
+  out.a = a; out.b = b;
+  return out;
+}
+function contaNash(r){
+  const M = Math.ceil(CONFIG.MAX_EQUIPES/2); let s = 0, n = 0, p = 0;
+  for(let m=1; m<=M; m++){ const x = nashMercado(m); if(x[r]===null || x[r]===undefined) continue; n++; if(x[r]) s++; if(r==='r6' && x.r6p) p++; }
+  return {s, n, p};
+}
+const AULA = {
+  r1:{num:1, viv:'Cada trio diagnosticou a própria empresa: 3 problemas, 1 indicador e um posicionamento estratégico.',
+      teo:['Diagnosticar é separar causa de sintoma. Dependência do importador, concentração de clientes, margem, processos manuais e rotatividade eram causas; embalagem, influenciadores e sabor da moda eram sintomas.',
+           'Um bom indicador (KPI) muda uma decisão. Seguidores e curtidas são indicador de vaidade.',
+           'Porter: liderança em custo, diferenciação ou enfoque. Ficar no meio do caminho é a pior escolha.'],
+      jogo:false, nashTxt:'Não há interação: o resultado não depende da concorrente. Equilíbrio de Nash não se aplica.',
+      perg:'Na organização onde vocês trabalham, quais "problemas" são só sintomas?'},
+  r5:{num:2, viv:'Lance fechado pela ponta de gôndola. O valor era o mesmo para as duas empresas, mas cada trio tinha só uma estimativa.',
+      teo:['Leilão de valor comum com lance fechado: o prêmio vale o mesmo para todos, mas ninguém sabe quanto.',
+           'Quem vence costuma ser quem mais superestimou o valor: a maldição do vencedor.',
+           'O lance racional fica abaixo da própria estimativa. Vencer também comprou a liderança da Rodada 5.'],
+      jogo:true, nashTxt:'Equilíbrio calculado só com o valor da gôndola: nenhuma das duas ganharia mudando sozinha o próprio lance.',
+      perg:'Vencer o leilão foi um bom negócio? A liderança na Rodada 5 compensou o preço?'},
+  r2:{num:3, viv:'O whey importado subiu 25%. O laticínio de Rio Verde só atendia uma empresa por mercado, e as duas decidiram ao mesmo tempo.',
+      teo:['Jogo de coordenação: há dois equilíbrios de Nash, uma empresa vai a Rio Verde e a outra não. O difícil é saber qual.',
+           'Melhor resposta é a melhor decisão dado o que o outro fez. Há equilíbrio de Nash quando as duas jogam a melhor resposta ao mesmo tempo.',
+           'Simon: decidimos com informação limitada, e informação custa. Mintzberg: a resposta à crise é estratégia emergente.'],
+      jogo:true, nashTxt:'Cada empresa escolheu a melhor resposta à escolha da outra.',
+      perg:'Como coordenar sem conversar? Que sinal os trios usaram para adivinhar a concorrente?'},
+  r3:{num:4, viv:'Proposta à Grünkorb, de Hamburgo: preço cheio, desconto ou consórcio, mais Incoterm, ESG e o caminho aberto pela decisão da crise.',
+      teo:['Desconto mútuo é equilíbrio de Nash e dilema do prisioneiro: estável, mas ruim para as duas.',
+           'Consórcio mútuo também é equilíbrio, e é o melhor para as duas. Exige confiança: coopetição (Axelrod).',
+           'Incoterms dividem custo e risco; ESG virou condição de acesso; os caminhos mostram que decisões passadas restringem as futuras.'],
+      jogo:true, nashTxt:'Desconto × desconto ou consórcio × consórcio.',
+      perg:'O que faltou para mais mercados chegarem ao consórcio, que era melhor para todos?'},
+  r6:{num:5, viv:'A vencedora do leilão decidiu primeiro se investia em barreira de entrada. A seguidora viu a escolha e respondeu.',
+      teo:['Jogo sequencial: resolve-se de trás para frente, por indução reversa (Selten).',
+           'Equilíbrio perfeito em subjogos: a líder não investe e a seguidora paga a barreira. É a vantagem do primeiro a se mover.',
+           'Ameaça sem compromisso não é crível (Schelling). A barreira protege as duas, e quem não paga pega carona (Olson).'],
+      jogo:true, nashTxt:'Há equilíbrio de Nash quando exatamente uma empresa investe na barreira.',
+      perg:'Quem foi líder aproveitou a vantagem? Quem seguiu percebeu que estava sem saída?'},
+  r4:{num:6, viv:'Cada participante escolheu, individualmente, as competências do administrador de 2030.',
+      teo:['Hard skills são técnicas e se aprendem com método.',
+           'Soft skills definem como a técnica chega às pessoas.',
+           'O jogo cobrou as duas: análise de dados nas rodadas e negociação dentro do trio.'],
+      jogo:false, nashTxt:'Decisão individual, sem interação estratégica. Equilíbrio de Nash não se aplica.',
+      perg:'Qual competência mais fez falta no trio de vocês hoje?'}
+};
+function salaFezAula(k){
+  const L = lista(), pct = (a,b)=> b ? Math.round(a/b*100)+'%' : '–';
+  const st = (n, t)=>`<div><b>${n}</b><small>${t}</small></div>`;
+  if(k==='r1'){ const r = L.filter(x=>x.d.r1); if(!r.length) return '';
+    const causas = r.filter(x=>(x.d.r1.prob||[]).every(p=>['P1','P2','P3','P4','P5'].includes(p))).length;
+    const vaid = r.filter(x=>x.d.r1.kpi==='K5').length;
+    const g = {custo:0,dif:0,enf:0}; r.forEach(x=>{ if(g[x.d.r1.gen]!==undefined) g[x.d.r1.gen]++; }); const top = Object.keys(g).sort((a,b)=>g[b]-g[a])[0];
+    return st(pct(causas,r.length),'escolheram só causas, nenhum sintoma') + st(vaid,'empresas mediram sucesso por curtidas') + st(pct(g[top],r.length), (R1_GEN.find(x=>x.id===top)||{}).t+' foi a escolha mais comum'); }
+  if(k==='r5'){ const L5 = L.filter(x=>x.d.r5 && x.rv && x.rv.r5!=null).map(x=>({x, r:resultadoLeilao(x.eq, x.d.r5.lance, x.rv.r5)})).filter(o=>o.r); if(!L5.length) return '';
+    const venc = L5.filter(o=>o.r.res==='venceu'), mald = venc.filter(o=>+o.x.d.r5.lance > o.r.V).length;
+    const med = (f)=> (L5.reduce((a,o)=>a+f(o),0)/L5.length).toFixed(1).replace('.',',');
+    return st(venc.length,'empresas venceram o leilão') + st(mald,'pagaram mais do que a gôndola valia') + st(med(o=>+o.x.d.r5.lance)+' × '+med(o=>o.r.V),'lance médio × valor real médio'); }
+  if(k==='r2'){ const M = mercadosCompletos('r2'); const r = L.filter(x=>x.d.r2); if(!r.length) return '';
+    const col = M.filter(x=>x.a.d.r2.opc==='A' && x.b.d.r2.opc==='A').length, coord = M.filter(x=>(x.a.d.r2.opc==='A')!==(x.b.d.r2.opc==='A')).length;
+    return st(coord,'mercados com só uma empresa em Rio Verde') + st(col,'mercados em que as duas colidiram') + st(pct(r.filter(x=>(x.d.r2.info||[]).length).length, r.length),'compraram informação antes de decidir'); }
+  if(k==='r3'){ const M = mercadosCompletos('r3'); const r = L.filter(x=>x.d.r3); if(!r.length) return '';
+    const cel = (x)=> estEfetiva(x.a.d.r3)+'|'+estEfetiva(x.b.d.r3);
+    return st(M.filter(x=>cel(x)==='K|K').length,'mercados fecharam consórcio') + st(M.filter(x=>cel(x)==='D|D').length,'mercados em guerra de preços') + st(r.filter(x=>x.d.r3.esg==='X4').length,'empresas recusaram o ESG e ficaram fora'); }
+  if(k==='r6'){ const M = mercadosCompletos('r6'); if(!M.length) return '';
+    const entrou = M.filter(x=>x.a.d.r6.bar!=='S' && x.b.d.r6.bar!=='S').length, so1 = M.filter(x=>(x.a.d.r6.bar==='S')!==(x.b.d.r6.bar==='S')).length, ambos = M.filter(x=>x.a.d.r6.bar==='S' && x.b.d.r6.bar==='S').length;
+    return st(entrou,'mercados onde a multinacional entrou') + st(so1,'mercados com uma pagando e outra de carona') + st(ambos,'mercados em que as duas pagaram'); }
+  if(k==='r4'){ if(!comp.length) return '';
+    const conta = (lst,key)=> lst.map(t=>({t, n:comp.filter(c=>(c[key]||[]).includes(t)).length})).sort((a,b)=>b.n-a.n)[0];
+    const h = conta(R4_HARD,'hard'), s = conta(R4_SOFT,'soft');
+    return st(comp.length,'respostas individuais') + st(h.n, esc(h.t)+' (hard skill mais citada)') + st(s.n, esc(s.t)+' (soft skill mais citada)'); }
+  return '';
+}
+function aulaRodadaHTML(k){
+  const A = AULA[k], C = CONCEITOS[k] || {};
+  const fez = salaFezAula(k);
+  let nashBox;
+  if(!A.jogo) nashBox = `<div><small>Equilíbrio de Nash</small><b>Não se aplica</b><p>${A.nashTxt}</p></div>`;
+  else { const c = contaNash(k);
+    nashBox = `<div class="${c.n ? (c.s ? 'n-sim' : 'n-nao') : ''}"><small>Equilíbrio de Nash</small><b>${c.n ? (c.s ? `Estabelecido em ${c.s} de ${c.n} mercados` : `Não estabelecido (0 de ${c.n})`) : 'Aguardando decisões'}</b><p>${A.nashTxt}${k==='r6' && c.n ? ` Em <b>${c.p}</b>, a líder pegou carona: equilíbrio perfeito em subjogos.` : ''}</p></div>`; }
+  let dest;
+  if(k==='r4'){ const I = rankingIndividual()[0]; dest = `<div><small>Destaque</small><b>${I ? esc(I.nome) : '–'}</b><p>${I ? 'Maior pontuação individual (quiz e relâmpago).' : 'Aparece quando houver respostas individuais.'}</p></div>`; }
+  else { const d = destaqueRodada(+k.slice(1)); dest = `<div><small>Trio destaque da rodada</small><b>${d ? esc(nomeEquipe(d.eq)) : '–'}</b><p>${d ? `${EMPRESAS[empresaKey(d.eq)].curto} · mercado ${mercadoDe(d.eq)} · ${d.g>0?'+':''}${d.g} pontos na rodada${d.empatados>1?`. ${d.empatados} trios empataram no melhor resultado; desempate pela pontuação final`:''}` : 'Aparece quando houver decisões.'}</p></div>`; }
+  return `<p class="tag">Fechamento · Rodada ${A.num}</p>
+  <h2 class="aula-h">${esc(C.t||'')}</h2>
+  <div class="aula">
+    <div><h3>O que vocês viveram</h3><p class="viv">${A.viv}</p>
+      ${fez ? `<h3>O que a sala fez</h3><div class="bigstats aula-st">${fez}</div>` : `<p class="muted">${CONFIG.ENDPOINT||demo ? 'Os números aparecem quando a rodada tiver decisões.' : 'Sem planilha: os números da sala não chegam aqui.'}</p>`}</div>
+    <div><h3>A teoria</h3><ul>${A.teo.map(t=>`<li>${t}</li>`).join('')}</ul>${C.ref?`<p class="small muted" style="margin-top:.8vh">${esc(C.ref)}</p>`:''}</div>
+  </div>
+  <div class="aula-pe">${nashBox}${dest}<div><small>Pergunta para a turma</small><p style="font-size:clamp(.95rem,1.25vw,1.4rem);margin-top:.3vh"><b>${A.perg}</b></p></div></div>`;
+}
+function aulaRoteiroHTML(){
+  const lin = [['r1','Diagnóstico com dados','Porter, KPI, VRIO'],['r5','Leilão da gôndola','Maldição do vencedor'],['r2','Crise do whey','Coordenação, melhor resposta, Simon'],['r3','Hamburgo e caminhos','Dilema do prisioneiro, coopetição, Ansoff'],['r6','A multinacional','Jogo sequencial, ameaça crível, carona'],['r4','O administrador de 2030','Hard e soft skills']];
+  return `<h2>Fechamento: o que cada rodada ensinou</h2>
+  <table class="rank aula-rot"><tr><td></td><td class="muted">Situação</td><td class="muted">Teoria</td><td class="muted n">Equilíbrio de Nash</td></tr>
+  ${lin.map(([k,s,t])=>{ const A = AULA[k]; let nz = 'não se aplica';
+    if(A.jogo){ const c = contaNash(k); nz = c.n ? `${c.s} de ${c.n} mercados` : 'aguardando'; }
+    return `<tr><td><b>Rodada ${A.num}</b></td><td>${s}</td><td>${t}</td><td class="n">${nz}</td></tr>`; }).join('')}</table>
+  <p class="small muted" style="margin-top:1.5vh">Próximos slides: uma rodada por vez, com o que a sala fez, a teoria, o equilíbrio de Nash e o trio destaque. No fim, o veredito mercado a mercado.</p>`;
+}
+function vereditoHTML(){
+  const M = Math.ceil(CONFIG.MAX_EQUIPES/2), V = [];
+  for(let m=1; m<=M; m++) V.push({m, ...nashMercado(m)});
+  const fin = lista().filter(x=>x.fin).sort((a,b)=>b.s.total-a.s.total);
+  if(!fin.length && !V.some(v=>v.r5!==null || v.r2!==null)) return `<h2>Veredito: equilíbrio de Nash e trio vencedor</h2>`+semDados('O veredito aparece quando houver resultados');
+  const w = fin[0], emp = w ? fin.filter(x=>x.s.total===w.s.total) : [];
+  const resumo = [['r5','R2 · Leilão'],['r2','R3 · Crise'],['r3','R4 · Hamburgo'],['r6','R5 · Multinacional']].map(([k,t])=>{ const c = contaNash(k); return `<div><small>${t}</small><b>${c.n ? c.s+' de '+c.n : '–'}</b></div>`; }).join('');
+  const badge = (v, t)=> `<i class="${v===null||v===undefined?'':(v?'s':'n')}" title="Rodada ${t}">${t}${v===null||v===undefined?'·':(v?'✓':'✗')}</i>`;
+  return `<h2 style="margin-bottom:.6vh">Veredito: equilíbrio de Nash e trio vencedor</h2>
+  <div class="vtop">
+    <div><p class="small muted" style="margin:0 0 .6vh">Mercados em equilíbrio de Nash, por rodada estratégica</p><div class="vres">${resumo}</div></div>
+    <div class="vwin">${w ? `${logo(empresaKey(w.eq),48)}<div><small>Trio vencedor do jogo</small><b>${emp.length>1 ? emp.map(x=>esc(nomeEquipe(x.eq))).join(' e ') : esc(nomeEquipe(w.eq))}</b><span>${emp.length>1 ? `Empate com ${w.s.total} pontos` : `${EMPRESAS[empresaKey(w.eq)].nome} · mercado ${mercadoDe(w.eq)} · ${w.s.total} pontos · ${w.s.nm}/${w.s.metas.length} metas`}</span></div>` : '<div><small>Trio vencedor</small><b>Aguardando a Rodada 5</b></div>'}</div>
+  </div>
+  <div class="vgrid" style="grid-template-columns:repeat(${Math.min(9, Math.max(4, Math.ceil(V.length/3)))},minmax(0,1fr))">${V.map(v=>{ const wn = v.venc==='empate' ? 'Empate' : (v.venc ? esc(nomeEquipe(v.venc)) : '–');
+    const ganhou = v.venc && v.venc!=='empate' ? EMPRESAS[empresaKey(v.venc)].curto : '';
+    return `<div class="vcell ${w && (v.venc===w.eq) ? 'top' : ''}"><small>Mercado ${v.m}</small><div class="vb">${badge(v.r5,'2')}${badge(v.r2,'3')}${badge(v.r3,'4')}${badge(v.r6,'5')}</div><b title="${wn}">🏁 ${wn}</b>${ganhou?`<em>${ganhou}${v.r6p?' · R5: líder de carona':''}</em>`:''}</div>`; }).join('')}</div>
+  <p class="small muted" style="margin-top:.8vh">2, 3, 4 e 5 = rodadas estratégicas · ✓ = o mercado terminou em equilíbrio de Nash · ✗ = não terminou · 🏁 = trio que venceu o mercado (maior pontuação final).</p>`;
+}
+
 /* ---------- pódio ---------- */
 function podioHTML(){
   const L = lista().sort((a,b)=>b.s.total-a.s.total).slice(0,3), I = rankingIndividual().slice(0,3);
@@ -2858,6 +3095,20 @@ function mostrarImpacto(r, vA, nota){
     ${r!==1?'<p class="small muted" style="margin:10px 0 0">O efeito do encontro com a concorrente aparece quando ela decidir.</p>':''}`, 'impacto');
 }
 
+
+/* ===================== QUIZ DE ÚLTIMA HORA: entra no telão e no celular quando a rodada fecha ===================== */
+const FASE_R = {1:1, 2:5, 3:2, 4:3, 5:6};        // fase -> rodada interna
+const EST_R  = {1:1, 5:2, 2:3, 3:4, 6:5};        // rodada interna -> estação do caminho no telão
+/* O quiz da rodada fica "no ar" do fechamento da rodada (cronômetro zerado ou botão Encerrar) até o professor liberar a próxima */
+function quizNoAr(){ const r = FASE_R[fase]; return r && QUIZ['r'+r] && ctlP && ctlP.fechouRodada===r ? r : null; }
+const respondeuQuiz = (x, r)=> x && x.respostas && QUIZ['r'+r].every(q=>x.respostas[q.id]);
+function acertoQuiz(r){
+  const qs = QUIZ['r'+r], porQ = qs.map(q=>{ const L = quizL.filter(x=>x.respostas && x.respostas[q.id]); return {q, n:L.length, ok:L.filter(x=>x.respostas[q.id].ok).length}; });
+  const n = porQ.reduce((a,x)=>a+x.n,0), ok = porQ.reduce((a,x)=>a+x.ok,0);
+  const dif = porQ.filter(x=>x.n).sort((a,b)=>a.ok/a.n - b.ok/b.n)[0];
+  return {n, pct: n ? Math.round(ok/n*100) : 0, dif, pessoas: quizL.filter(x=>respondeuQuiz(x, r)).length};
+}
+
 /* ===================== TELÃO DE NOTÍCIAS: "Jornal do Cerrado · Ao vivo" (?telao=1) ===================== */
 const ESTACOES = [
   {t:'Formação dos trios', s:'Quem joga com quem', ic:'👥'},
@@ -2867,14 +3118,19 @@ const ESTACOES = [
   {t:'Rodada 4', s:'Hamburgo e caminhos', ic:'🌍'},
   {t:'Rodada 5', s:'A multinacional', ic:'🏭'},
   {t:'Rodada 6', s:'O administrador de 2030', ic:'🧭'},
+  {t:'Quiz relâmpago', s:'Conceito e rapidez', ic:'⚡'},
   {t:'Pódio', s:'Quem chegou mais longe', ic:'🏆'}
 ];
 // posições das estações no desenho (viewBox 1200 x 430): uma trilha sinuosa pelo Cerrado
-const PTS = [[70,420],[225,190],[380,420],[535,190],[690,420],[845,190],[1000,420],[1135,190]];
+const PTS = [[62,420],[196,190],[330,420],[464,190],[598,420],[732,190],[866,420],[1000,190],[1134,420]];
 let tvSom = false, tvHash = '', tvManchetes = [], tvIdx = 0, tvVistas = new Set(), tvPrimeira = true;
 
 function estacaoAtual(){
-  if(fase >= 6 && (relL.length || (ctlP && ctlP.flash))) return 7;
+  if(fase >= 6){
+    const fl = ctlP && ctlP.flash, p = fl ? flashPos(fl, agoraP()) : null;
+    if(p) return p.fase==='fim' ? 8 : 7;      // quiz relâmpago antes do pódio
+    if(relL.length) return 8;
+  }
   return Math.max(0, Math.min(6, fase||0));
 }
 function noticias(){
@@ -2936,8 +3192,13 @@ function noticias(){
   }
   // 5. pódio
   const fin = L.filter(x=>x.fin).sort((a,b)=>b.s.total-a.s.total);
-  if(fin.length) N.push({st: estacaoAtual()>=7 ? 7 : Math.min(6, estacaoAtual()), t:`${nomeEquipe(fin[0].eq)} lidera com ${fin[0].s.total} pontos`, sub:`${EMPRESAS[empresaKey(fin[0].eq)].nome} · mercado ${mercadoDe(fin[0].eq)}.`, lider:fin[0].eq});
+  if(fin.length) N.push({st: estacaoAtual()>=8 ? 8 : Math.min(6, estacaoAtual()), t: estacaoAtual()>=8 ? `${nomeEquipe(fin[0].eq)} vence o jogo com ${fin[0].s.total} pontos` : `${nomeEquipe(fin[0].eq)} lidera com ${fin[0].s.total} pontos`, sub:`${EMPRESAS[empresaKey(fin[0].eq)].nome} · mercado ${mercadoDe(fin[0].eq)}.`, lider:fin[0].eq});
   if(relL.length){ const r = relL.slice().sort((a,b)=>b.pontos-a.pontos)[0]; N.push({st:7, t:`${r.nome} vence o quiz relâmpago com ${r.pontos} pontos`, sub:'Rapidez e conceito: a combinação que vale ouro.'}); }
+  // quiz de cada rodada: última hora enquanto está no ar; depois, o resultado na estação da rodada
+  ORDEM_R.forEach(r=>{
+    if(quizNoAr()===r) N.push({st:EST_R[r], t:`Última hora: quiz da Rodada ${numR(r)} no ar`, sub:'Respondam agora no celular. Cada acerto vale 1 ponto no ranking individual.', uh:true});
+    else if(fase > FASE_DA_R[r]){ const a = acertoQuiz(r); if(a.n) N.push({st:EST_R[r], q:true, t:`Quiz da Rodada ${numR(r)}: ${a.pct}% de acerto`, sub: a.dif ? `Pergunta mais difícil: ${a.dif.q.curto} (${Math.round(a.dif.ok/a.dif.n*100)}% acertaram).` : ''}); }
+  });
   // eventos surpresa: entram na trilha na rodada em que aconteceram
   (ctlP.evs||[]).forEach(x=>{ const ev = EVENTOS.find(e=>e.id===x.id); if(ev) N.push({st:Math.max(1, Math.min(6, x.f||estacaoAtual())), t:ev.t, sub:ev.txt, ev:true, id:x.id}); });
   return N;
@@ -2965,8 +3226,8 @@ function telaoHTML(N){
   const cur = estacaoAtual(), L = lista(), rank = L.filter(x=>x.d.r1).sort((a,b)=>b.s.total-a.s.total).slice(0,5);
   const segs = PTS.slice(0,-1).map((_,i)=>`<path class="seg ${i<cur?'feito':''}" d="${trilhaSeg(i)}"/>`).join('');
   const nos = PTS.map(([x,y],i)=>`<g class="no ${i<cur?'feito':(i===cur?'atual':'')}" transform="translate(${x},${y})">${i===cur?'<circle class="onda" r="34"/><circle class="onda o2" r="34"/>':''}<circle r="30"/><text y="9" text-anchor="middle">${i<cur?'✓':ESTACOES[i].ic}</text></g>`).join('');
-  const rot = PTS.map(([x,y],i)=>{ const acima = y<300; const n = N.filter(z=>z.st===i && !z.ev && !/^Manchete/.test(z.sub)).slice(-1)[0];
-    return `<div class="est ${i<cur?'feito':(i===cur?'atual':'')} ${acima?'cima':'baixo'}" style="left:${x/12}%;top:${y/6}%">
+  const rot = PTS.map(([x,y],i)=>{ const acima = y<300; const n = N.filter(z=>z.st===i && !z.ev && !z.q && !/^Manchete/.test(z.sub)).slice(-1)[0];
+    return `<div class="est ${i<cur?'feito':(i===cur?'atual':'')} ${acima?'cima':'baixo'} ${n&&n.uh?'uh':''}" style="left:${x/12}%;top:${y/6}%">
       <div class="est-t"><b>${esc(ESTACOES[i].t)}</b><small>${esc(ESTACOES[i].s)}</small></div>
       ${n && i<=cur ? `<div class="bal">${esc(n.t)}</div>` : ''}</div>`; }).join('');
   const evs = N.filter(z=>z.ev);
@@ -3009,20 +3270,20 @@ function tvPinsPos(N){
 function tvManchete(){
   const el = $('#tvManch'); if(!el || !tvManchetes.length) { if(el) el.innerHTML = '<div class="m-tag">Jornal do Cerrado</div><h1>O jogo vai começar</h1><p>Leiam o QR Code e formem seus trios.</p>'; return; }
   const z = tvManchetes[tvIdx % tvManchetes.length];
-  el.className = 'manch' + (z.ev ? ' ev' : '');
-  el.innerHTML = `<div class="m-tag">${z.ev ? '⚡ Urgente' : '📍 '+esc(ESTACOES[z.st].t)}</div><h1>${esc(z.t)}</h1><p>${esc(z.sub||'')}</p>
+  el.className = 'manch' + (z.ev || z.uh ? ' ev' : '');
+  el.innerHTML = `<div class="m-tag">${z.ev ? '⚡ Urgente' : (z.uh ? '⚡ Última hora' : '📍 '+esc(ESTACOES[z.st].t))}</div><h1>${esc(z.t)}</h1><p>${esc(z.sub||'')}</p>
     <div class="m-dots">${tvManchetes.map((_,i)=>`<i class="${i===tvIdx%tvManchetes.length?'on':''}"></i>`).join('')}</div>`;
   el.animate([{opacity:0, transform:'translateY(14px)'},{opacity:1, transform:'none'}], {duration:500, easing:'ease-out'});
   document.querySelectorAll('.est').forEach((e,i)=>e.classList.toggle('foco', i===z.st));
 }
 function renderTelao(){
   const N = noticias(), rank = lista().filter(x=>x.d.r1);
-  const hash = JSON.stringify([N.map(z=>z.t), fase, estacaoAtual(), lista().map(x=>x.s.total), partN, triosL.map(t=>t.n+(t.nome||''))]);
+  const hash = JSON.stringify([N.map(z=>z.t), fase, estacaoAtual(), quizNoAr(), lista().map(x=>x.s.total), partN, triosL.map(t=>t.n+(t.nome||''))]);
   if(hash === tvHash) return;
   tvHash = hash;
   const novas = N.filter(z=>!tvVistas.has(z.ev ? 'ev'+z.id : z.t));
   $('#tvApp').innerHTML = telaoHTML(N);
-  requestAnimationFrame(()=>tvPinsPos(N));
+  requestAnimationFrame(()=>tvPinsPos(N)); tvQuizTick();
   const qg = $('#tvQRg');
   if(qg){ const tam = Math.round(Math.min(innerHeight*0.52, innerWidth*0.27)); if(window.QRCode) new QRCode(qg,{text:partURL, width:tam, height:tam, colorDark:'#0A1428', colorLight:'#FFFFFF', correctLevel:QRCode.CorrectLevel.M}); else qg.textContent='QR indisponível'; }
   const qb = $('#tvQr');
@@ -3048,9 +3309,39 @@ async function pollTelao(){
     if(j && j.ok!==false){
       dados = j.equipes || {}; comp = j.competencias || []; triosL = j.trios || []; quizL = j.quiz || []; partN = j.participantes || 0; relL = j.relampago || [];
       ctlP = j.ctl || {}; EVENTOS_ATIVOS = ctlP.evs || []; if(j.nEq) CONFIG.MAX_EQUIPES = j.nEq; fase = Number(j.fase)||0;
+      if(j.agora) offP = j.agora - Date.now();
     }
   }catch(e){}
   renderTelao();
+}
+/* Quiz da rodada no telão: notícia de última hora sobre o caminho, com as perguntas e quantos já responderam */
+let tvQuizR = null, tvQuizT0 = 0, tvQuizHtml = '';
+function tvQuizTick(){
+  const r = quizNoAr(), mapa = document.querySelector('.tv-mapa');
+  let box = $('#tvQuiz');
+  if(!r || !mapa || $('#tvFlash')){ if(box) box.remove(); if(!r) tvQuizR = null; return; }
+  if(tvQuizR !== r){ tvQuizR = r; tvQuizT0 = Date.now(); if(tvSom){ som('alerta'); setTimeout(()=>som('alerta'), 700); } const a = $('#tvApp'); if(a){ a.classList.remove('tremor'); void a.offsetWidth; a.classList.add('tremor'); } }
+  if(!box || box.parentNode !== mapa){ if(box) box.remove(); box = document.createElement('div'); box.id = 'tvQuiz'; mapa.appendChild(box); tvQuizHtml = ''; }
+  const qs = QUIZ['r'+r], i = Math.floor((Date.now()-tvQuizT0)/15000) % qs.length, q = qs[i];
+  const resp = quizL.filter(x=>respondeuQuiz(x, r)).length, tot = Math.max(1, partN);
+  const h = `<div class="tq-faixa"><span>⚡ ÚLTIMA HORA</span><b>A Rodada ${numR(r)} fechou: quiz no ar, respondam no celular</b></div>
+    <div class="tq-corpo">
+      <div class="tq-h"><span>Pergunta ${i+1} de ${qs.length}</span><span><b>${resp}</b> de ${partN} já responderam</span></div>
+      <div class="tq-bar"><i style="width:${Math.min(100, resp/tot*100)}%"></i></div>
+      <h2>${esc(q.q)}</h2>
+      <div class="tq-ops">${q.ops.map((o,k)=>`<div style="background:${FL_COR[k]}"><span>${FL_SIM[k]}</span>${esc(o)}</div>`).join('')}</div>
+      <p class="tq-rod">O quiz abriu sozinho no celular de cada um (se fechou, está no fim da aba <b>Rodada ${numR(r)}</b>). Uma tentativa por pergunta; a resposta certa aparece no celular depois que você responde.</p>
+    </div>`;
+  if(h !== tvQuizHtml){ box.innerHTML = h; tvQuizHtml = h; }
+}
+/* Quiz relâmpago ao vivo no telão: cobre a tela enquanto as perguntas correm; ao terminar, a trilha segue para o pódio */
+function tvFlashTick(){
+  const fl = ctlP && ctlP.flash, p = fl ? flashPos(fl, agoraP()) : null;
+  let box = $('#tvFlash');
+  if(!p || p.fase==='fim'){ if(box){ box.remove(); tvHash=''; renderTelao(); } return; }
+  if(!box){ box = document.createElement('div'); box.id = 'tvFlash'; document.body.appendChild(box); }
+  const s0 = somOn; somOn = tvSom; const h = flashTelaoHTML(); somOn = s0;
+  box.innerHTML = '<div class="tf-marca">⚡ QUIZ RELÂMPAGO · JORNAL DO CERRADO</div>' + h;
 }
 function initTelao(){
   document.documentElement.classList.add('prof','tvmode');
@@ -3058,7 +3349,7 @@ function initTelao(){
   ['#appPart','#appProf'].forEach(s=>{ const e=$(s); if(e) e.classList.add('hidden'); });
   const d = document.createElement('div'); d.id = 'tvApp'; document.body.appendChild(d);
   if(qs.has('demo')){ demo = true; gerarDemo(); fase = Number(qs.get('fase')||4); ctlP = {evs:[{id:'E2',f:2},{id:'E4',f:3}]}; EVENTOS_ATIVOS = ctlP.evs; }
-  pollTelao(); setInterval(pollTelao, 5000);
+  pollTelao(); setInterval(pollTelao, 5000); setInterval(tvFlashTick, 250); setInterval(tvQuizTick, 1000);
   setInterval(()=>{ if(tvManchetes.length>1){ tvIdx = (tvIdx+1) % tvManchetes.length; tvManchete(); } }, 9000);
   setInterval(()=>{ const h=$('#tvHora'); if(h) h.textContent = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }, 1000);
 }
@@ -3076,6 +3367,15 @@ function initProf(){
     if((e.key==='c'||e.key==='C') && SLIDES[cur].conceito){ mostraConceito=!mostraConceito; drawSlide(); revelar(); }
   });
   $('#tStart').onclick = toggleTimer;
+  $('#tFim').onclick = async ()=>{
+    const b = $('#tFim');
+    if(!b.dataset.conf){ b.dataset.conf = '1'; b.textContent = 'Confirmar?'; setTimeout(()=>{ if(b.dataset.conf){ delete b.dataset.conf; b.textContent = '⏹ Encerrar'; } }, 4000); return; }
+    delete b.dataset.conf; b.textContent = '⏹ Encerrar';
+    tRun = false; tLeft = 0; $('#tStart').textContent = 'Iniciar'; drawTimer();
+    if(!CONFIG.ENDPOINT || demo){ $('#feedStatus').textContent = 'Sem planilha: não há rodada para encerrar.'; return; }
+    await ctlEnviar({fim:'0.005'});
+    $('#feedStatus').textContent = 'Rodada encerrada: vale a maioria de cada trio. O quiz entra no telão e nos celulares em instantes.';
+  };
   $('#tFase').onclick = cliqueFase;
   desenharFase();
   $('#tPlus').onclick = ()=>{ if(tRun) tEnd += 60000; else tLeft = (tLeft??0) + 60000; drawTimer(); syncTimer(); };
@@ -3090,9 +3390,11 @@ function go(i){
   cur = i; const s = SLIDES[i]; mostraConceito = false;
   document.querySelectorAll('.hexdeco').forEach(h=>h.classList.toggle('hidden', !(i===0 || i===SLIDES.length-1)));
   document.documentElement.classList.toggle('cover', i===0);
-  $('#stepLbl').textContent = `· ${i+1}/${SLIDES.length} · ${s.n}`;
+  $('#stepLbl').textContent = `· ${i+1}/${SLIDES.length} · ${s.n}` + (s.pos ? ` · ${s.min}+${s.pos} min` : '');
+  $('#stepLbl').title = s.pos ? `${s.min} min para decidir (cronômetro) e cerca de ${s.pos} min para resultado e quiz` : '';
   document.querySelectorAll('#dots i').forEach((d,k)=>d.classList.toggle('on',k===i));
   $('#tConc').classList.toggle('hidden', !s.conceito);
+  $('#tFim').classList.toggle('hidden', !s.pos); $('#tFim').textContent = '⏹ Encerrar'; delete $('#tFim').dataset.conf;
   tRun=false; tLeft = s.min*60000; $('#tStart').textContent='Iniciar';
   drawSlide();
   if(MANCHETES[s.n] && somOn) som('alerta');
@@ -3147,19 +3449,23 @@ async function poll(){
     evVistosP = ids;
     if(j.nEq) CONFIG.MAX_EQUIPES = j.nEq;
     if(typeof j.fase==='number' && !faseConfirmando){ fase = j.fase; desenharFase(); }
+    backAntigo = j.v !== VERSAO_BACK; desenharFase();
     if(j.v !== VERSAO_BACK){ st.innerHTML = `<b style="color:var(--warn)">⚠ A planilha está com o Codigo.gs antigo${j.v?' ('+esc(j.v)+')':''}. Cole o Codigo.gs novo no Apps Script e crie uma Nova versão em Gerenciar implantações.</b>`; return; }
-    st.textContent = `${FASE_NOME[fase]} · ${partN} participante(s) · ${triosL.length} trio(s) · ${Object.keys(dados).length} equipe(s) com decisões · ${comp.length} resposta(s) individuais · ${new Date().toLocaleTimeString('pt-BR')}`;
+    const qa = quizNoAr();
+    st.textContent = (qa ? `⚡ Quiz da Rodada ${numR(qa)} no ar: ${quizL.filter(x=>respondeuQuiz(x, qa)).length} de ${partN} responderam · ` : '') + `${FASE_NOME[fase]} · ${partN} participante(s) · ${triosL.length} trio(s) · ${Object.keys(dados).length} equipe(s) com decisões · ${comp.length} resposta(s) individuais · ${new Date().toLocaleTimeString('pt-BR')}`;
     if(SLIDES[cur].live) drawSlide();
   }catch(e){ st.textContent='Sem conexão com a planilha: ' + motivoFalha(e); }
 }
 const FASE_BTN  = ['Liberar o jogo','Liberar Rodada 2','Liberar Rodada 3','Liberar Rodada 4','Liberar Rodada 5','Liberar Rodada 6','Tudo liberado'];
 const FASE_NOME = ['Formação dos trios','Rodada 1 liberada','Rodada 2 liberada','Rodada 3 liberada','Rodada 4 liberada','Rodada 5 liberada','Rodada 6 liberada'];
-let fase = 0, faseConfirmando = false, faseTmr = null;
+let fase = 0, faseConfirmando = false, faseTmr = null, backAntigo = false;
 function desenharFase(){
   const b = $('#tFase'); if(!b) return;
   b.classList.toggle('confirm', faseConfirmando);
   if(!CONFIG.ENDPOINT){ b.textContent = 'Liberação por código'; b.disabled = true; b.title = 'Configure o ENDPOINT para liberar pelos celulares'; return; }
   b.disabled = fase >= 6;
+  if(backAntigo){ b.textContent = '⚠ Codigo.gs antigo'; b.title = 'Atualize o Codigo.gs no Apps Script (Nova versão) para liberar as Rodadas 5 e 6'; b.classList.add('confirm'); return; }
+  b.title = '';
   b.textContent = faseConfirmando ? `Confirmar: ${FASE_BTN[fase].toLowerCase()}?` : FASE_BTN[fase];
 }
 async function cliqueFase(){
@@ -3173,7 +3479,8 @@ async function cliqueFase(){
   const b = $('#tFase'); b.disabled = true; b.textContent = 'Liberando...';
   try{
     const j = await consultar({acao:'fase', s:normS(CONFIG.SESSAO), chave:CONFIG.CHAVE, f:fase+1}, 12000);
-    if(j && j.ok){ fase = j.fase; $('#feedStatus').textContent = FASE_NOME[fase] + ' · os celulares atualizam em até 15 segundos'; }
+    if(j && j.ok && j.fase < fase+1){ fase = j.fase; backAntigo = true; $('#feedStatus').innerHTML = '<b style="color:var(--warn)">⚠ A planilha não aceitou a rodada seguinte: o Apps Script ainda está com o Codigo.gs antigo, que só tem 4 rodadas. Cole o Codigo.gs novo e crie uma Nova versão em Gerenciar implantações.</b>'; }
+    else if(j && j.ok){ fase = j.fase; $('#feedStatus').textContent = FASE_NOME[fase] + ' · os celulares atualizam em até 15 segundos'; }
     else $('#feedStatus').textContent = 'Chave do professor recusada. Confira CONFIG.CHAVE.';
   }catch(e){ $('#feedStatus').textContent = 'Sem conexão: use o código reserva projetado.'; }
   desenharFase();
