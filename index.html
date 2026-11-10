@@ -480,6 +480,10 @@ html.tvmode,html.tvmode body{background:#0A1428;color:#EAF1FB;overflow:hidden;he
 .ent-n{display:flex;gap:3vw;margin-top:3.4vh}
 .ent-n b{display:block;font-family:Montserrat,sans-serif;font-size:clamp(2rem,3.4vw,4rem);color:#E3A51E;line-height:1}
 .ent-n small{color:#9FB0CC;font-size:clamp(.85rem,1.05vw,1.2rem)}
+.tstat{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--surface2);font-size:.9rem;line-height:1.4}
+.tstat.ok{background:color-mix(in srgb,var(--ok) 16%,var(--surface));border-left:4px solid var(--ok)}
+.tstat.fila{border-left:4px solid var(--accent)}
+.roster li.vaga{border:1.5px dashed var(--line);border-radius:8px;padding-left:8px;padding-right:8px;margin-top:6px;color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.9rem;z-index:20;max-width:90vw}
 
 /* ---------- professor (projeção) ---------- */
@@ -515,6 +519,7 @@ html.prof{--bg:#0d1830;--surface:#15244a;--surface2:#1c2e58;--line:#283c68;--mut
 html.prof{--muted:color-mix(in srgb,var(--muted) 55%,var(--ink))}
 html.prof .rank{font-size:clamp(1.1rem,1.4vw,1.7rem)}
 html.prof .rank td{padding:.35em .55em;font-weight:600}
+@media (max-height:780px){html.prof .rank td{padding:.2em .5em} html.prof .rank{font-size:clamp(1rem,1.25vw,1.5rem)} html.prof #slide h2{margin-bottom:.35em} html.prof #slide h3{margin-bottom:.3em} html.prof .bars{gap:2px} html.prof .mtx.big td{padding-top:.35em;padding-bottom:.35em} html.prof .mtx.big .cnt{font-size:1.6em}}
 html.prof .rank td.n{white-space:nowrap}
 html.prof .small{font-size:max(1rem,.95vw)}
 .net{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--muted);margin-right:8px;vertical-align:middle}
@@ -1200,8 +1205,9 @@ function telaNome(){
     <div class="divider">ou entre no trio de um colega</div>
     <input type="text" id="codIn" maxlength="4" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" placeholder="Código do trio" style="text-align:center;letter-spacing:.2em;font-size:1.2rem">
     <button class="btn block sec" id="btnEntrar" style="margin-top:8px">Entrar no trio</button>
-    <div class="divider">está sozinho?</div>
-    <button class="btn block sec" id="btnEncaixar">Me encaixe num trio</button>
+    <div class="divider">não tem trio?</div>
+    <button class="btn block sec" id="btnEncaixar">Estou sem trio</button>
+    <p class="small muted" style="margin:8px 0 0">O sistema junta você com outras pessoas sem trio. Os trios têm sempre 3 pessoas.</p>
   </div>`;
   const nome = ()=>{ const n = $('#nomeIn').value.trim(); if(n.length<2){ toast('Digite seu primeiro nome.'); $('#nomeIn').focus(); return null; } return n; };
   $('#btnCriar').onclick = ()=>{ const n=nome(); if(n) cadastrar('criar_trio', n); };
@@ -1239,7 +1245,7 @@ async function cadastrar(acao, nome, codigo){
     $('#manual').onclick = ()=>telaManual('Combinem com o professor o número da equipe de vocês.');
   }
 }
-const VERSAO_BACK = 'trios-2026-11-09';
+const VERSAO_BACK = 'trios-2026-11-10';
 function erroVersao(j){
   $('#joinBox').innerHTML = `<div class="card"><h3>O jogo ainda não está pronto</h3>
     <p>A planilha do professor está com uma versão antiga do sistema${j && j.v ? ` (${esc(j.v)})` : ''}. <b>Avise o professor.</b></p>
@@ -1252,6 +1258,7 @@ function aplicarEu(eu){
   let mudou = false;
   const set = (k,v)=>{ if(v!==undefined && v!==null && JSON.stringify(P[k])!==JSON.stringify(v)){ P[k]=v; mudou=true; } };
   set('trio', eu.trio); set('codigo', eu.codigo); set('role', eu.cargo); set('membros', eu.membros); if(eu.nomeTrio!==undefined) set('nomeTrio', eu.nomeTrio);
+  if(eu.aberto!==undefined) set('aberto', !!eu.aberto);
   if(eu.equipe) set('team', eu.equipe);
   return mudou;
 }
@@ -1259,9 +1266,27 @@ function rosterHTML(){
   const ms = (P.membros||[]).slice().sort((a,b)=>CARGOS.findIndex(c=>c.id===a.cargo)-CARGOS.findIndex(c=>c.id===b.cargo));
   if(!ms.length) return '<li class="muted">Carregando...</li>';
   return ms.map(m=>{ const eu = m.nome===P.nome && m.cargo===P.role; return `<li class="${eu?'me':''}"><span>${esc(m.nome)}${eu?' (você)':''}</span><span class="small muted">${esc(cargoDe(m.cargo).n)}</span></li>`; }).join('')
-    + (ms.length<3 ? `<li class="small muted">Aguardando ${3-ms.length} colega(s)...</li>` : '');
+    + Array.from({length:Math.max(0,3-ms.length)},()=>`<li class="vaga"><span>vaga aberta</span><span class="small muted">aguardando...</span></li>`).join('');
 }
-function atualizaRoster(){ const ul=$('#roster'); if(ul) ul.innerHTML = rosterHTML(); const n=$('#nMembros'); if(n) n.textContent = (P.membros||[]).length; }
+function atualizaRoster(){ const ul=$('#roster'); if(ul) ul.innerHTML = rosterHTML(); const n=$('#nMembros'); if(n) n.textContent = (P.membros||[]).length; const st=$('#trioStatus'); if(st){ st.innerHTML = trioStatusHTML(); bindVaga(); } }
+function trioStatusHTML(){
+  const n = (P.membros||[]).length, falta = Math.max(0, 3-n);
+  if(!n) return '';
+  if(!falta) return `<div class="tstat ok">✓ <b>Trio completo.</b> Agora é só aguardar o professor liberar o jogo.</div>`;
+  if(P.aberto) return `<div class="tstat fila">🔎 <b>Vaga aberta para quem está sem trio.</b> Falta${falta>1?'m':''} ${falta} pessoa${falta>1?'s':''}: assim que chegarem colegas sem trio, eles entram aqui automaticamente. Não feche esta página.</div>`;
+  return `<div class="tstat">Falta${falta>1?'m':''} <b>${falta} pessoa${falta>1?'s':''}</b>. Mostre o código <b>${esc(P.codigo||'')}</b> aos colegas.
+    <button class="btn block sec" id="btnVaga" style="margin-top:10px">Não temos mais ninguém: aceitar colegas sem trio</button></div>`;
+}
+function bindVaga(){
+  const b = $('#btnVaga'); if(!b) return;
+  b.onclick = async ()=>{
+    b.disabled = true; b.textContent = 'Abrindo vaga...';
+    try{ const j = await consultar({acao:'abrir_vaga', s:P.sessao||normS(CONFIG.SESSAO), id:clientId()}, 12000);
+      if(j && j.ok){ aplicarEu(j); save(); atualizaRoster(); toast('Pronto: quem está sem trio pode completar o seu.'); }
+      else { toast((j && j.erro) || 'Não foi possível abrir a vaga.'); b.disabled=false; }
+    }catch(e){ toast('Sem conexão. Tente de novo.'); b.disabled=false; b.textContent='Não temos mais ninguém: aceitar colegas sem trio'; }
+  };
+}
 function telaManual(msg){
   $('#joinBox').innerHTML = `
   <div class="card">
@@ -1292,7 +1317,7 @@ function telaEspera(){
     <p class="small muted" style="margin:6px 0 0">Mostre este código aos colegas que vão jogar com você.</p>
     <p class="lbl">Seu cargo</p><div class="cargo">${esc(c.n)}</div>
   </div>
-  <div class="card"><h3 style="margin:0">Seu trio <span class="muted small">(<span id="nMembros">${(P.membros||[]).length}</span>)</span></h3><ul class="roster" id="roster">${rosterHTML()}</ul></div>${nomeTrioFormHTML()}` :
+  <div class="card"><h3 style="margin:0">Seu trio <span class="muted small">(<span id="nMembros">${(P.membros||[]).length}</span> de 3)</span></h3><ul class="roster" id="roster">${rosterHTML()}</ul><div id="trioStatus">${trioStatusHTML()}</div></div>${nomeTrioFormHTML()}` :
   `<div class="card reveal"><span class="badge">Equipe <b>${P.team}</b> · ${esc(c.n)}</span></div>`}
   <div class="card reveal" aria-live="polite">
     <div class="loader" role="img" aria-label="Carregando"></div>
@@ -1312,7 +1337,7 @@ function telaEspera(){
     P.unlock.jogo=true; save(); startGame();
   };
   $('#iniOk').onclick = go; $('#iniIn').onkeydown = (e)=>{ if(e.key==='Enter') go(); };
-  bindNomeTrio();
+  bindNomeTrio(); bindVaga();
   syncFase();
 }
 let faseRodando = false, syncTmr = null, syncTick = null;
@@ -1408,13 +1433,13 @@ function comoJogarHTML(){
   </div>
   <div class="card help"><h3>Antes de começar</h3>
     ${passo(1,'Entre pelo QR Code','Digite seu primeiro nome. Cada pessoa joga no próprio celular.')}
-    ${passo(2,'Forme o trio','Um colega toca em <b>Criar um trio</b> e mostra o código. Os outros digitam o código e tocam em <b>Entrar no trio</b>. Sozinho? Toque em <b>Me encaixe num trio</b>. Depois, deem um <b>nome à consultoria</b> do trio: ele aparece no telão.')}
+    ${passo(2,'Forme o trio','Um colega toca em <b>Criar um trio</b> e mostra o código. Os outros digitam o código e tocam em <b>Entrar no trio</b>. Sem trio? Toque em <b>Estou sem trio</b> e aguarde: o sistema junta você com outras pessoas sem trio. Os trios têm sempre 3 pessoas. Depois, deem um <b>nome à consultoria</b>: ele aparece no telão.')}
     ${passo(3,'Aguarde o professor','O jogo só abre quando o professor liberar. Nesse momento vocês descobrem a empresa e a concorrente.')}
   </div>
   <div class="card help"><h3>Em cada rodada</h3>
     ${passo(1,'Leiam o caso','Usem as abas <b>O caso</b>, <b>Dossiê</b> e <b>Meu cargo</b>. Cada cargo vê <b>dados exclusivos</b> no Dossiê; nas partes dos colegas aparece um 🔒. Os números do topo são os indicadores da empresa.')}
     ${passo(2,'Discutam no trio','Cada integrante tem um cargo e uma <b>meta secreta</b>. As metas podem entrar em conflito: defendam a sua, mas o placar é coletivo.')}
-    ${passo(3,'Cada um vota','Cada pessoa envia o próprio voto. Vale a decisão da <b>maioria</b> (2 de 3, ou 3 de 4). Sem maioria, conversem e toquem em <b>Alterar meu voto</b>.')}
+    ${passo(3,'Cada um vota','Cada pessoa envia o próprio voto. Vale a decisão da <b>maioria</b>: 2 de 3. Sem maioria, conversem e toquem em <b>Alterar meu voto</b>.')}
     ${passo(4,'Vejam o resultado','Depois da decisão, o celular mostra os efeitos, a escolha da concorrente e um conceito de Administração.')}
     ${passo(5,'Responda o quiz','Ao fim da rodada aparecem 3 perguntas individuais. Uma tentativa por pergunta.')}
   </div>
@@ -2319,14 +2344,14 @@ function rankingOverlay(){
   const L = lista().sort((a,b)=>b.s.total-a.s.total).slice(0,10);
   const ind = rankingIndividual().slice(0,8);
   overlay(`<div class="rk2"><div><h2>🏆 Empresas</h2>${L.length?`<table class="rank">${L.map((x,i)=>`<tr><td>${i+1}º</td><td>${logo(empresaKey(x.eq),26)} ${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${EMPRESAS[empresaKey(x.eq)].curto} · M${mercadoDe(x.eq)}</span></td><td class="n">${x.s.total}</td></tr>`).join('')}</table>`:'<p class="muted">Sem decisões ainda.</p>'}</div>
-    <div><h2>⭐ Individual</h2>${ind.length?`<table class="rank">${ind.map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(x.nome)}</td><td class="n">${x.pts}</td></tr>`).join('')}</table><p class="small muted">100 por acerto no quiz das rodadas + pontos do quiz relâmpago.</p>`:'<p class="muted">Sem respostas ainda.</p>'}</div></div>`, 'telao ranking');
+    <div><h2>⭐ Individual</h2>${ind.length?`<table class="rank">${ind.map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(x.nome)}</td><td class="n">${x.pts}</td></tr>`).join('')}</table><p class="small muted">100 por acerto no quiz das rodadas + pontos do quiz relâmpago ÷ 10.</p>`:'<p class="muted">Sem respostas ainda.</p>'}</div></div>`, 'telao ranking');
   if(somOn) som('revela');
 }
 function rankingIndividual(){
   const m = {};
   quizL.forEach(q=>{ const k=q.id||q.nome+'|'+q.equipe; m[k]={nome:q.nome, equipe:q.equipe, quiz:q.acertos, fl:0}; });
   relL.forEach(r=>{ const k=r.id||r.nome+'|'+r.equipe; m[k]=m[k]||{nome:r.nome, equipe:r.equipe, quiz:0, fl:0}; m[k].fl=r.pontos; });
-  return Object.values(m).map(x=>({...x, pts:x.quiz*100+x.fl})).sort((a,b)=>b.pts-a.pts);
+  return Object.values(m).map(x=>({...x, pts:x.quiz*100+Math.round(x.fl/10)})).sort((a,b)=>b.pts-a.pts);   // relâmpago ÷ 10: os dois quizzes pesam parecido
 }
 
 /* ---------- cronômetro sincronizado ---------- */
@@ -2388,7 +2413,7 @@ function teoriaSalaHTML(){
   <div class="panelgrid">
     <div><h3>Rodada 2 · o fornecedor de Rio Verde</h3>
       <p class="small">A teoria prevê dois equilíbrios: <b>uma</b> empresa vai a Rio Verde e a outra não. O problema é saber qual.</p>
-      ${bar('Coordenaram (só uma foi a Rio Verde)', pct(coord,m2.length), coord+' de '+m2.length, 'var(--ok)', 'Chegaram a um dos equilíbrios sem conversar.')}
+      ${bar('Evitaram a colisão (só uma foi a Rio Verde)', pct(coord,m2.length), coord+' de '+m2.length, 'var(--ok)', 'Coordenaram o fornecedor sem conversar. Se o mercado todo terminou em equilíbrio de Nash depende também das outras escolhas (veja o Painel).')}
       ${bar('Colidiram (as duas foram)', pct(colis,m2.length), colis+' de '+m2.length, 'var(--warn)', 'Falha de coordenação: capacidade dividida e preço maior.')}
     </div>
     <div><h3>Rodada 3 · a proposta de Hamburgo</h3>
@@ -2482,7 +2507,7 @@ function exportar(){
   const L = lista(), linhas = [['Equipe','Mercado','Empresa','Trio','Nome do trio','Posicionamento','R2 decisão','R3 estratégia','R3 Incoterm','R3 ESG','Caixa','Clientes','Pessoas','Resiliência','Metas','Coerência','Total']];
   L.sort((a,b)=>b.s.total-a.s.total).forEach(x=>{ const t = triosL.find(y=>y.equipe===x.eq)||{};
     linhas.push([x.eq, mercadoDe(x.eq), EMPRESAS[empresaKey(x.eq)].nome, t.codigo||'', t.nome||'', x.d.r1&&x.d.r1.gen||'', x.d.r2&&x.d.r2.opc||'', x.d.r3&&x.d.r3.est||'', x.d.r3&&x.d.r3.inc||'', x.d.r3&&x.d.r3.esg||'', x.v.caixa, x.v.clientes, x.v.pessoas, x.v.res, x.s.nm, x.s.coer?x.s.coer.pts:'', x.s.total]); });
-  linhas.push([]); linhas.push(['Individual','Equipe','Acertos quiz (de '+TODAS_Q.length+')','Pontos relâmpago','Pontos totais']);
+  linhas.push([]); linhas.push(['Individual','Equipe','Acertos quiz (de '+TODAS_Q.length+')','Pontos relâmpago','Pontos totais (quiz × 100 + relâmpago ÷ 10)']);
   rankingIndividual().forEach(x=>linhas.push([x.nome, x.equipe, x.quiz, x.fl, x.pts]));
   const csv = '﻿' + linhas.map(l=>l.map(c=>`"${String(c??'').replace(/"/g,'""')}"`).join(';')).join('\n');
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
@@ -2623,19 +2648,19 @@ function noticias(){
   return N;
 }
 function entradaTelaoHTML(){
-  const passos = [['📱','Aponte a câmera para o QR Code'],['✍️','Digite seu primeiro nome'],['👥','Crie um trio ou entre com o código de um colega'],['⏳','Aguarde: o jogo começa quando o professor liberar']];
+  const passos = [['📱','Aponte a câmera para o QR Code'],['✍️','Digite seu primeiro nome'],['👥','Crie um trio, entre com o código de um colega ou toque em “Estou sem trio”'],['⏳','Aguarde: o jogo começa quando o professor liberar']];
   return `<div class="tv-entrada">
     <div class="qr-tv"><div id="tvQRg"></div><p>Sem câmera? Código da sala <b>${esc(normS(CONFIG.SESSAO))}</b></p></div>
     <div class="ent-txt">
       <h2>Entre no jogo</h2>
       <h1>Administração em Jogo</h1>
       <ol>${passos.map(([i,t])=>`<li><span>${i}</span>${t}</li>`).join('')}</ol>
-      <div class="ent-n"><div><b>${partN}</b><small>participantes</small></div><div><b>${triosL.length}</b><small>trios</small></div><div><b>${triosL.filter(t=>t.n>=3).length}</b><small>trios completos</small></div></div>
+      <div class="ent-n"><div><b>${partN}</b><small>participantes</small></div><div><b>${triosL.filter(t=>t.n>=3).length}</b><small>trios completos</small></div><div><b>${triosL.filter(t=>t.n<3).reduce((a,t)=>a+t.n,0)}</b><small>aguardando trio</small></div></div>
     </div></div>`;
 }
 function triosTelaoHTML(){
   const ult = triosL.slice(-5).reverse();
-  return `<div class="tv-rank"><h3>Trios chegando</h3>${ult.length ? ult.map(t=>`<div class="rk"><span class="pos">${t.n}</span><span>👥</span><div><b>${esc(nomeTrioDe(t) || 'Trio '+t.codigo)}</b><small>${t.n} integrante${t.n>1?'s':''}${t.n>=3?' · completo':''}</small></div><em></em></div>`).join('') : '<p class="vazio">Os primeiros trios aparecem aqui.</p>'}</div>`;
+  return `<div class="tv-rank"><h3>Trios chegando</h3>${ult.length ? ult.map(t=>`<div class="rk"><span class="pos">${t.n}</span><span>👥</span><div><b>${esc(nomeTrioDe(t) || 'Trio '+t.codigo)}</b><small>${t.n>=3 ? 'completo ✓' : `falta${3-t.n>1?'m':''} ${3-t.n}${t.aberto?' · na fila de encaixe':''}`}</small></div><em></em></div>`).join('') : '<p class="vazio">Os primeiros trios aparecem aqui.</p>'}</div>`;
 }
 function trilhaSeg(i){
   const [x1,y1] = PTS[i], [x2,y2] = PTS[i+1], dx = (x2-x1)*.55;
@@ -2893,6 +2918,7 @@ function matrizSalaHTML(cont, tot, opt){
 const pips = (n,max)=> Array.from({length:max||5},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('');
 function equipesHTML(){
   const ativo = CONFIG.ENDPOINT || demo;
+  const esperando = triosL.filter(t=>t.n<3).reduce((a,t)=>a+t.n,0);
   const comp3 = triosL.filter(t=>t.n>=3).length, pareado = triosL.some(t=>t.equipe);
   const porEq = {}; triosL.forEach(t=>{ if(t.equipe) porEq[t.equipe]=t; });
   const nmT = (t)=> nomeTrioDe(t) ? `<span class="nm">${esc(t.nome)} <button class="oc" data-ocultar="${t.trio}" title="Ocultar nome">✕</button></span>` : '';
@@ -2909,10 +2935,11 @@ function equipesHTML(){
         <li>Leia o QR Code e digite seu primeiro nome.</li>
         <li>Um colega toca em <b>Criar um trio</b> e mostra o código.</li>
         <li>Os outros dois digitam o código e entram no trio.</li>
-        <li>Sozinho? Toque em <b>Me encaixe num trio</b>.</li>
+        <li>Sem trio? Toque em <b>Estou sem trio</b> e aguarde: o sistema junta quem está sozinho em trios de 3.</li>
         <li>Aguardem: ao liberar o jogo, o sistema sorteia as empresas e forma os mercados.</li>
       </ol>
-      ${ativo ? `<div style="display:flex;gap:5vw;margin-top:2vh"><div><div class="bigcount">${partN}</div><p class="small muted" style="margin:4px 0 0">participantes</p></div><div><div class="bigcount">${triosL.length}</div><p class="small muted" style="margin:4px 0 0">trios</p></div><div><div class="bigcount">${comp3}</div><p class="small muted" style="margin:4px 0 0">com 3 ou mais</p></div></div>` : semDados('Cadastro desligado: configure o ENDPOINT da planilha')}
+      ${ativo ? `<div style="display:flex;gap:5vw;margin-top:2vh"><div><div class="bigcount">${partN}</div><p class="small muted" style="margin:4px 0 0">participantes</p></div><div><div class="bigcount">${triosL.length}</div><p class="small muted" style="margin:4px 0 0">trios</p></div><div><div class="bigcount">${comp3}</div><p class="small muted" style="margin:4px 0 0">completos</p></div><div><div class="bigcount" style="color:${esperando?'var(--warn)':'inherit'}">${esperando}</div><p class="small muted" style="margin:4px 0 0">aguardando trio</p></div></div>
+      ${esperando ? `<p class="small" style="margin-top:1.5vh;color:var(--warn)"><b>${esperando} pessoa(s) em trios incompletos.</b> Peça que quem está sozinho toque em "Estou sem trio" antes de liberar o jogo.</p>` : ''}` : semDados('Cadastro desligado: configure o ENDPOINT da planilha')}
     </div>
     <div style="text-align:center"><div class="qr" id="qrBox"></div><p class="small muted" style="margin-top:8px">Código da sala: <b style="color:var(--accent);letter-spacing:.08em">${esc(normS(CONFIG.SESSAO))}</b></p></div>
   </div>
@@ -2934,7 +2961,7 @@ function painelHTML(){
   <h2>Painel da diretoria <span class="muted" style="font-size:1rem;font-family:Inter">${fin.length} de ${L.length} equipes com resultado final</span></h2>
   <div class="panelgrid">
     <div><h3>Ranking</h3>
-      <table class="rank">${fin.slice(0,7).map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
+      <table class="rank">${fin.slice(0, innerHeight<780 ? 6 : 7).map((x,i)=>`<tr><td>${i+1}º</td><td>${esc(nomeEquipe(x.eq))} <span class="muted" style="font-size:.8em">${empresaDe(x.eq).curto}</span></td><td class="n">${x.s.total} pts</td><td class="n muted">${x.s.nm}/${x.s.metas.length} metas</td></tr>`).join('') || '<tr><td class="muted">Aguardando a Rodada 3</td></tr>'}</table>
       <h3 style="margin-top:1vh">Posicionamento estratégico (Porter)</h3>
       <div class="bars">${['custo','dif','enf'].map(g=>{ const n=L.filter(x=>x.d.r1&&x.d.r1.gen===g).length, tot=L.filter(x=>x.d.r1&&x.d.r1.gen).length; const p=tot?Math.round(n/tot*100):0; return `<div class="row"><span>${(R1_GEN.find(x=>x.id===g)||{}).t}</span><div class="track"><i style="width:${p}%;background:var(--brand)"></i></div><b>${n}</b></div>`; }).join('')}</div>
     </div>
